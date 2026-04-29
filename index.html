@@ -8,85 +8,90 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://unpkg.com/scrollreveal"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
-        /* Bloqueamos el desbordamiento lateral para que nada se mueva a la izquierda */
-        html, body { 
-            background-color: #000; 
-            color: #fff; 
-            font-family: sans-serif; 
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            overflow-x: hidden; 
-        }
+        html, body { background-color: #000; color: #fff; font-family: sans-serif; overflow-x: hidden; }
         .texto-rojo { color: #dc2626; }
-        header { backdrop-filter: blur(10px); background-color: rgba(0,0,0,0.8); width: 100%; }
         
-        .glow-logo { filter: drop-shadow(0 0 15px rgba(255,255,255,0.1)); }
+        /* ESTILO DEL MARCO DEL CELULAR */
+        .phone-frame {
+            width: 280px;
+            height: 570px;
+            background: #111;
+            border: 8px solid #222;
+            border-radius: 45px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(220, 38, 38, 0.15);
+            overflow: hidden;
+        }
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 25px;
+            background: #222;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 20;
+        }
+        .swiper { width: 100%; height: 100%; }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
     </style>
 </head>
 
 <body>
-    <header class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center border-b border-zinc-900">
-        <div class="text-xl font-black italic uppercase tracking-tighter">
-            FAST <span class="texto-rojo">TRAVEL</span>
-        </div>
-        <button class="text-white text-2xl">
-            <i class="fa-solid fa-bars-staggered"></i>
-        </button>
-    </header>
-
-    <section class="min-h-screen w-full flex flex-col items-center justify-center text-center px-4 pt-20">
+    <section class="min-h-screen w-full flex flex-col items-center justify-center py-20 px-6">
         
-        <h1 id="titulo-principal" class="w-full text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-6">
-            FAST <span class="texto-rojo">TRAVEL</span>
-        </h1>
+        <h2 class="text-xs font-bold texto-rojo uppercase tracking-[0.4em] mb-10">Solicita tu unidad</h2>
 
-        <div id="espacio-logo" class="w-full max-w-[280px] aspect-square mb-8 flex items-center justify-center">
-            <img src="1000917167-removebg-preview.png" alt="Logo VIP" class="max-w-full h-auto glow-logo">
-        </div>
-        
-        <h2 id="subtitulo" class="w-full text-[10px] md:text-xs font-light text-gray-400 uppercase tracking-[0.5em] mb-12 leading-relaxed">
-            Transporte Ejecutivo Privado
-        </h2>
+        <div id="celular-interactivo" class="phone-frame">
+            <div class="phone-notch"></div>
+            
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide cursor-pointer" onclick="window.location.href='https://wa.me/TU_NUMERO'">
+                        <img src="CAPTURA_WHATSAPP.jpg" alt="Chat T-Go">
+                        <div class="absolute bottom-10 left-0 w-full p-4 bg-black/60 backdrop-blur-sm text-center">
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-green-500">Chatea con T-Go <i class="fa-brands fa-whatsapp ml-1"></i></p>
+                        </div>
+                    </div>
 
-        <div id="boton-reserva" class="w-full flex justify-center">
-            <button class="bg-red-700 text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] shadow-2xl active:scale-95 transition-transform">
-                Reservar Ahora
-            </button>
-        </div>
-    </section>
-
-    <section class="w-full py-24 px-6 border-t border-zinc-900 flex justify-center">
-        <div id="tarjeta-info" class="w-full max-w-xs bg-zinc-900/50 p-10 rounded-[50px] border border-zinc-800 text-center">
-            <p class="text-[9px] text-zinc-500 uppercase tracking-widest italic mb-4 text-center">Desliza para conocer</p>
-            <div class="text-red-600 text-4xl mb-6 flex justify-center">
-                <i class="fa-solid fa-mobile-screen-button"></i>
+                    <div class="swiper-slide cursor-pointer" onclick="abrirRegistro()">
+                        <img src="CAPTURA_WEBAPP.jpg" alt="WebApp Fast Travel">
+                        <div class="absolute bottom-10 left-0 w-full p-4 bg-black/60 backdrop-blur-sm text-center">
+                            <p class="text-[10px] font-bold uppercase tracking-widest texto-rojo text-white">Usar WebApp <i class="fa-solid fa-bolt ml-1"></i></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
             </div>
-            <h3 class="font-bold text-xl mb-3 uppercase italic tracking-tighter text-center">Reserva en <span class="texto-rojo text-2xl">APP</span></h3>
-            <p class="text-gray-500 text-[10px] leading-relaxed uppercase tracking-widest text-center">
-                Seguridad y confort al alcance de un toque.
-            </p>
         </div>
+
+        <p class="mt-8 text-[9px] text-zinc-500 uppercase tracking-widest italic animate-pulse text-center">
+            <i class="fa-solid fa-arrow-left-long mr-2"></i> Desliza el celular <i class="fa-solid fa-arrow-right-long ml-2"></i>
+        </p>
     </section>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Mantenemos tus efectos pero con distancias más cortas para no desajustar el móvil
-        ScrollReveal().reveal('#titulo-principal', { 
-            delay: 200, distance: '50px', origin: 'left', duration: 1200, easing: 'ease-out'
+        // Inicializar el carrusel del celular
+        var swiper = new Swiper(".mySwiper", {
+            effect: "cards",
+            grabCursor: true,
+            pagination: { el: ".swiper-pagination", clickable: true },
         });
 
-        ScrollReveal().reveal('#espacio-logo', { 
-            delay: 600, scale: 0.9, duration: 1000 
-        });
+        // Función para abrir el formulario que ya tienes
+        function abrirRegistro() {
+            // Aquí pegaremos el código del formulario de tu github original
+            alert("Redirigiendo al Formulario de Registro...");
+        }
 
-        ScrollReveal().reveal('#subtitulo', { 
-            delay: 1100, distance: '30px', origin: 'bottom', duration: 2500, easing: 'ease-out'
-        });
-
-        ScrollReveal().reveal('#tarjeta-info', { 
-            delay: 400, distance: '50px', origin: 'right', duration: 1500, easing: 'ease-out'
+        ScrollReveal().reveal('#celular-interactivo', { 
+            delay: 300, distance: '100px', origin: 'right', duration: 1500, easing: 'cubic-bezier(0.5, 0, 0, 1)'
         });
     </script>
 </body>
