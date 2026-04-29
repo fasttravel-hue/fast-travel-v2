@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Fast Travel V2 | Laboratorio Final</title>
+    <title>Fast Travel V2 | VIP</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -18,40 +18,43 @@
 
         /* MARCO DEL CELULAR */
         .phone-frame {
-            width: 270px; height: 550px; background: #080808; border: 10px solid #1a1a1a;
-            border-radius: 40px; position: relative; box-shadow: 0 0 40px rgba(220, 38, 38, 0.1);
-            overflow: hidden; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 280px; height: 580px; background: #080808; border: 12px solid #1a1a1a;
+            border-radius: 45px; position: relative; box-shadow: 0 0 40px rgba(220, 38, 38, 0.15);
+            overflow: hidden; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .phone-notch {
             position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 100px; height: 20px; background: #1a1a1a;
-            border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; z-index: 50;
+            width: 110px; height: 24px; background: #1a1a1a;
+            border-bottom-left-radius: 14px; border-bottom-right-radius: 14px; z-index: 50;
         }
 
-        /* Registro interno (Tu original) */
+        /* REGISTRO INTERNO CENTRADO */
         #registro-interno {
-            display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: white; z-index: 45; color: #333; padding: 50px 20px;
+            display: none; position: absolute; inset: 0;
+            background: white; z-index: 45; color: #333; padding: 40px 25px;
+            flex-direction: column; align-items: center; justify-content: center;
         }
 
         #menu-lateral { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
         #menu-lateral.open { transform: translateX(0); }
 
-        /* BONO ELEGANTE */
+        /* BONO POP UP */
         #notificacionPop { 
             position: fixed; bottom: 30px; left: 20px; z-index: 100;
             background: white; color: black; padding: 15px 20px;
             border-radius: 20px; display: flex; align-items: center; gap: 12px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             transform: translateY(200%); opacity: 0;
-            transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: all 1.8s cubic-bezier(0.19, 1, 0.22, 1);
             border-left: 6px solid #dc2626;
         }
         #notificacionPop.show { transform: translateY(0); opacity: 1; }
 
-        .modal-full { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:1000; align-items:center; justify-content:center; padding:20px; backdrop-filter: blur(10px); }
-        .red-box { background: #f3f4f6; border-radius: 15px; padding: 12px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
-        .red-box.active { border-color: #22c55e; background: #f0fdf4; }
+        .modal-full { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:1000; align-items:center; justify-content:center; padding:20px; backdrop-filter: blur(12px); }
+        
+        .red-item { display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; transition: 0.3s; }
+        .red-item img { width: 36px; height: 36px; transition: 0.3s; filter: grayscale(1); }
+        .red-item.active img { filter: grayscale(0); transform: scale(1.2); }
     </style>
 </head>
 
@@ -60,11 +63,11 @@
         <div onclick="mostrarModalJuego()" class="flex items-center gap-3 cursor-pointer">
             <div class="text-2xl">🎁</div>
             <div>
-                <h4 class="text-[10px] font-black uppercase m-0">Bono VIP</h4>
+                <h4 class="text-[10px] font-black uppercase m-0 text-black">Bono VIP</h4>
                 <p class="text-[8px] text-gray-500 font-bold uppercase m-0">¡Gana 60% aquí!</p>
             </div>
         </div>
-        <button id="cerrarPop" onclick="cerrarPop(event)" class="hidden ml-2 text-gray-300 hover:text-black">✕</button>
+        <button id="cerrarPop" onclick="cerrarPop(event)" class="hidden ml-2 text-gray-400 font-bold">✕</button>
     </div>
 
     <div id="modalJuego" class="modal-full">
@@ -72,15 +75,23 @@
             <button onclick="cerrarModalJuego()" class="absolute top-4 right-6 text-xl">✕</button>
             <h2 class="font-black italic uppercase text-lg">Reto <span class="text-red-600">Descuento</span></h2>
             <div class="text-4xl font-black text-red-600 my-4"><span id="numDesc">0</span>%</div>
-            <div class="grid grid-cols-2 gap-3 mb-4">
-                <div class="red-box" id="box-tt" onclick="clickRed('tt', 'https://tiktok.com/@fasttravelec')"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" class="w-7 mx-auto"></div>
-                <div class="red-box" id="box-ig" onclick="clickRed('ig', 'https://instagram.com/fasttravelec')"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" class="w-7 mx-auto"></div>
-                <div class="red-box" id="box-fb" onclick="clickRed('fb', 'https://facebook.com/fasttravelec')"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" class="w-7 mx-auto"></div>
-                <div class="red-box" id="box-wa" onclick="clickRed('wa', 'https://whatsapp.com/channel/0029VbBTr2dK5cDGtfZGFq0q')"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="w-7 mx-auto"></div>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent transition-all" id="box-tt" onclick="clickRed('tt', 'https://tiktok.com/@fasttravelec')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" class="w-8 mx-auto">
+                </div>
+                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent transition-all" id="box-ig" onclick="clickRed('ig', 'https://instagram.com/fasttravelec')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" class="w-8 mx-auto">
+                </div>
+                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent transition-all" id="box-fb" onclick="clickRed('fb', 'https://facebook.com/fasttravelec')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" class="w-8 mx-auto">
+                </div>
+                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent transition-all" id="box-wa" onclick="clickRed('wa', 'https://whatsapp.com/channel/0029VbBTr2dK5cDGtfZGFq0q')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="w-8 mx-auto">
+                </div>
             </div>
             <div id="codigoGenerado" onclick="copiarCodigo()" class="hidden mt-4 p-4 bg-red-50 border-2 border-dashed border-red-200 rounded-2xl cursor-pointer">
                 <span id="txtCodigo" class="font-black text-red-600 uppercase">CODIGO</span>
-                <p class="text-[8px] text-red-400 mt-1 uppercase">¡Toca para copiar e ir al registro!</p>
+                <p class="text-[8px] text-red-400 mt-1 uppercase">¡Toca para copiar!</p>
             </div>
         </div>
     </div>
@@ -90,12 +101,12 @@
         <button onclick="toggleMenu()" class="text-white text-2xl pr-2"><i class="fa-solid fa-bars-staggered"></i></button>
     </header>
 
-    <div id="menu-lateral" class="fixed top-0 right-0 h-full w-[85%] bg-zinc-950 z-[100] p-10 flex flex-col border-l border-zinc-800">
+    <div id="menu-lateral" class="fixed top-0 right-0 h-full w-[85%] bg-zinc-950 z-[100] p-10 flex flex-col border-l border-zinc-800 shadow-2xl">
         <button onclick="toggleMenu()" class="text-white text-3xl self-end mb-10"><i class="fa-solid fa-xmark"></i></button>
-        <nav class="flex flex-col gap-8 text-2xl font-black italic uppercase tracking-tighter text-white">
+        <nav class="flex flex-col gap-6 text-xl font-black italic uppercase tracking-tighter text-white">
             <a href="#" class="text-red-600">Inicio</a>
-            <button onclick="abrirModalConductor()" class="text-left flex items-center gap-3 bg-zinc-900 p-5 rounded-2xl border border-zinc-800 text-lg">
-                <i class="fa-solid fa-car-side text-red-600"></i> Trabaja con nosotros
+            <button onclick="abrirModalConductor()" class="text-left flex items-center gap-3 bg-zinc-900 p-5 rounded-2xl border border-zinc-800 text-sm">
+                <i class="fa-solid fa-car-side text-red-600"></i> TRABAJA CON NOSOTROS
             </button>
         </nav>
     </div>
@@ -103,7 +114,7 @@
     <div id="modalConductor" class="modal-full">
         <div class="bg-white rounded-[40px] p-8 text-black w-full max-w-sm overflow-y-auto max-h-[90vh]">
             <button onclick="cerrarModalConductor()" class="float-right text-2xl">&times;</button>
-            <h2 class="font-black italic uppercase text-red-600 text-xl mb-4">Únete al Equipo</h2>
+            <h2 class="font-black italic uppercase text-red-600 text-xl mb-6">Únete al Equipo</h2>
             <form id="formConductor" class="space-y-3">
                 <input type="text" name="nombre" placeholder="Nombre Completo" class="w-full p-4 bg-gray-100 rounded-xl text-xs outline-none" required>
                 <input type="text" name="cedula" placeholder="Cédula" class="w-full p-4 bg-gray-100 rounded-xl text-xs outline-none" required>
@@ -116,42 +127,47 @@
     </div>
 
     <main class="w-full flex flex-col items-center">
-        <section class="min-h-screen w-full flex flex-col items-center justify-center text-center px-4 pt-20">
-            <h1 id="titulo-principal" class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-6">FAST <span class="texto-rojo">TRAVEL</span></h1>
-            <div id="espacio-logo" class="w-full max-w-[280px] aspect-square mb-8 flex items-center justify-center">
+        <section class="min-h-screen w-full flex flex-col items-center justify-center text-center px-4 pt-10">
+            <h1 id="titulo-principal" class="text-5xl md:text-8xl font-black italic uppercase tracking-tighter mb-4">FAST <span class="texto-rojo">TRAVEL</span></h1>
+            <div id="espacio-logo" class="w-full max-w-[280px] aspect-square mb-10 flex items-center justify-center">
                 <img src="1000917167-removebg-preview.png" alt="Logo VIP" class="max-w-full h-auto glow-logo">
             </div>
-            <h2 id="subtitulo" class="w-full text-[10px] md:text-xs font-light text-gray-400 uppercase tracking-[0.5em] leading-relaxed">Transporte Ejecutivo Privado</h2>
+            <h2 id="subtitulo" class="w-full text-[11px] md:text-sm font-bold text-gray-400 uppercase tracking-[0.6em] leading-relaxed">Transporte Ejecutivo Privado</h2>
         </section>
 
         <section class="w-full py-20 flex flex-col items-center border-t border-zinc-900 px-6">
-            <p id="label-solicita" class="text-[10px] font-bold texto-rojo uppercase tracking-[0.4em] mb-10">Solicita tu unidad</p>
+            <p id="label-solicita" class="text-[10px] font-bold texto-rojo uppercase tracking-[0.4em] mb-12">Solicita tu unidad</p>
             
-            <div id="celular-interactivo" class="phone-frame mb-10">
+            <div id="celular-interactivo" class="phone-frame mb-12">
                 <div class="phone-notch"></div>
                 
                 <div id="registro-interno">
-                    <button onclick="cerrarRegistro()" class="self-start text-3xl mb-2 text-black">&times;</button>
-                    <h3 class="text-xs font-black uppercase mb-4 text-center">Fast Travel <span class="text-red-600">ID</span></h3>
-                    <div class="flex justify-center gap-8 mb-10">
-                        <div onclick="seleccionarRed('ig', 'https://instagram.com/fasttravelec')" class="flex flex-col items-center cursor-pointer group">
-                            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" class="w-9 icon-ig grayscale transition-all">
-                            <span class="text-[7px] font-black text-gray-400 uppercase mt-1">IG</span>
+                    <button onclick="cerrarRegistro()" class="absolute top-8 left-8 text-3xl text-black">&times;</button>
+                    <div class="text-center mb-8">
+                        <h3 class="text-sm font-black uppercase tracking-tighter">Fast Travel <span class="text-red-600">ID</span></h3>
+                        <p class="text-[8px] text-gray-400 font-bold uppercase tracking-widest mt-1">Validación de Usuario</p>
+                    </div>
+
+                    <div class="flex justify-center gap-6 mb-10">
+                        <div onclick="seleccionarRed('ig', 'https://instagram.com/fasttravelec')" class="red-item icon-ig">
+                            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png">
+                            <span class="text-[8px] font-black uppercase">IG</span>
                         </div>
-                        <div onclick="seleccionarRed('tt', 'https://tiktok.com/@fasttravelec')" class="flex flex-col items-center cursor-pointer group">
-                            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" class="w-9 icon-tt grayscale transition-all">
-                            <span class="text-[7px] font-black text-gray-400 uppercase mt-1">TikTok</span>
+                        <div onclick="seleccionarRed('tt', 'https://tiktok.com/@fasttravelec')" class="red-item icon-tt">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png">
+                            <span class="text-[8px] font-black uppercase">TikTok</span>
                         </div>
-                        <div onclick="seleccionarRed('fb', 'https://facebook.com/fasttravelec')" class="flex flex-col items-center cursor-pointer group">
-                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" class="w-9 icon-fb grayscale transition-all">
-                            <span class="text-[7px] font-black text-gray-400 uppercase mt-1">FB</span>
+                        <div onclick="seleccionarRed('fb', 'https://facebook.com/fasttravelec')" class="red-item icon-fb">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+                            <span class="text-[8px] font-black uppercase">FB</span>
                         </div>
                     </div>
-                    <form id="miFormulario" class="space-y-3">
-                        <input type="text" name="Nombre" placeholder="Nombre Completo" class="w-full bg-gray-50 p-3 rounded-xl text-[10px]" required>
-                        <input type="number" name="WhatsApp" placeholder="WhatsApp" class="w-full bg-gray-50 p-3 rounded-xl text-[10px]" required>
-                        <input type="text" id="inputCuponReal" placeholder="CÓDIGO PROMOCIONAL" class="w-full bg-red-50 p-3 rounded-xl text-[10px] text-red-600 font-black border border-red-100 uppercase">
-                        <button type="submit" id="btn-verificar" class="w-full bg-black text-white font-bold py-4 rounded-xl mt-4 uppercase text-[10px]">Activar Servicio VIP</button>
+
+                    <form id="miFormulario" class="w-full space-y-3">
+                        <input type="text" name="Nombre" placeholder="Nombre Completo" class="w-full bg-gray-50 p-4 rounded-2xl text-[11px] outline-none border border-gray-100" required>
+                        <input type="number" name="WhatsApp" placeholder="WhatsApp" class="w-full bg-gray-50 p-4 rounded-2xl text-[11px] outline-none border border-gray-100" required>
+                        <input type="text" id="inputCuponReal" placeholder="CÓDIGO PROMOCIONAL" class="w-full bg-red-50 p-4 rounded-2xl text-[10px] text-red-600 font-black border border-dashed border-red-200 uppercase outline-none">
+                        <button type="submit" id="btn-verificar" class="w-full bg-black text-white font-bold py-5 rounded-2xl mt-4 uppercase text-[10px] tracking-widest">Activar Servicio VIP</button>
                     </form>
                 </div>
 
@@ -168,11 +184,11 @@
                 </div>
             </div>
 
-            <div class="flex flex-col gap-4 w-full max-w-[260px]">
-                <button onclick="mostrarRegistro()" class="bg-red-700 text-white py-5 rounded-2xl font-black uppercase italic tracking-widest text-[11px] shadow-2xl active:scale-95 transition-all">
+            <div class="flex flex-col gap-4 w-full max-w-[280px]">
+                <button onclick="mostrarRegistro()" class="bg-red-700 text-white py-5 rounded-3xl font-black uppercase italic tracking-widest text-[11px] shadow-2xl active:scale-95 transition-all">
                     <i class="fa-solid fa-bolt mr-2"></i> Usar WebApp
                 </button>
-                <a href="https://wa.me/593979986138" class="bg-zinc-900 border border-zinc-800 text-green-500 py-5 rounded-2xl font-black uppercase italic tracking-widest text-[11px] text-center active:scale-95 transition-all">
+                <a href="https://wa.me/593979986138" class="bg-zinc-900 border border-zinc-800 text-green-500 py-5 rounded-3xl font-black uppercase italic tracking-widest text-[11px] text-center active:scale-95 transition-all">
                     <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Chatear con T-Go
                 </a>
             </div>
@@ -188,26 +204,25 @@
         function mostrarRegistro() { 
             document.getElementById('registro-interno').style.display = 'flex'; 
             document.getElementById('celular-interactivo').style.width = '320px';
-            document.getElementById('celular-interactivo').style.height = '600px';
+            document.getElementById('celular-interactivo').style.height = '620px';
         }
         function cerrarRegistro() { 
             document.getElementById('registro-interno').style.display = 'none'; 
-            document.getElementById('celular-interactivo').style.width = '270px';
-            document.getElementById('celular-interactivo').style.height = '550px';
+            document.getElementById('celular-interactivo').style.width = '280px';
+            document.getElementById('celular-interactivo').style.height = '580px';
         }
 
         let redEscogida = "";
         function seleccionarRed(red, url) {
             redEscogida = red;
-            document.querySelectorAll('.icon-ig, .icon-tt, .icon-fb').forEach(i => i.classList.add('grayscale'));
-            document.querySelector('.icon-' + red).classList.remove('grayscale');
-            document.querySelector('.icon-' + red).classList.add('scale-125');
+            document.querySelectorAll('.red-item').forEach(i => i.classList.remove('active'));
+            document.querySelector('.icon-' + red).classList.add('active');
             window.open(url, '_blank');
         }
 
         window.onload = () => { setTimeout(() => { 
             document.getElementById('notificacionPop').classList.add('show'); 
-            setTimeout(() => { document.getElementById('cerrarPop').classList.remove('hidden'); }, 2000);
+            setTimeout(() => { document.getElementById('cerrarPop').classList.remove('hidden'); }, 3000);
         }, 45000); };
 
         function cerrarPop(e) { e.stopPropagation(); document.getElementById('notificacionPop').classList.remove('show'); }
@@ -219,7 +234,7 @@
             if(!visitadas.has(id)) {
                 visitadas.add(id); acum += 15;
                 document.getElementById('numDesc').innerText = acum;
-                document.getElementById('box-' + id).classList.add('active');
+                document.getElementById('box-' + id).classList.add('border-green-500');
                 document.getElementById('txtCodigo').innerText = "FAST" + acum + "VIP";
                 document.getElementById('codigoGenerado').classList.remove('hidden');
             }
@@ -247,11 +262,14 @@
 
         var swiper = new Swiper(".mySwiper", { loop: true, pagination: { el: ".swiper-pagination", clickable: true } });
 
-        // ANIMACIONES ORIGINALES RESTAURADAS
-        ScrollReveal().reveal('#titulo-principal', { delay: 100, distance: '50px', origin: 'bottom', duration: 1000 });
-        ScrollReveal().reveal('#espacio-logo', { delay: 300, scale: 0.8, duration: 1000 });
-        ScrollReveal().reveal('#subtitulo', { delay: 500, distance: '30px', origin: 'bottom', duration: 1000 });
-        ScrollReveal().reveal('#celular-interactivo', { delay: 400, distance: '50px', origin: 'right', duration: 1500 });
+        // ANIMACIONES ELEGANTES (CORREGIDAS Y RESTAURADAS)
+        ScrollReveal().reveal('#titulo-principal', { delay: 400, distance: '100px', origin: 'bottom', duration: 1800, easing: 'cubic-bezier(0.5, 0, 0, 1)' });
+        ScrollReveal().reveal('#espacio-logo', { delay: 1000, scale: 0.5, duration: 2000, easing: 'ease-out' });
+        
+        // SUBTÍTULO ENTRANDO LENTO CON 2600ms
+        ScrollReveal().reveal('#subtitulo', { delay: 1600, distance: '40px', origin: 'bottom', duration: 2600, opacity: 0 });
+        
+        ScrollReveal().reveal('#celular-interactivo', { delay: 600, distance: '80px', origin: 'right', duration: 2000 });
     </script>
 </body>
 </html>
