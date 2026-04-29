@@ -16,7 +16,6 @@
         header { backdrop-filter: blur(10px); background-color: rgba(0,0,0,0.8); width: 100%; }
         .glow-logo { filter: drop-shadow(0 0 15px rgba(255,255,255,0.1)); }
 
-        /* MARCO DEL CELULAR */
         .phone-frame {
             width: 280px; height: 580px; background: #080808; border: 12px solid #1a1a1a;
             border-radius: 45px; position: relative; box-shadow: 0 0 40px rgba(220, 38, 38, 0.15);
@@ -28,7 +27,6 @@
             border-bottom-left-radius: 14px; border-bottom-right-radius: 14px; z-index: 50;
         }
 
-        /* REGISTRO INTERNO CENTRADO */
         #registro-interno {
             display: none; position: absolute; inset: 0;
             background: white; z-index: 45; color: #333; padding: 40px 25px;
@@ -38,7 +36,6 @@
         #menu-lateral { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
         #menu-lateral.open { transform: translateX(0); }
 
-        /* BONO POP UP */
         #notificacionPop { 
             position: fixed; bottom: 30px; left: 20px; z-index: 100;
             background: white; color: black; padding: 15px 20px;
@@ -52,9 +49,9 @@
 
         .modal-full { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:1000; align-items:center; justify-content:center; padding:20px; backdrop-filter: blur(12px); }
         
-        .red-item { display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; transition: 0.3s; }
-        .red-item img { width: 36px; height: 36px; transition: 0.3s; filter: grayscale(1); }
-        .red-item.active img { filter: grayscale(0); transform: scale(1.2); }
+        .red-item { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; transition: 0.3s; width: 60px; }
+        .red-item img { width: 40px; height: 40px; transition: 0.3s; filter: grayscale(1); opacity: 0.6; }
+        .red-item.active img { filter: grayscale(0); opacity: 1; transform: scale(1.1); }
     </style>
 </head>
 
@@ -76,16 +73,16 @@
             <h2 class="font-black italic uppercase text-lg">Reto <span class="text-red-600">Descuento</span></h2>
             <div class="text-4xl font-black text-red-600 my-4"><span id="numDesc">0</span>%</div>
             <div class="grid grid-cols-2 gap-4 mb-4">
-                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent transition-all" id="box-tt" onclick="clickRed('tt', 'https://tiktok.com/@fasttravelec')">
+                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent" id="box-tt" onclick="clickRed('tt', 'https://tiktok.com/@fasttravelec')">
                     <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" class="w-8 mx-auto">
                 </div>
-                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent transition-all" id="box-ig" onclick="clickRed('ig', 'https://instagram.com/fasttravelec')">
+                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent" id="box-ig" onclick="clickRed('ig', 'https://instagram.com/fasttravelec')">
                     <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" class="w-8 mx-auto">
                 </div>
-                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent transition-all" id="box-fb" onclick="clickRed('fb', 'https://facebook.com/fasttravelec')">
+                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent" id="box-fb" onclick="clickRed('fb', 'https://facebook.com/fasttravelec')">
                     <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" class="w-8 mx-auto">
                 </div>
-                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent transition-all" id="box-wa" onclick="clickRed('wa', 'https://whatsapp.com/channel/0029VbBTr2dK5cDGtfZGFq0q')">
+                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent" id="box-wa" onclick="clickRed('wa', 'https://whatsapp.com/channel/0029VbBTr2dK5cDGtfZGFq0q')">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="w-8 mx-auto">
                 </div>
             </div>
@@ -114,7 +111,7 @@
     <div id="modalConductor" class="modal-full">
         <div class="bg-white rounded-[40px] p-8 text-black w-full max-w-sm overflow-y-auto max-h-[90vh]">
             <button onclick="cerrarModalConductor()" class="float-right text-2xl">&times;</button>
-            <h2 class="font-black italic uppercase text-red-600 text-xl mb-6">Únete al Equipo</h2>
+            <h2 class="font-black italic uppercase text-red-600 text-xl mb-6 text-center">Únete al Equipo</h2>
             <form id="formConductor" class="space-y-3">
                 <input type="text" name="nombre" placeholder="Nombre Completo" class="w-full p-4 bg-gray-100 rounded-xl text-xs outline-none" required>
                 <input type="text" name="cedula" placeholder="Cédula" class="w-full p-4 bg-gray-100 rounded-xl text-xs outline-none" required>
@@ -132,7 +129,7 @@
             <div id="espacio-logo" class="w-full max-w-[280px] aspect-square mb-10 flex items-center justify-center">
                 <img src="1000917167-removebg-preview.png" alt="Logo VIP" class="max-w-full h-auto glow-logo">
             </div>
-            <h2 id="subtitulo" class="w-full text-[11px] md:text-sm font-bold text-gray-400 uppercase tracking-[0.6em] leading-relaxed">Transporte Ejecutivo Privado</h2>
+            <h2 id="subtitulo" class="w-full text-[11px] md:text-sm font-bold text-gray-400 uppercase tracking-[0.6em] leading-relaxed text-center">Transporte Ejecutivo Privado</h2>
         </section>
 
         <section class="w-full py-20 flex flex-col items-center border-t border-zinc-900 px-6">
@@ -142,32 +139,34 @@
                 <div class="phone-notch"></div>
                 
                 <div id="registro-interno">
-                    <button onclick="cerrarRegistro()" class="absolute top-8 left-8 text-3xl text-black">&times;</button>
-                    <div class="text-center mb-8">
+                    <button onclick="cerrarRegistro()" class="absolute top-6 left-6 text-2xl text-black">✕</button>
+                    <div class="text-center mb-6">
                         <h3 class="text-sm font-black uppercase tracking-tighter">Fast Travel <span class="text-red-600">ID</span></h3>
                         <p class="text-[8px] text-gray-400 font-bold uppercase tracking-widest mt-1">Validación de Usuario</p>
                     </div>
 
-                    <div class="flex justify-center gap-6 mb-10">
+                    <div class="flex justify-center gap-4 mb-6">
                         <div onclick="seleccionarRed('ig', 'https://instagram.com/fasttravelec')" class="red-item icon-ig">
                             <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png">
-                            <span class="text-[8px] font-black uppercase">IG</span>
+                            <span class="text-[8px] font-black uppercase text-gray-400">IG</span>
                         </div>
                         <div onclick="seleccionarRed('tt', 'https://tiktok.com/@fasttravelec')" class="red-item icon-tt">
                             <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png">
-                            <span class="text-[8px] font-black uppercase">TikTok</span>
+                            <span class="text-[8px] font-black uppercase text-gray-400">TikTok</span>
                         </div>
                         <div onclick="seleccionarRed('fb', 'https://facebook.com/fasttravelec')" class="red-item icon-fb">
                             <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
-                            <span class="text-[8px] font-black uppercase">FB</span>
+                            <span class="text-[8px] font-black uppercase text-gray-400">FB</span>
                         </div>
                     </div>
 
-                    <form id="miFormulario" class="w-full space-y-3">
-                        <input type="text" name="Nombre" placeholder="Nombre Completo" class="w-full bg-gray-50 p-4 rounded-2xl text-[11px] outline-none border border-gray-100" required>
-                        <input type="number" name="WhatsApp" placeholder="WhatsApp" class="w-full bg-gray-50 p-4 rounded-2xl text-[11px] outline-none border border-gray-100" required>
-                        <input type="text" id="inputCuponReal" placeholder="CÓDIGO PROMOCIONAL" class="w-full bg-red-50 p-4 rounded-2xl text-[10px] text-red-600 font-black border border-dashed border-red-200 uppercase outline-none">
-                        <button type="submit" id="btn-verificar" class="w-full bg-black text-white font-bold py-5 rounded-2xl mt-4 uppercase text-[10px] tracking-widest">Activar Servicio VIP</button>
+                    <form id="miFormulario" class="w-full space-y-2">
+                        <input type="text" name="Nombre" placeholder="Nombre Completo" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none border border-gray-100" required>
+                        <input type="text" name="Cedula" placeholder="Cédula" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none border border-gray-100" required>
+                        <input type="number" name="WhatsApp" placeholder="WhatsApp" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none border border-gray-100" required>
+                        <input type="email" name="Correo" placeholder="Correo" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none border border-gray-100" required>
+                        <input type="text" id="inputCuponReal" placeholder="CÓDIGO PROMOCIONAL" class="w-full bg-red-50 p-3 rounded-2xl text-[9px] text-red-600 font-black border border-dashed border-red-200 uppercase outline-none">
+                        <button type="submit" id="btn-verificar" class="w-full bg-black text-white font-bold py-4 rounded-2xl mt-2 uppercase text-[9px] tracking-widest shadow-xl">Activar Servicio VIP</button>
                     </form>
                 </div>
 
@@ -262,13 +261,9 @@
 
         var swiper = new Swiper(".mySwiper", { loop: true, pagination: { el: ".swiper-pagination", clickable: true } });
 
-        // ANIMACIONES ELEGANTES (CORREGIDAS Y RESTAURADAS)
         ScrollReveal().reveal('#titulo-principal', { delay: 400, distance: '100px', origin: 'bottom', duration: 1800, easing: 'cubic-bezier(0.5, 0, 0, 1)' });
         ScrollReveal().reveal('#espacio-logo', { delay: 1000, scale: 0.5, duration: 2000, easing: 'ease-out' });
-        
-        // SUBTÍTULO ENTRANDO LENTO CON 2600ms
         ScrollReveal().reveal('#subtitulo', { delay: 1600, distance: '40px', origin: 'bottom', duration: 2600, opacity: 0 });
-        
         ScrollReveal().reveal('#celular-interactivo', { delay: 600, distance: '80px', origin: 'right', duration: 2000 });
     </script>
 </body>
