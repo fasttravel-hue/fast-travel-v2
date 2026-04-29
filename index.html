@@ -177,6 +177,54 @@
                 </a>
             </div>
         </section>
+            <section class="w-full py-16 px-6 border-t border-zinc-900 bg-zinc-950/30">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h3 class="text-[10px] font-black text-red-600 uppercase tracking-[0.5em] mb-2">Manual de Usuario</h3>
+                    <h2 class="text-3xl font-black italic uppercase tracking-tighter">¿Cómo solicitar tu <span class="texto-rojo">Unidad?</span></h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800 flex flex-col items-center text-center group hover:border-red-600/50 transition-all">
+                        <div class="w-12 h-12 bg-red-600/10 rounded-full flex items-center justify-center mb-4 text-red-600">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                        </div>
+                        <h4 class="font-black uppercase text-[11px] mb-2">1. Registro ID</h4>
+                        <p class="text-[10px] text-gray-400 leading-relaxed uppercase">Ingresa tus datos. Recibirás un <b>código por SMS</b> para validar tu cuenta.</p>
+                    </div>
+
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800 flex flex-col items-center text-center group hover:border-red-600/50 transition-all">
+                        <div class="w-12 h-12 bg-red-600/10 rounded-full flex items-center justify-center mb-4 text-red-600">
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                        </div>
+                        <h4 class="font-black uppercase text-[11px] mb-2">2. Activa GPS</h4>
+                        <p class="text-[10px] text-gray-400 leading-relaxed uppercase">Dale a <b>"Permitir"</b> a la ubicación. Sin GPS no podremos cotizar tu viaje.</p>
+                    </div>
+
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800 flex flex-col items-center text-center group hover:border-red-600/50 transition-all">
+                        <div class="w-12 h-12 bg-red-600/10 rounded-full flex items-center justify-center mb-4 text-red-600">
+                            <i class="fa-solid fa-hand-pointer"></i>
+                        </div>
+                        <h4 class="font-black uppercase text-[11px] mb-2">3. Fija el Punto</h4>
+                        <p class="text-[10px] text-gray-400 leading-relaxed uppercase">Arrastra el <b>puntero rojo</b> en el mapa hasta tu ubicación exacta.</p>
+                    </div>
+
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800 flex flex-col items-center text-center group hover:border-red-600/50 transition-all">
+                        <div class="w-12 h-12 bg-red-600/10 rounded-full flex items-center justify-center mb-4 text-red-600">
+                            <i class="fa-solid fa-money-bill-transfer"></i>
+                        </div>
+                        <h4 class="font-black uppercase text-[11px] mb-2">4. Mira tu Precio</h4>
+                        <p class="text-[10px] text-gray-400 leading-relaxed uppercase">La App te dará el <b>precio final</b>. Si estás de acuerdo, pide tu unidad.</p>
+                    </div>
+                </div>
+
+                <div class="mt-12 flex justify-center">
+                    <button onclick="mostrarRegistroYScroll()" class="bg-white text-black px-10 py-5 rounded-full font-black uppercase text-[10px] tracking-[0.2em] hover:bg-red-600 hover:text-white transition-all">
+                        ¡Entendido, quiero registrarme!
+                    </button>
+                </div>
+            </div>
+            </section>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -262,6 +310,16 @@
         ScrollReveal().reveal('#espacio-logo', { delay: 1000, scale: 0.5, duration: 2000 });
         ScrollReveal().reveal('#subtitulo', { delay: 1600, distance: '40px', origin: 'bottom', duration: 2600, opacity: 0 });
         ScrollReveal().reveal('#celular-interactivo', { delay: 600, distance: '80px', origin: 'right', duration: 2000 });
+
+        function mostrarRegistroYScroll() {
+    mostrarRegistro(); // Abre el formulario en el celular
+    // Hace que la pantalla suba suavemente hasta el celular
+    document.getElementById('celular-interactivo').scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' 
+    });
+        }
+        
     </script>
 </body>
 </html>
