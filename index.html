@@ -3,31 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Fast Travel V2 | Laboratorio</title>
+    <title>Fast Travel V2 | Laboratorio Final</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <style>
-        html, body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
-        header { backdrop-filter: blur(10px); background: rgba(0,0,0,0.8); width: 100%; }
-        #contenedor-celular { transition: all 0.5s ease; width: 260px; height: 530px; margin-bottom: 40px; }
-        #contenedor-celular.expandido { width: 310px; height: 580px; }
-        .phone-frame { width: 100%; height: 100%; background: #050505; border: 8px solid #1a1a1a; border-radius: 40px; position: relative; overflow: hidden; }
-        #registro-interno { display: none; position: absolute; inset: 0; background: white; z-index: 50; color: #333; padding: 40px 20px; flex-direction: column; align-items: center; }
-        #menu-lateral { position: fixed; top: 0; right: 0; height: 100%; width: 80%; background: #050505; z-index: 100; transition: 0.5s; transform: translateX(100%); border-l: 1px solid #222; }
+        html, body { 
+            background-color: #000; color: #fff; font-family: sans-serif; 
+            margin: 0; padding: 0; width: 100%; overflow-x: hidden; 
+        }
+        .texto-rojo { color: #dc2626; }
+        header { backdrop-filter: blur(10px); background-color: rgba(0,0,0,0.8); width: 100%; }
+        .glow-logo { filter: drop-shadow(0 0 15px rgba(255,255,255,0.1)); }
+
+        /* MARCO DE CELULAR REALISTA (Diseño VIP) */
+        .phone-frame {
+            width: 270px;
+            height: 550px;
+            background: #111;
+            border: 10px solid #2a2a2a;
+            border-radius: 45px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(220, 38, 38, 0.15);
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .phone-notch {
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 120px; height: 25px; background: #2a2a2a;
+            border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; z-index: 50;
+        }
+
+        /* Expansión del celular al registrar */
+        .phone-frame.expandido {
+            width: 320px;
+            height: 600px;
+        }
+
+        /* SWIPER Y REGISTRO DENTRO DEL CELULAR */
+        .swiper { width: 100%; height: 100%; }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
+        
+        #registro-interno {
+            display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: white; z-index: 45; color: #333; padding: 50px 20px;
+        }
+
+        #menu-lateral { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); transform: translateX(100%); }
         #menu-lateral.open { transform: translateX(0); }
     </style>
 </head>
+
 <body>
-    <header class="fixed top-0 z-50 px-6 py-4 flex justify-between items-center">
-        <div class="text-xl font-black italic uppercase">FAST <span class="text-red-600">TRAVEL</span></div>
-        <button onclick="toggleMenu()" class="text-white text-2xl"><i class="fa-solid fa-bars-staggered"></i></button>
+    <header class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center border-b border-zinc-900">
+        <div class="text-xl font-black italic uppercase tracking-tighter">
+            FAST <span class="texto-rojo">TRAVEL</span>
+        </div>
+        <button onclick="toggleMenu()" class="text-white text-2xl pr-2">
+            <i class="fa-solid fa-bars-staggered"></i>
+        </button>
     </header>
 
-    <div id="menu-lateral" class="p-10 flex flex-col">
-        <button onclick="toggleMenu()" class="self-end text-3xl mb-10">&times;</button>
-        <nav class="flex flex-col gap-8 text-2xl font-black italic uppercase">
+    <div id="menu-lateral" class="fixed top-0 right-0 h-full w-[80%] bg-zinc-950 z-[100] p-10 flex flex-col border-l border-zinc-800 shadow-2xl text-white">
+        <button onclick="toggleMenu()" class="text-white text-3xl self-end mb-10"><i class="fa-solid fa-xmark"></i></button>
+        <nav class="flex flex-col gap-8 text-2xl font-black italic uppercase tracking-tighter">
             <a href="#" class="text-red-600">Inicio</a>
             <a href="#">Servicios</a>
             <a href="#">Flota</a>
@@ -35,40 +77,62 @@
         </nav>
     </div>
 
-    <main class="w-full flex flex-col items-center pt-32">
-        <h1 id="t1" class="text-5xl font-black italic uppercase mb-4">FAST <span class="text-red-600">TRAVEL</span></h1>
-        <img id="logo" src="1000917167-removebg-preview.png" class="w-56 h-auto mb-6">
-        <h2 id="t2" class="text-[10px] text-gray-400 uppercase tracking-[0.5em] mb-12">Transporte Ejecutivo Privado</h2>
+    <main class="w-full flex flex-col items-center">
+        <section class="min-h-screen w-full flex flex-col items-center justify-center text-center px-4 pt-20">
+            <h1 id="titulo-principal" class="w-full text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-6">
+                FAST <span class="texto-rojo">TRAVEL</span>
+            </h1>
+            <div id="espacio-logo" class="w-full max-w-[280px] aspect-square mb-8 flex items-center justify-center">
+                <img src="1000917167-removebg-preview.png" alt="Logo VIP" class="max-w-full h-auto glow-logo">
+            </div>
+            <h2 id="subtitulo" class="w-full text-[10px] md:text-xs font-light text-gray-400 uppercase tracking-[0.5em]LEADING-RELAXED">
+                Transporte Ejecutivo Privado
+            </h2>
+        </section>
 
-        <div id="contenedor-celular">
-            <div class="phone-frame">
-                <div id="registro-interno">
-                    <button onclick="cerrarRegistro()" class="self-start text-3xl mb-2">&times;</button>
-                    <h3 class="font-black uppercase mb-4 text-sm text-center">FAST TRAVEL <span class="text-red-600">ID</span></h3>
+        <section class="w-full py-20 flex flex-col items-center border-t border-zinc-900">
+            
+            <div class="w-20 h-px bg-zinc-800 mb-10"></div>
+            
+            <p class="text-[10px] font-bold texto-rojo uppercase tracking-[0.4em] mb-12">Solicita tu unidad</p>
+            
+            <div id="celular-interactivo" class="phone-frame mb-10">
+                <div class="phone-notch"></div>
+                
+                <div id="registro-interno" class="flex flex-col items-center overflow-y-auto">
+                    <button onclick="cerrarRegistro()" class="self-start text-3xl mb-2 text-black">&times;</button>
+                    <h3 class="text-xs font-black uppercase mb-4 tracking-tighter text-center">Fast Travel <span class="text-red-600">ID</span></h3>
+                    
+                    <p class="text-[9px] font-bold text-gray-400 uppercase mb-4">Selecciona tu red favorita:</p>
                     <div class="flex gap-6 mb-6 text-2xl text-gray-400">
                         <a href="https://www.instagram.com/fasttravel_hue/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://www.tiktok.com/@fasttravel_hue" target="_blank"><i class="fa-brands fa-tiktok text-black"></i></a>
                         <a href="https://www.facebook.com/fasttravelhue" target="_blank"><i class="fa-brands fa-facebook"></i></a>
                     </div>
+
                     <div class="w-full space-y-3">
-                        <input type="text" placeholder="Nombre" class="w-full bg-gray-100 p-3 rounded-xl text-xs outline-none">
-                        <input type="text" placeholder="WhatsApp" class="w-full bg-gray-100 p-3 rounded-xl text-xs outline-none">
+                        <input type="text" placeholder="Nombre Completo" class="w-full bg-gray-100 p-3 rounded-xl text-[10px] outline-none">
+                        <input type="text" placeholder="Cédula" class="w-full bg-gray-100 p-3 rounded-xl text-[10px] outline-none">
+                        <input type="text" placeholder="WhatsApp" class="w-full bg-gray-100 p-3 rounded-xl text-[10px] outline-none">
+                        <input type="text" placeholder="Código Promocional" class="w-full bg-red-50 p-3 rounded-xl text-[10px] border border-red-100 text-red-400 placeholder-red-300">
                     </div>
-                    <button onclick="window.location.href='https://ondelight.com'" class="w-full bg-black text-white py-4 rounded-xl mt-6 text-[10px] font-bold uppercase">Activar VIP</button>
+                    <button onclick="window.location.href='https://ondelight.com'" class="w-full bg-black text-white text-[10px] font-bold py-4 rounded-xl mt-6 uppercase tracking-widest">Activar Servicio VIP</button>
                 </div>
-                <div class="swiper mySwiper h-full">
+
+                <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide" onclick="irWhatsApp()"><img src="1000922713.jpg" class="w-full h-full object-cover"></div>
-                        <div class="swiper-slide" onclick="mostrarRegistro()"><img src="1000925510.jpg" class="w-full h-full object-cover"></div>
+                        <div class="swiper-slide cursor-pointer" onclick="irWhatsApp()"><img src="1000922713.jpg" alt="WhatsApp"></div>
+                        <div class="swiper-slide cursor-pointer" onclick="mostrarRegistro()"><img src="1000925510.jpg" alt="WebApp"></div>
                     </div>
+                    <div class="swiper-pagination !bottom-10"></div>
                 </div>
             </div>
-        </div>
 
-        <div class="flex flex-col gap-4 w-full max-w-[260px] pb-20">
-            <button onclick="mostrarRegistro()" class="bg-red-700 text-white py-4 rounded-2xl font-black uppercase italic text-[11px] shadow-xl">Usar WebApp</button>
-            <button onclick="irWhatsApp()" class="bg-zinc-900 text-green-500 py-4 rounded-2xl font-black uppercase italic text-[11px] border border-zinc-800">WhatsApp T-Go</button>
-        </div>
+            <div class="flex flex-col gap-4 w-full max-w-[280px] px-4">
+                <button onclick="mostrarRegistro()" class="bg-red-700 text-white py-5 rounded-2xl font-black uppercase italic tracking-widest text-[11px] shadow-xl active:scale-95 transition-all"><i class="fa-solid fa-bolt mr-2"></i> Usar WebApp</button>
+                <button onclick="irWhatsApp()" class="bg-zinc-900 border border-zinc-800 text-green-500 py-5 rounded-2xl font-black uppercase italic tracking-widest text-[11px] active:scale-95 transition-all"><i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Chatear con T-Go</button>
+            </div>
+        </section>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -76,17 +140,24 @@
         function toggleMenu() { document.getElementById('menu-lateral').classList.toggle('open'); }
         function mostrarRegistro() { 
             document.getElementById('registro-interno').style.display = 'flex'; 
-            document.getElementById('contenedor-celular').classList.add('expandido');
+            document.getElementById('celular-interactivo').classList.add('expandido');
         }
         function cerrarRegistro() { 
             document.getElementById('registro-interno').style.display = 'none'; 
-            document.getElementById('contenedor-celular').classList.remove('expandido');
+            document.getElementById('celular-interactivo').classList.remove('expandido');
         }
         function irWhatsApp() { window.location.href = "https://wa.me/593980287239"; }
-        new Swiper(".mySwiper", { loop: true });
-        ScrollReveal().reveal('#t1', { origin: 'left', distance: '50px', duration: 1000 });
-        ScrollReveal().reveal('#logo', { scale: 0.8, duration: 1000, delay: 300 });
-        ScrollReveal().reveal('#t2', { origin: 'bottom', distance: '20px', duration: 2000, delay: 600 });
+
+        var swiper = new Swiper(".mySwiper", { 
+            loop: true, 
+            grabCursor: true,
+            pagination: { el: ".swiper-pagination", clickable: true },
+        });
+
+        ScrollReveal().reveal('#titulo-principal', { delay: 200, distance: '50px', origin: 'left', duration: 1200, easing: 'ease-out' });
+        ScrollReveal().reveal('#espacio-logo', { delay: 600, scale: 0.9, duration: 1000 });
+        ScrollReveal().reveal('#subtitulo', { delay: 1100, distance: '30px', origin: 'bottom', duration: 2500, easing: 'ease-out' });
+        ScrollReveal().reveal('#celular-interactivo', { delay: 400, distance: '50px', origin: 'right', duration: 1500, easing: 'ease-out' });
     </script>
 </body>
 </html>
