@@ -13,6 +13,9 @@
         body { background-color: #000; color: #fff; font-family: sans-serif; overflow-x: hidden; }
         .texto-rojo { color: #dc2626; }
         header { backdrop-filter: blur(10px); background-color: rgba(0,0,0,0.8); }
+        
+        /* Animación suave para la tarjeta */
+        .card-shadow { shadow-[0_20px_50px_rgba(0,0,0,0.5)]; }
     </style>
 </head>
 
@@ -32,52 +35,65 @@
             FAST <span class="texto-rojo">TRAVEL</span>
         </h1>
 
-        <div id="espacio-logo" class="w-40 h-40 mb-8 flex items-center justify-center">
-            <div class="w-32 h-32 border-2 border-dashed border-zinc-800 rounded-full flex items-center justify-center">
-                <span class="text-[10px] text-zinc-600 uppercase">Espacio Logo</span>
-            </div>
+        <div id="espacio-logo" class="w-48 h-48 mb-8 flex items-center justify-center">
+            <img src="logo_ft-removebg-preview (1).png" alt="Logo" class="w-full h-auto">
         </div>
         
         <h2 id="subtitulo" class="text-xs font-light text-gray-400 uppercase tracking-[0.6em] mb-12">
             Transporte Ejecutivo Privado
         </h2>
 
-        <button id="boton-reserva" class="bg-red-700 text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] shadow-2xl transition-all active:scale-95">
-            Reservar Ahora
-        </button>
+        <div id="boton-reserva">
+            <button class="bg-red-700 text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] shadow-2xl active:scale-95 transition-transform">
+                Reservar Ahora
+            </button>
+        </div>
+    </section>
+
+    <section class="py-24 px-6">
+        <div id="tarjeta-seguridad" class="max-w-xs mx-auto bg-zinc-900/50 p-10 rounded-[50px] border border-zinc-800 text-left relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-red-900/20 blur-3xl rounded-full"></div>
+            
+            <div class="text-red-600 text-3xl mb-6"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3 class="font-bold text-xl mb-3 uppercase italic tracking-tighter">Seguridad <span class="texto-rojo">24/7</span></h3>
+            <p class="text-gray-500 text-[10px] leading-relaxed uppercase tracking-widest">
+                Viajes monitoreados en tiempo real para tu total tranquilidad.
+            </p>
+        </div>
     </section>
 
     <script>
-        /* CONFIGURACIÓN DE LOS MOVIMIENTOS */
-        
-        // 1. Fast Travel de izquierda a derecha
+        // Título de izquierda a derecha
         ScrollReveal().reveal('#titulo-principal', { 
-            delay: 200, 
-            distance: '100px', 
-            origin: 'left', 
-            duration: 1000 
+            delay: 200, distance: '100px', origin: 'left', duration: 1000 
         });
 
-        // 2. El Logo aparece con escala (creciendo)
+        // Logo apareciendo
         ScrollReveal().reveal('#espacio-logo', { 
-            delay: 500, 
-            scale: 0.5, 
-            duration: 1000 
+            delay: 500, scale: 0.7, duration: 1000 
         });
 
-        // 3. Transporte Ejecutivo de abajo hacia arriba
+        // Subtítulo LENTO (Como lo configuraste)
         ScrollReveal().reveal('#subtitulo', { 
-            delay: 800, 
+            delay: 1000, 
             distance: '50px', 
             origin: 'bottom', 
-            duration: 2500 
+            duration: 2500,
+            easing: 'cubic-bezier(0.5, 0, 0, 1)' 
         });
 
-        // 4. El botón aparece al final
+        // Botón apareciendo
         ScrollReveal().reveal('#boton-reserva', { 
-            delay: 1100, 
-            opacity: 0, 
-            duration: 1000 
+            delay: 1500, opacity: 0, duration: 1000 
+        });
+
+        // LA TARJETA DESDE LA DERECHA (Efecto GitHub)
+        ScrollReveal().reveal('#tarjeta-seguridad', { 
+            delay: 500, 
+            distance: '200px', 
+            origin: 'right', 
+            duration: 1800,
+            easing: 'cubic-bezier(0.32, 0.72, 0, 1)'
         });
     </script>
 </body>
