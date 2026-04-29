@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Fast Travel V2 | Laboratorio</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -10,17 +10,25 @@
     <script src="https://unpkg.com/scrollreveal"></script>
 
     <style>
-        body { background-color: #000; color: #fff; font-family: sans-serif; overflow-x: hidden; }
+        /* Bloqueamos el desbordamiento lateral para que nada se mueva a la izquierda */
+        html, body { 
+            background-color: #000; 
+            color: #fff; 
+            font-family: sans-serif; 
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden; 
+        }
         .texto-rojo { color: #dc2626; }
-        header { backdrop-filter: blur(10px); background-color: rgba(0,0,0,0.8); }
+        header { backdrop-filter: blur(10px); background-color: rgba(0,0,0,0.8); width: 100%; }
         
-        /* Animación suave para la tarjeta */
-        .card-shadow { shadow-[0_20px_50px_rgba(0,0,0,0.5)]; }
+        .glow-logo { filter: drop-shadow(0 0 15px rgba(255,255,255,0.1)); }
     </style>
 </head>
 
 <body>
-    <header class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center border-b border-zinc-900">
+    <header class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center border-b border-zinc-900">
         <div class="text-xl font-black italic uppercase tracking-tighter">
             FAST <span class="texto-rojo">TRAVEL</span>
         </div>
@@ -29,72 +37,56 @@
         </button>
     </header>
 
-    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20">
+    <section class="min-h-screen w-full flex flex-col items-center justify-center text-center px-4 pt-20">
         
-        <h1 id="titulo-principal" class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-4">
+        <h1 id="titulo-principal" class="w-full text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-6">
             FAST <span class="texto-rojo">TRAVEL</span>
         </h1>
 
-        <div id="espacio-logo" class="w-48 h-48 mb-8 flex items-center justify-center">
-            <img src="1000917167-removebg-preview.png" alt="Logo Fast Travel" class="w-full h-auto drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-            
+        <div id="espacio-logo" class="w-full max-w-[280px] aspect-square mb-8 flex items-center justify-center">
+            <img src="1000917167-removebg-preview.png" alt="Logo VIP" class="max-w-full h-auto glow-logo">
         </div>
         
-        <h2 id="subtitulo" class="text-xs font-light text-gray-400 uppercase tracking-[0.6em] mb-12">
+        <h2 id="subtitulo" class="w-full text-[10px] md:text-xs font-light text-gray-400 uppercase tracking-[0.5em] mb-12 leading-relaxed">
             Transporte Ejecutivo Privado
         </h2>
 
-        <div id="boton-reserva">
+        <div id="boton-reserva" class="w-full flex justify-center">
             <button class="bg-red-700 text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] shadow-2xl active:scale-95 transition-transform">
                 Reservar Ahora
             </button>
         </div>
     </section>
 
-    <section class="py-24 px-6">
-        <div id="tarjeta-seguridad" class="max-w-xs mx-auto bg-zinc-900/50 p-10 rounded-[50px] border border-zinc-800 text-left relative overflow-hidden">
-            <div class="absolute -top-10 -right-10 w-32 h-32 bg-red-900/20 blur-3xl rounded-full"></div>
-            
-            <div class="text-red-600 text-3xl mb-6"><i class="fa-solid fa-shield-halved"></i></div>
-            <h3 class="font-bold text-xl mb-3 uppercase italic tracking-tighter">Seguridad <span class="texto-rojo">24/7</span></h3>
-            <p class="text-gray-500 text-[10px] leading-relaxed uppercase tracking-widest">
-                Viajes monitoreados en tiempo real para tu total tranquilidad.
+    <section class="w-full py-24 px-6 border-t border-zinc-900 flex justify-center">
+        <div id="tarjeta-info" class="w-full max-w-xs bg-zinc-900/50 p-10 rounded-[50px] border border-zinc-800 text-center">
+            <p class="text-[9px] text-zinc-500 uppercase tracking-widest italic mb-4 text-center">Desliza para conocer</p>
+            <div class="text-red-600 text-4xl mb-6 flex justify-center">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3 uppercase italic tracking-tighter text-center">Reserva en <span class="texto-rojo text-2xl">APP</span></h3>
+            <p class="text-gray-500 text-[10px] leading-relaxed uppercase tracking-widest text-center">
+                Seguridad y confort al alcance de un toque.
             </p>
         </div>
     </section>
 
     <script>
-        // Título de izquierda a derecha
+        // Mantenemos tus efectos pero con distancias más cortas para no desajustar el móvil
         ScrollReveal().reveal('#titulo-principal', { 
-            delay: 200, distance: '100px', origin: 'left', duration: 1000 
+            delay: 200, distance: '50px', origin: 'left', duration: 1200, easing: 'ease-out'
         });
 
-        // Logo apareciendo
         ScrollReveal().reveal('#espacio-logo', { 
-            delay: 500, scale: 0.7, duration: 1000 
+            delay: 600, scale: 0.9, duration: 1000 
         });
 
-        // Subtítulo LENTO (Como lo configuraste)
         ScrollReveal().reveal('#subtitulo', { 
-            delay: 1000, 
-            distance: '50px', 
-            origin: 'bottom', 
-            duration: 2500,
-            easing: 'cubic-bezier(0.5, 0, 0, 1)' 
+            delay: 1100, distance: '30px', origin: 'bottom', duration: 2500, easing: 'ease-out'
         });
 
-        // Botón apareciendo
-        ScrollReveal().reveal('#boton-reserva', { 
-            delay: 1500, opacity: 0, duration: 1000 
-        });
-
-        // LA TARJETA DESDE LA DERECHA (Efecto GitHub)
-        ScrollReveal().reveal('#tarjeta-seguridad', { 
-            delay: 500, 
-            distance: '200px', 
-            origin: 'right', 
-            duration: 1800,
-            easing: 'cubic-bezier(0.32, 0.72, 0, 1)'
+        ScrollReveal().reveal('#tarjeta-info', { 
+            delay: 400, distance: '50px', origin: 'right', duration: 1500, easing: 'ease-out'
         });
     </script>
 </body>
