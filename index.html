@@ -15,23 +15,20 @@
         .texto-rojo { color: #dc2626; }
         header { backdrop-filter: blur(10px); background-color: rgba(0,0,0,0.8); width: 100%; }
         
-        /* MENÚ LATERAL DE LUJO - Más lento y suave */
-        #menu-lateral { 
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
-            transform: translateX(100%); 
-        }
+        /* MENÚ LATERAL */
+        #menu-lateral { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); transform: translateX(100%); }
         #menu-lateral.open { transform: translateX(0); }
+
+        /* MODAL DE REGISTRO (EL QUE ME PASASTE EN LA FOTO) */
+        #modal-registro {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: white; z-index: 200; overflow-y: auto; color: #333;
+        }
 
         .phone-frame {
             width: 260px; height: 530px; background: #050505;
             border: 8px solid #1a1a1a; border-radius: 40px;
-            position: relative; box-shadow: 0 0 40px rgba(220, 38, 38, 0.1);
-            overflow: hidden;
-        }
-        .phone-notch {
-            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 100px; height: 20px; background: #1a1a1a;
-            border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; z-index: 20;
+            position: relative; overflow: hidden;
         }
         .swiper { width: 100%; height: 100%; }
         .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
@@ -39,60 +36,74 @@
 </head>
 
 <body>
-    <header class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center border-b border-zinc-900">
-        <div class="text-xl font-black italic uppercase tracking-tighter">
-            FAST <span class="texto-rojo">TRAVEL</span>
+    <div id="modal-registro" class="p-8 flex flex-col items-center">
+        <button onclick="cerrarRegistro()" class="self-start text-4xl mb-6 text-black">&times;</button>
+        
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-black italic uppercase tracking-tighter">FAST TRAVEL <span class="text-red-600">ID</span></h2>
+            <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Validación de Usuario</p>
         </div>
-        <button onclick="toggleMenu()" class="text-white text-2xl pr-2">
-            <i class="fa-solid fa-bars-staggered"></i>
+
+        <p class="text-[9px] font-bold text-gray-400 uppercase mb-4 italic">Selecciona tu red favorita:</p>
+        <div class="flex gap-6 mb-8 text-3xl text-gray-600">
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-tiktok text-black"></i>
+            <i class="fa-brands fa-facebook"></i>
+        </div>
+
+        <div class="w-full space-y-4">
+            <input type="text" placeholder="Nombre Completo" class="w-full bg-gray-100 p-4 rounded-2xl text-sm border-none outline-none">
+            <input type="text" placeholder="Cédula" class="w-full bg-gray-100 p-4 rounded-2xl text-sm border-none outline-none">
+            <input type="text" placeholder="WhatsApp" class="w-full bg-gray-100 p-4 rounded-2xl text-sm border-none outline-none">
+            <input type="email" placeholder="Correo" class="w-full bg-gray-100 p-4 rounded-2xl text-sm border-none outline-none">
+            <input type="text" placeholder="CÓDIGO PROMOCIONAL" class="w-full bg-red-50 p-4 rounded-2xl text-sm border-dashed border border-red-200 text-red-400 placeholder-red-300">
+        </div>
+
+        <button onclick="irAppFinal()" class="w-full bg-black text-white font-bold py-5 rounded-2xl mt-8 uppercase tracking-widest text-xs">
+            Activar Servicio VIP
         </button>
+    </div>
+
+    <header class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center border-b border-zinc-900">
+        <div class="text-xl font-black italic uppercase tracking-tighter">FAST <span class="texto-rojo">TRAVEL</span></div>
+        <button onclick="toggleMenu()" class="text-white text-2xl"><i class="fa-solid fa-bars-staggered"></i></button>
     </header>
 
     <div id="menu-lateral" class="fixed top-0 right-0 h-full w-[80%] bg-zinc-950 z-[100] p-10 flex flex-col border-l border-zinc-800 shadow-2xl">
         <button onclick="toggleMenu()" class="text-white text-3xl self-end mb-10"><i class="fa-solid fa-xmark"></i></button>
         <nav class="flex flex-col gap-8 text-3xl font-black italic uppercase tracking-tighter">
-            <a href="#" onclick="toggleMenu()" class="hover:text-red-600 transition-colors">Inicio</a>
-            <a href="#" onclick="toggleMenu()" class="text-red-600">Servicios</a>
-            <a href="#" onclick="toggleMenu()" class="hover:text-red-600 transition-colors">Flota</a>
-            <a href="#" onclick="toggleMenu()" class="hover:text-red-600 transition-colors">Contacto</a>
+            <a href="#" class="text-red-600">Inicio</a>
+            <a href="#">Servicios</a>
+            <a href="#">Flota</a>
+            <a href="#">Contacto</a>
         </nav>
     </div>
 
     <main class="w-full flex flex-col items-center">
         <section class="min-h-screen w-full flex flex-col items-center justify-center text-center px-4 pt-20">
-            <h1 id="titulo-principal" class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-6">
-                FAST <span class="texto-rojo">TRAVEL</span>
-            </h1>
-            <div id="espacio-logo" class="w-full max-w-[280px] aspect-square mb-8 flex items-center justify-center">
+            <h1 id="titulo-principal" class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-6">FAST <span class="texto-rojo">TRAVEL</span></h1>
+            <div id="espacio-logo" class="w-full max-w-[280px] mb-8 flex items-center justify-center">
                 <img src="1000917167-removebg-preview.png" alt="Logo VIP" class="max-w-full h-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
             </div>
-            <h2 id="subtitulo" class="text-[10px] font-light text-gray-400 uppercase tracking-[0.5em] leading-relaxed">
-                Transporte Ejecutivo Privado
-            </h2>
+            <h2 id="subtitulo" class="text-[10px] font-light text-gray-400 uppercase tracking-[0.5em] leading-relaxed">Transporte Ejecutivo Privado</h2>
         </section>
 
         <section class="w-full py-20 flex flex-col items-center border-t border-zinc-900">
             <p class="text-[10px] font-bold texto-rojo uppercase tracking-[0.4em] mb-10">Solicita tu unidad</p>
-            
             <div id="celular-interactivo" class="phone-frame mb-10">
-                <div class="phone-notch"></div>
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide cursor-pointer" onclick="irWhatsApp()">
-                            <img src="1000922713.jpg" alt="WhatsApp Fast Travel">
-                        </div>
-                        <div class="swiper-slide cursor-pointer" onclick="irRegistro()">
-                            <img src="1000925510.jpg" alt="WebApp Fast Travel">
-                        </div>
+                        <div class="swiper-slide cursor-pointer" onclick="irWhatsApp()"><img src="1000922713.jpg"></div>
+                        <div class="swiper-slide cursor-pointer" onclick="abrirRegistro()"><img src="1000925510.jpg"></div>
                     </div>
                 </div>
             </div>
 
             <div class="flex flex-col gap-4 w-full max-w-[280px] px-4">
-                <button onclick="irRegistro()" class="bg-red-700 text-white py-5 rounded-2xl font-black uppercase italic tracking-widest text-[11px] shadow-xl active:scale-95 transition-all">
+                <button onclick="abrirRegistro()" class="bg-red-700 text-white py-5 rounded-2xl font-black uppercase italic tracking-widest text-[11px] shadow-xl">
                     <i class="fa-solid fa-bolt mr-2"></i> Usar WebApp
                 </button>
-                <button onclick="irWhatsApp()" class="bg-zinc-900 border border-zinc-800 text-green-500 py-5 rounded-2xl font-black uppercase italic tracking-widest text-[11px] active:scale-95 transition-all">
+                <button onclick="irWhatsApp()" class="bg-zinc-900 border border-zinc-800 text-green-500 py-5 rounded-2xl font-black uppercase italic tracking-widest text-[11px]">
                     <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Chatear con T-Go
                 </button>
             </div>
@@ -102,19 +113,16 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         function toggleMenu() { document.getElementById('menu-lateral').classList.toggle('open'); }
+        
+        function abrirRegistro() { document.getElementById('modal-registro').style.display = 'block'; }
+        function cerrarRegistro() { document.getElementById('modal-registro').style.display = 'none'; }
+        
+        function irWhatsApp() { window.location.href = "https://wa.me/593980287239"; }
+        function irAppFinal() { window.location.href = "https://ondelight.com"; } // <--- Pon aquí el link real de la app
 
-        // REDIRECCIONES (XAVIER: Pon aquí tus links finales)
-        function irWhatsApp() {
-            window.location.href = "https://wa.me/593987654321"; // <--- Tu número de WhatsApp aquí
-        }
-        function irRegistro() {
-            window.location.href = "https://fasttravel-hue.github.io/transporte/"; // <--- Link a tu página de registro
-        }
-
-        var swiper = new Swiper(".mySwiper", { grabCursor: true, loop: true });
+        var swiper = new Swiper(".mySwiper", { loop: true });
 
         ScrollReveal().reveal('#titulo-principal', { delay: 200, distance: '50px', origin: 'left', duration: 1200 });
-        ScrollReveal().reveal('#espacio-logo', { delay: 600, scale: 0.9, duration: 1000 });
         ScrollReveal().reveal('#subtitulo', { delay: 1100, distance: '30px', origin: 'bottom', duration: 2500 });
         ScrollReveal().reveal('#celular-interactivo', { delay: 400, distance: '50px', origin: 'right', duration: 1500 });
     </script>
