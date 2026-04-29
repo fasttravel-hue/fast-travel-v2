@@ -6,31 +6,45 @@
     <title>Fast Travel V2 | Laboratorio</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
-        /* Definimos el color negro de fondo y el rojo de tu marca */
-        body { background-color: #000; color: #fff; }
+        /* Definimos el color negro de fondo y el tipo de letra */
+        body { background-color: #000; color: #fff; font-family: sans-serif; overflow-x: hidden; }
         .texto-rojo { color: #dc2626; }
+        
+        /* Esto hace que el menú de arriba se quede pegado cuando hagas scroll */
+        header { backdrop-filter: blur(10px); background-color: rgba(0,0,0,0.8); }
     </style>
 </head>
 
-<body class="flex flex-col items-center justify-center min-h-screen text-center px-6">
+<body>
+    <header class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center border-b border-zinc-900">
+        <div class="text-xl font-black italic uppercase tracking-tighter">
+            FAST <span class="texto-rojo">TRAVEL</span>
+        </div>
+        
+        <button class="text-white text-2xl">
+            <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+    </header>
 
-    <h1 class="text-5xl font-black italic uppercase tracking-tighter mb-2">
-        FAST <span class="texto-rojo">TRAVEL</span>
-    </h1>
-    
-    <p class="text-xs font-light text-gray-500 uppercase tracking-[0.5em] mb-10">
-        Laboratorio de Diseño
-    </p>
+    <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20">
+        <h1 class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-4">
+            EXPERIENCIA <br> <span class="texto-rojo text-6xl md:text-8xl">VIP</span>
+        </h1>
+        
+        <p class="text-xs font-light text-gray-500 uppercase tracking-[0.5em] mb-10 max-w-xs">
+            Transporte ejecutivo privado en Guayaquil
+        </p>
 
-    <div class="border border-zinc-800 p-8 rounded-[40px] bg-zinc-900/30 max-w-sm">
-        <p class="text-sm text-gray-400 mb-4">
-            Xavier, si ves esto en el link azul, significa que ya tenemos el control del nuevo repositorio.
-        </p>
-        <p class="text-[10px] font-bold texto-rojo uppercase tracking-widest">
-            ¡Siguiente paso: La magia del celular!
-        </p>
+        <button class="bg-red-700 hover:bg-red-600 text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] shadow-2xl transition-all active:scale-95">
+            Reservar Ahora
+        </button>
+    </section>
+
+    <div class="py-20 text-center border-t border-zinc-900">
+        <p class="text-[10px] text-zinc-600 uppercase tracking-widest">Próximo paso: El Carrusel de Celular</p>
     </div>
 
 </body>
