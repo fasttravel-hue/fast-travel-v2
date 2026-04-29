@@ -71,12 +71,10 @@
         <div class="bg-white rounded-[35px] p-8 text-black text-center max-w-[340px] relative">
             <button onclick="cerrarModalJuego()" class="absolute top-4 right-6 text-xl">✕</button>
             <h2 class="font-black italic uppercase text-lg">Reto <span class="text-red-600">Descuento</span></h2>
-            
             <div class="my-4">
                 <div class="text-4xl font-black text-red-600 leading-none"><span id="numDesc">0</span>%</div>
                 <p class="text-[9px] font-bold text-gray-400 uppercase tracking-tighter mt-1">15% de descuento por cada red que nos sigas</p>
             </div>
-
             <div class="grid grid-cols-2 gap-4 mb-4">
                 <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent" id="box-tt" onclick="clickRed('tt', 'https://tiktok.com/@fasttravelec')">
                     <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" class="w-8 mx-auto">
@@ -123,7 +121,7 @@
                 <input type="tel" name="telefono" placeholder="WhatsApp" class="w-full p-4 bg-gray-100 rounded-xl text-xs outline-none" required>
                 <input type="text" name="vehiculo" placeholder="Modelo y Año del Vehículo" class="w-full p-4 bg-gray-100 rounded-xl text-xs outline-none" required>
                 <input type="text" name="placa" placeholder="Número de Placa" class="w-full p-4 bg-gray-100 rounded-xl text-xs outline-none" required>
-                <button type="submit" class="w-full bg-red-600 text-white py-5 rounded-xl font-bold uppercase text-[10px] tracking-widest">Enviar Solicitud</button>
+                <button type="submit" id="btn-envio-cond" class="w-full bg-red-600 text-white py-5 rounded-xl font-bold uppercase text-[10px] tracking-widest">Enviar Solicitud</button>
             </form>
         </div>
     </div>
@@ -139,46 +137,29 @@
 
         <section class="w-full py-20 flex flex-col items-center border-t border-zinc-900 px-6">
             <p id="label-solicita" class="text-[10px] font-bold texto-rojo uppercase tracking-[0.4em] mb-12">Solicita tu unidad</p>
-            
             <div id="celular-interactivo" class="phone-frame mb-12">
                 <div class="phone-notch"></div>
-                
                 <div id="registro-interno">
                     <button onclick="cerrarRegistro()" class="absolute top-6 left-6 text-2xl text-black">✕</button>
                     <div class="text-center mb-6">
                         <h3 class="text-sm font-black uppercase tracking-tighter">Fast Travel <span class="text-red-600">ID</span></h3>
                         <p class="text-[8px] text-gray-400 font-bold uppercase tracking-widest mt-1">Validación de Usuario</p>
                     </div>
-
                     <div class="flex justify-center gap-4 mb-6">
-                        <div onclick="seleccionarRed('ig', 'https://instagram.com/fasttravelec')" class="red-item icon-ig">
-                            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png">
-                            <span class="text-[8px] font-black uppercase text-gray-400">IG</span>
-                        </div>
-                        <div onclick="seleccionarRed('tt', 'https://tiktok.com/@fasttravelec')" class="red-item icon-tt">
-                            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png">
-                            <span class="text-[8px] font-black uppercase text-gray-400">TikTok</span>
-                        </div>
-                        <div onclick="seleccionarRed('fb', 'https://facebook.com/fasttravelec')" class="red-item icon-fb">
-                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
-                            <span class="text-[8px] font-black uppercase text-gray-400">FB</span>
-                        </div>
+                        <div onclick="seleccionarRed('ig', 'https://instagram.com/fasttravelec')" class="red-item icon-ig"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png"><span class="text-[8px] font-black uppercase text-gray-400">IG</span></div>
+                        <div onclick="seleccionarRed('tt', 'https://tiktok.com/@fasttravelec')" class="red-item icon-tt"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"><span class="text-[8px] font-black uppercase text-gray-400">TikTok</span></div>
+                        <div onclick="seleccionarRed('fb', 'https://facebook.com/fasttravelec')" class="red-item icon-fb"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"><span class="text-[8px] font-black uppercase text-gray-400">FB</span></div>
                     </div>
-
                     <form id="miFormulario" class="w-full space-y-2">
-                        <input type="text" name="Nombre" placeholder="Nombre Completo" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none border border-gray-100" required>
-                        <input type="text" name="Cedula" placeholder="Cédula" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none border border-gray-100" required>
-                        <input type="number" name="WhatsApp" placeholder="WhatsApp" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none border border-gray-100" required>
-                        <input type="email" name="Correo" placeholder="Correo" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none border border-gray-100" required>
+                        <input type="text" name="Nombre" placeholder="Nombre Completo" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none" required>
+                        <input type="text" name="Cedula" placeholder="Cédula" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none" required>
+                        <input type="number" name="WhatsApp" placeholder="WhatsApp" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none" required>
+                        <input type="email" name="Correo" placeholder="Correo" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none" required>
                         <input type="text" id="inputCuponReal" placeholder="CÓDIGO PROMOCIONAL" class="w-full bg-red-50 p-3 rounded-2xl text-[9px] text-red-600 font-black border border-dashed border-red-200 uppercase outline-none">
-                        <button type="submit" id="btn-verificar" class="w-full bg-black text-white font-bold py-4 rounded-2xl mt-2 uppercase text-[9px] tracking-widest shadow-xl">Activar Servicio VIP</button>
+                        <button type="submit" id="btn-verificar" class="w-full bg-black text-white font-bold py-4 rounded-2xl mt-2 uppercase text-[9px] tracking-widest">Activar Servicio VIP</button>
                     </form>
                 </div>
-
-                <div id="contenedor-aplicativo" class="hidden w-full h-full">
-                    <iframe src="https://fasttravelec.ondelight.app/" class="w-full h-full border-0" allow="geolocation"></iframe>
-                </div>
-
+                <div id="contenedor-aplicativo" class="hidden w-full h-full"><iframe src="https://fasttravelec.ondelight.app/" class="w-full h-full border-0" allow="geolocation"></iframe></div>
                 <div id="slides-inicio" class="swiper mySwiper h-full">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide cursor-pointer" onclick="mostrarRegistro()"><img src="Screenshot_2026-04-29-07-41-13-165_com.android.chrome.jpg" class="w-full h-full object-cover"></div>
@@ -187,12 +168,11 @@
                     <div class="swiper-pagination !bottom-10"></div>
                 </div>
             </div>
-
             <div class="flex flex-col gap-4 w-full max-w-[280px]">
-                <button onclick="mostrarRegistro()" class="bg-red-700 text-white py-5 rounded-3xl font-black uppercase italic tracking-widest text-[11px] shadow-2xl active:scale-95 transition-all">
+                <button onclick="mostrarRegistro()" class="bg-red-700 text-white py-5 rounded-3xl font-black uppercase italic tracking-widest text-[11px] shadow-2xl">
                     <i class="fa-solid fa-bolt mr-2"></i> Usar WebApp
                 </button>
-                <a href="https://wa.me/593979986138" class="bg-zinc-900 border border-zinc-800 text-green-500 py-5 rounded-3xl font-black uppercase italic tracking-widest text-[11px] text-center active:scale-95 transition-all">
+                <a href="https://wa.me/593979986138" class="bg-zinc-900 border border-zinc-800 text-green-500 py-5 rounded-3xl font-black uppercase italic tracking-widest text-[11px] text-center">
                     <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Chatear con T-Go
                 </a>
             </div>
@@ -201,20 +181,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
+        // CONFIGURACIÓN DE CONEXIONES (Sustituir URL de AppScript)
+        const scriptURL = 'TU_URL_DE_APPSCRIPT_AQUI';
+
         function toggleMenu() { document.getElementById('menu-lateral').classList.toggle('open'); }
         function abrirModalConductor() { toggleMenu(); document.getElementById('modalConductor').style.display = 'flex'; }
         function cerrarModalConductor() { document.getElementById('modalConductor').style.display = 'none'; }
         
-        function mostrarRegistro() { 
-            document.getElementById('registro-interno').style.display = 'flex'; 
-            document.getElementById('celular-interactivo').style.width = '320px';
-            document.getElementById('celular-interactivo').style.height = '620px';
-        }
-        function cerrarRegistro() { 
-            document.getElementById('registro-interno').style.display = 'none'; 
-            document.getElementById('celular-interactivo').style.width = '280px';
-            document.getElementById('celular-interactivo').style.height = '580px';
-        }
+        function mostrarRegistro() { document.getElementById('registro-interno').style.display = 'flex'; }
+        function cerrarRegistro() { document.getElementById('registro-interno').style.display = 'none'; }
 
         let redEscogida = "";
         function seleccionarRed(red, url) {
@@ -224,11 +199,39 @@
             window.open(url, '_blank');
         }
 
-        window.onload = () => { setTimeout(() => { 
-            document.getElementById('notificacionPop').classList.add('show'); 
-            setTimeout(() => { document.getElementById('cerrarPop').classList.remove('hidden'); }, 3000);
-        }, 45000); };
+        // ENVÍO CLIENTE (SHEETS + HOSTINGER)
+        document.getElementById('miFormulario').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if(!redEscogida) return alert("Selecciona una red social primero");
+            document.getElementById('btn-verificar').innerText = "ENVIANDO...";
 
+            const formData = new FormData(this);
+            formData.append('RedSocial', redEscogida);
+            formData.append('Cupon', document.getElementById('inputCuponReal').value || "Ninguno");
+
+            // 1. Google Sheets
+            fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
+
+            // 2. Hostinger
+            fetch('registro_cliente.php', { method: 'POST', body: formData })
+            .finally(() => {
+                document.getElementById('registro-interno').style.display = 'none';
+                document.getElementById('slides-inicio').style.display = 'none';
+                document.getElementById('contenedor-aplicativo').classList.remove('hidden');
+            });
+        });
+
+        // ENVÍO CONDUCTOR (HOSTINGER)
+        document.getElementById('formConductor').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('btn-envio-cond').innerText = "PROCESANDO...";
+            fetch('registro_conductor.php', { method: 'POST', body: new FormData(this) })
+            .then(() => { alert("Solicitud enviada con éxito"); cerrarModalConductor(); })
+            .catch(() => alert("Error al enviar solicitud"));
+        });
+
+        // BONO Y OTROS
+        window.onload = () => { setTimeout(() => { document.getElementById('notificacionPop').classList.add('show'); }, 45000); };
         function cerrarPop(e) { e.stopPropagation(); document.getElementById('notificacionPop').classList.remove('show'); }
         function mostrarModalJuego() { document.getElementById('modalJuego').style.display = 'flex'; }
         function cerrarModalJuego() { document.getElementById('modalJuego').style.display = 'none'; }
@@ -253,21 +256,10 @@
             });
         }
 
-        document.getElementById('miFormulario').addEventListener('submit', function(e) {
-            e.preventDefault();
-            if(!redEscogida) return alert("Selecciona una red social primero");
-            document.getElementById('btn-verificar').innerText = "VALIDANDO...";
-            setTimeout(() => {
-                document.getElementById('registro-interno').style.display = 'none';
-                document.getElementById('slides-inicio').style.display = 'none';
-                document.getElementById('contenedor-aplicativo').classList.remove('hidden');
-            }, 2000);
-        });
-
         var swiper = new Swiper(".mySwiper", { loop: true, pagination: { el: ".swiper-pagination", clickable: true } });
 
-        ScrollReveal().reveal('#titulo-principal', { delay: 400, distance: '100px', origin: 'bottom', duration: 1800, easing: 'cubic-bezier(0.5, 0, 0, 1)' });
-        ScrollReveal().reveal('#espacio-logo', { delay: 1000, scale: 0.5, duration: 2000, easing: 'ease-out' });
+        ScrollReveal().reveal('#titulo-principal', { delay: 400, distance: '100px', origin: 'bottom', duration: 1800 });
+        ScrollReveal().reveal('#espacio-logo', { delay: 1000, scale: 0.5, duration: 2000 });
         ScrollReveal().reveal('#subtitulo', { delay: 1600, distance: '40px', origin: 'bottom', duration: 2600, opacity: 0 });
         ScrollReveal().reveal('#celular-interactivo', { delay: 600, distance: '80px', origin: 'right', duration: 2000 });
     </script>
