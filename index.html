@@ -54,23 +54,23 @@
         <button onclick="toggleMenu()" class="text-white text-2xl pr-2"><i class="fa-solid fa-bars-staggered"></i></button>
     </header>
 
-    <div id="menu-lateral" class="fixed top-0 right-0 h-full w-[80%] bg-zinc-950 z-[100] p-10 flex flex-col border-l border-zinc-800 shadow-2xl">
+    <div id="menu-lateral" class="fixed top-0 right-0 h-full w-[80%] bg-zinc-950 z-[100] p-10 flex flex-col border-l border-zinc-800 shadow-2xl text-2xl font-black italic uppercase text-white">
         <button onclick="toggleMenu()" class="text-white text-3xl self-end mb-10"><i class="fa-solid fa-xmark"></i></button>
-        <nav class="flex flex-col gap-8 text-2xl font-black italic uppercase tracking-tighter text-white">
-            <a href="#" onclick="toggleMenu()" class="text-red-600">Inicio</a>
-            <a href="#" onclick="toggleMenu()">Servicios</a>
-            <a href="#" onclick="toggleMenu()">Flota</a>
-            <a href="#" onclick="toggleMenu()">Contacto</a>
+        <nav class="flex flex-col gap-8">
+            <a href="#" class="text-red-600">Inicio</a>
+            <a href="#">Servicios</a>
+            <a href="#">Flota</a>
+            <a href="#">Contacto</a>
         </nav>
     </div>
 
     <main class="w-full flex flex-col items-center">
-        <section class="min-h-screen w-full flex flex-col items-center justify-center text-center px-4">
+        <section class="min-h-screen w-full flex flex-col items-center justify-center text-center px-4 pt-20">
             <h1 id="titulo-principal" class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-6">FAST <span class="texto-rojo">TRAVEL</span></h1>
-            <div id="espacio-logo" class="w-full max-w-[280px] mb-8 flex items-center justify-center">
+            <div id="espacio-logo" class="w-full max-w-[280px] aspect-square mb-8 flex items-center justify-center">
                 <img src="1000917167-removebg-preview.png" alt="Logo VIP" class="max-w-full h-auto glow-logo">
             </div>
-            <h2 id="subtitulo" class="text-[10px] font-light text-gray-400 uppercase tracking-[0.5em]">Transporte Ejecutivo Privado</h2>
+            <h2 id="subtitulo" class="text-[10px] font-light text-gray-400 uppercase tracking-[0.5em] leading-relaxed">Transporte Ejecutivo Privado</h2>
         </section>
 
         <section class="w-full py-20 flex flex-col items-center border-t border-zinc-900">
@@ -80,29 +80,33 @@
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     
-                    <div id="registro-interno" class="flex flex-col items-center">
+                    <div id="registro-interno" class="flex flex-col items-center overflow-y-auto">
                         <button onclick="cerrarRegistro()" class="self-start text-3xl mb-2 text-black">&times;</button>
-                        <h3 class="text-sm font-black uppercase mb-4">FAST TRAVEL <span class="text-red-600">ID</span></h3>
+                        <h3 class="text-xs font-black uppercase mb-4 tracking-tighter">FAST TRAVEL <span class="text-red-600">ID</span></h3>
                         
-                        <div class="flex gap-6 mb-6 text-2xl">
+                        <div class="flex gap-6 mb-4 text-xl">
                             <a href="https://www.instagram.com/fasttravel_hue/" target="_blank"><i class="fa-brands fa-instagram text-gray-700"></i></a>
                             <a href="https://www.tiktok.com/@fasttravel_hue" target="_blank"><i class="fa-brands fa-tiktok text-black"></i></a>
                             <a href="https://www.facebook.com/fasttravelhue" target="_blank"><i class="fa-brands fa-facebook text-gray-700"></i></a>
                         </div>
 
-                        <div class="w-full space-y-3">
+                        <div class="w-full space-y-2">
                             <input type="text" placeholder="Nombre Completo" class="w-full bg-gray-100 p-3 rounded-xl text-[10px] outline-none">
                             <input type="text" placeholder="Cédula" class="w-full bg-gray-100 p-3 rounded-xl text-[10px] outline-none">
                             <input type="text" placeholder="WhatsApp" class="w-full bg-gray-100 p-3 rounded-xl text-[10px] outline-none">
                             <input type="text" placeholder="Código Promocional" class="w-full bg-red-50 p-3 rounded-xl text-[10px] border border-red-100 text-red-400">
                         </div>
-                        <button onclick="window.location.href='https://ondelight.com'" class="w-full bg-black text-white text-[10px] font-bold py-4 rounded-xl mt-6 uppercase">Activar Servicio VIP</button>
+                        <button onclick="window.location.href='https://ondelight.com'" class="w-full bg-black text-white text-[10px] font-bold py-4 rounded-xl mt-4 uppercase">Activar Servicio VIP</button>
                     </div>
 
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide cursor-pointer" onclick="irWhatsApp()"><img src="1000922713.jpg"></div>
-                            <div class="swiper-slide cursor-pointer" onclick="mostrarRegistro()"><img src="1000925510.jpg"></div>
+                            <div class="swiper-slide cursor-pointer" onclick="irWhatsApp()">
+                                <img src="1000922713.jpg" alt="WhatsApp">
+                            </div>
+                            <div class="swiper-slide cursor-pointer" onclick="mostrarRegistro()">
+                                <img src="1000925510.jpg" alt="WebApp">
+                            </div>
                         </div>
                     </div>
                 </div>
