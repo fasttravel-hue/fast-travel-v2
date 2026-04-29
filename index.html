@@ -11,23 +11,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
-        html, body { 
-            background-color: #000; color: #fff; font-family: sans-serif; 
-            margin: 0; padding: 0; width: 100%; overflow-x: hidden; 
-        }
+        html, body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
         .texto-rojo { color: #dc2626; }
         header { backdrop-filter: blur(10px); background-color: rgba(0,0,0,0.8); width: 100%; }
-        .glow-logo { filter: drop-shadow(0 0 15px rgba(255,255,255,0.1)); }
+        
+        /* MENÚ LATERAL DE LUJO - Más lento y suave */
+        #menu-lateral { 
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
+            transform: translateX(100%); 
+        }
+        #menu-lateral.open { transform: translateX(0); }
 
-        /* ESTILO DEL MARCO DEL CELULAR */
         .phone-frame {
-            width: 260px;
-            height: 530px;
-            background: #050505;
-            border: 8px solid #1a1a1a;
-            border-radius: 40px;
-            position: relative;
-            box-shadow: 0 0 40px rgba(220, 38, 38, 0.1);
+            width: 260px; height: 530px; background: #050505;
+            border: 8px solid #1a1a1a; border-radius: 40px;
+            position: relative; box-shadow: 0 0 40px rgba(220, 38, 38, 0.1);
             overflow: hidden;
         }
         .phone-notch {
@@ -37,10 +35,6 @@
         }
         .swiper { width: 100%; height: 100%; }
         .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* Menú lateral */
-        #menu-lateral { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
-        #menu-lateral.open { transform: translateX(0); }
     </style>
 </head>
 
@@ -49,16 +43,18 @@
         <div class="text-xl font-black italic uppercase tracking-tighter">
             FAST <span class="texto-rojo">TRAVEL</span>
         </div>
-        <button onclick="toggleMenu()" class="text-white text-2xl"><i class="fa-solid fa-bars-staggered"></i></button>
+        <button onclick="toggleMenu()" class="text-white text-2xl pr-2">
+            <i class="fa-solid fa-bars-staggered"></i>
+        </button>
     </header>
 
     <div id="menu-lateral" class="fixed top-0 right-0 h-full w-[80%] bg-zinc-950 z-[100] p-10 flex flex-col border-l border-zinc-800 shadow-2xl">
         <button onclick="toggleMenu()" class="text-white text-3xl self-end mb-10"><i class="fa-solid fa-xmark"></i></button>
-        <nav class="flex flex-col gap-8 text-2xl font-black italic uppercase tracking-tighter">
-            <a href="#" class="hover:text-red-600">Inicio</a>
-            <a href="#" class="hover:text-red-600 text-red-600">Servicios</a>
-            <a href="#" class="hover:text-red-600">Flota</a>
-            <a href="#" class="hover:text-red-600">Contacto</a>
+        <nav class="flex flex-col gap-8 text-3xl font-black italic uppercase tracking-tighter">
+            <a href="#" onclick="toggleMenu()" class="hover:text-red-600 transition-colors">Inicio</a>
+            <a href="#" onclick="toggleMenu()" class="text-red-600">Servicios</a>
+            <a href="#" onclick="toggleMenu()" class="hover:text-red-600 transition-colors">Flota</a>
+            <a href="#" onclick="toggleMenu()" class="hover:text-red-600 transition-colors">Contacto</a>
         </nav>
     </div>
 
@@ -68,7 +64,7 @@
                 FAST <span class="texto-rojo">TRAVEL</span>
             </h1>
             <div id="espacio-logo" class="w-full max-w-[280px] aspect-square mb-8 flex items-center justify-center">
-                <img src="1000917167-removebg-preview.png" alt="Logo VIP" class="max-w-full h-auto glow-logo">
+                <img src="1000917167-removebg-preview.png" alt="Logo VIP" class="max-w-full h-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
             </div>
             <h2 id="subtitulo" class="text-[10px] font-light text-gray-400 uppercase tracking-[0.5em] leading-relaxed">
                 Transporte Ejecutivo Privado
@@ -76,23 +72,27 @@
         </section>
 
         <section class="w-full py-20 flex flex-col items-center border-t border-zinc-900">
-            <p id="label-solicita" class="text-[10px] font-bold texto-rojo uppercase tracking-[0.4em] mb-10">Solicita tu unidad</p>
+            <p class="text-[10px] font-bold texto-rojo uppercase tracking-[0.4em] mb-10">Solicita tu unidad</p>
             
             <div id="celular-interactivo" class="phone-frame mb-10">
                 <div class="phone-notch"></div>
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide"><img src="1000922713.jpg" alt="Chat T-Go"></div>
-                        <div class="swiper-slide"><img src="CAPTURA_WEBAPP.jpg" alt="WebApp"></div>
+                        <div class="swiper-slide cursor-pointer" onclick="irWhatsApp()">
+                            <img src="1000922713.jpg" alt="WhatsApp Fast Travel">
+                        </div>
+                        <div class="swiper-slide cursor-pointer" onclick="irRegistro()">
+                            <img src="1000925510.jpg" alt="WebApp Fast Travel">
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div id="botones-celular" class="flex flex-col gap-4 w-full max-w-[260px]">
-                <button class="bg-red-700 text-white py-4 rounded-xl font-black uppercase italic tracking-widest text-[11px] shadow-xl active:scale-95 transition-all">
+            <div class="flex flex-col gap-4 w-full max-w-[280px] px-4">
+                <button onclick="irRegistro()" class="bg-red-700 text-white py-5 rounded-2xl font-black uppercase italic tracking-widest text-[11px] shadow-xl active:scale-95 transition-all">
                     <i class="fa-solid fa-bolt mr-2"></i> Usar WebApp
                 </button>
-                <button class="bg-zinc-900 border border-zinc-800 text-green-500 py-4 rounded-xl font-black uppercase italic tracking-widest text-[11px] active:scale-95 transition-all">
+                <button onclick="irWhatsApp()" class="bg-zinc-900 border border-zinc-800 text-green-500 py-5 rounded-2xl font-black uppercase italic tracking-widest text-[11px] active:scale-95 transition-all">
                     <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Chatear con T-Go
                 </button>
             </div>
@@ -103,14 +103,20 @@
     <script>
         function toggleMenu() { document.getElementById('menu-lateral').classList.toggle('open'); }
 
+        // REDIRECCIONES (XAVIER: Pon aquí tus links finales)
+        function irWhatsApp() {
+            window.location.href = "https://wa.me/593987654321"; // <--- Tu número de WhatsApp aquí
+        }
+        function irRegistro() {
+            window.location.href = "https://fasttravel-hue.github.io/transporte/"; // <--- Link a tu página de registro
+        }
+
         var swiper = new Swiper(".mySwiper", { grabCursor: true, loop: true });
 
         ScrollReveal().reveal('#titulo-principal', { delay: 200, distance: '50px', origin: 'left', duration: 1200 });
         ScrollReveal().reveal('#espacio-logo', { delay: 600, scale: 0.9, duration: 1000 });
         ScrollReveal().reveal('#subtitulo', { delay: 1100, distance: '30px', origin: 'bottom', duration: 2500 });
-        
         ScrollReveal().reveal('#celular-interactivo', { delay: 400, distance: '50px', origin: 'right', duration: 1500 });
-        ScrollReveal().reveal('#botones-celular', { delay: 800, opacity: 0, duration: 1000 });
     </script>
 </body>
 </html>
