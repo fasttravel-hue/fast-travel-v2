@@ -177,54 +177,71 @@
                 </a>
             </div>
         </section>
-            <section class="w-full py-16 px-6 border-t border-zinc-900 bg-zinc-950/30">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12">
-                    <h3 class="text-[10px] font-black text-red-600 uppercase tracking-[0.5em] mb-2">Manual de Usuario</h3>
-                    <h2 class="text-3xl font-black italic uppercase tracking-tighter">¿Cómo solicitar tu <span class="texto-rojo">Unidad?</span></h2>
+                    <section class="w-full py-16 px-6 border-t border-zinc-900 bg-zinc-950/30">
+            <div class="max-w-4xl mx-auto text-center">
+                
+                <h3 class="text-[10px] font-black text-red-600 uppercase tracking-[0.5em] mb-2">Manual de Usuario</h3>
+                <h2 class="text-3xl font-black italic uppercase tracking-tighter mb-8">¿Cómo prefieres <span class="texto-rojo">Pedir?</span></h2>
+                
+                <div class="flex justify-center gap-4 mb-10">
+                    <button onclick="switchManual('webapp')" id="btn-m-webapp" class="px-6 py-3 rounded-full border border-red-600 bg-red-600 text-white font-black text-[10px] uppercase tracking-widest transition-all">Por WebApp</button>
+                    <button onclick="switchManual('whatsapp')" id="btn-m-whatsapp" class="px-6 py-3 rounded-full border border-zinc-800 bg-zinc-900 text-gray-400 font-black text-[10px] uppercase tracking-widest transition-all">Por WhatsApp</button>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800 flex flex-col items-center text-center group hover:border-red-600/50 transition-all">
-                        <div class="w-12 h-12 bg-red-600/10 rounded-full flex items-center justify-center mb-4 text-red-600">
-                            <i class="fa-solid fa-mobile-screen-button"></i>
-                        </div>
+                <div id="manual-webapp" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-solid fa-id-card text-red-600 mb-4 block text-xl"></i>
                         <h4 class="font-black uppercase text-[11px] mb-2">1. Registro ID</h4>
-                        <p class="text-[10px] text-gray-400 leading-relaxed uppercase">Ingresa tus datos. Recibirás un <b>código por SMS</b> para validar tu cuenta.</p>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Recibirás un código por <b>WhatsApp o SMS</b> para activar tu cuenta.</p>
                     </div>
-
-                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800 flex flex-col items-center text-center group hover:border-red-600/50 transition-all">
-                        <div class="w-12 h-12 bg-red-600/10 rounded-full flex items-center justify-center mb-4 text-red-600">
-                            <i class="fa-solid fa-location-crosshairs"></i>
-                        </div>
-                        <h4 class="font-black uppercase text-[11px] mb-2">2. Activa GPS</h4>
-                        <p class="text-[10px] text-gray-400 leading-relaxed uppercase">Dale a <b>"Permitir"</b> a la ubicación. Sin GPS no podremos cotizar tu viaje.</p>
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-solid fa-location-dot text-red-600 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">2. Punto A</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Arrastra el <b>puntero morado (A)</b> hasta donde te encuentras.</p>
                     </div>
-
-                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800 flex flex-col items-center text-center group hover:border-red-600/50 transition-all">
-                        <div class="w-12 h-12 bg-red-600/10 rounded-full flex items-center justify-center mb-4 text-red-600">
-                            <i class="fa-solid fa-hand-pointer"></i>
-                        </div>
-                        <h4 class="font-black uppercase text-[11px] mb-2">3. Fija el Punto</h4>
-                        <p class="text-[10px] text-gray-400 leading-relaxed uppercase">Arrastra el <b>puntero rojo</b> en el mapa hasta tu ubicación exacta.</p>
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-solid fa-flag-checkered text-red-600 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">3. Punto B</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Selecciona tu destino <b>(Punto B)</b> para calcular tu ruta.</p>
                     </div>
-
-                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800 flex flex-col items-center text-center group hover:border-red-600/50 transition-all">
-                        <div class="w-12 h-12 bg-red-600/10 rounded-full flex items-center justify-center mb-4 text-red-600">
-                            <i class="fa-solid fa-money-bill-transfer"></i>
-                        </div>
-                        <h4 class="font-black uppercase text-[11px] mb-2">4. Mira tu Precio</h4>
-                        <p class="text-[10px] text-gray-400 leading-relaxed uppercase">La App te dará el <b>precio final</b>. Si estás de acuerdo, pide tu unidad.</p>
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-solid fa-money-bill-transfer text-red-600 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">4. Tarifa Real</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Mira el precio final. Si estás de acuerdo, presiona <b>"Pedir"</b>.</p>
                     </div>
                 </div>
 
-                <div class="mt-12 flex justify-center">
-                    <button onclick="mostrarRegistroYScroll()" class="bg-white text-black px-10 py-5 rounded-full font-black uppercase text-[10px] tracking-[0.2em] hover:bg-red-600 hover:text-white transition-all">
-                        ¡Entendido, quiero registrarme!
+                <div id="manual-whatsapp" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-brands fa-whatsapp text-green-500 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">1. Chatea</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Escríbenos directamente a nuestra central de despacho 24/7.</p>
+                    </div>
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-solid fa-map-location-dot text-green-500 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">2. Ubicación</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Envíanos tu ubicación actual y dinos hacia dónde vas.</p>
+                    </div>
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-solid fa-comment-dollar text-green-500 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">3. Cotización</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Un operador te dará el precio VIP de inmediato por el chat.</p>
+                    </div>
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-solid fa-car-side text-green-500 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">4. Despacho</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Confirmamos la unidad y te enviamos los datos del conductor.</p>
+                    </div>
+                </div>
+
+                <div class="mt-12">
+                    <button onclick="mostrarRegistroYScroll()" class="bg-white text-black px-10 py-5 rounded-full font-black uppercase text-[10px] tracking-[0.2em] shadow-xl">
+                        ¡Registrarme y Pedir!
                     </button>
                 </div>
             </div>
-            </section>
+                    </section>
+        
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
