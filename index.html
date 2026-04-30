@@ -56,16 +56,16 @@
 </head>
 
 <body>
-    <div id="notificacionPop">
+        <div id="notificacionPop" class="fixed bottom-[30px] left-[20px] z-[100] bg-white text-black p-4 rounded-3xl flex items-center gap-3 shadow-2xl border-l-[6px] border-red-600 transition-all duration-300 ease-out touch-none select-none opacity-0 translate-y-[200%]">
         <div onclick="mostrarModalJuego()" class="flex items-center gap-3 cursor-pointer">
             <div class="text-2xl">🎁</div>
             <div>
-                <h4 class="text-[10px] font-black uppercase m-0 text-black">Bono VIP</h4>
-                <p class="text-[8px] text-gray-500 font-bold uppercase m-0">¡Gana 60% aquí!</p>
+                <h4 class="text-[10px] font-black uppercase m-0">Bono VIP</h4>
+                <p class="text-[8px] text-gray-500 font-bold uppercase m-0">Desliza a la derecha para cerrar</p>
             </div>
         </div>
-        <button id="cerrarPop" onclick="cerrarPop(event)" class="hidden ml-2 text-gray-400 font-bold">✕</button>
     </div>
+
 
     <div id="modalJuego" class="modal-full">
         <div class="bg-white rounded-[35px] p-8 text-black text-center max-w-[340px] relative">
@@ -361,7 +361,41 @@
                 btnWeb.style.color = '#a1a1aa';
             }
         }
+// Lógica para que el Bono VIP siga el dedo y se oculte
+const bonoPop = document.getElementById('notificacionPop');
+let startX;
 
+if (bonoPop) {
+    bonoPop.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        bonoPop.style.transition = 'none'; 
+    });
+
+    bonoPop.addEventListener('touchmove', e => {
+        let touch = e.touches[0].clientX;
+        let change = touch - startX;
+        if (change > 0) {
+            bonoPop.style.transform = `translateX(${change}px) rotate(${change / 25}deg)`;
+            bonoPop.style.opacity = 1 - (change / 200);
+        }
+    });
+
+    bonoPop.addEventListener('touchend', e => {
+        let change = e.changedTouches[0].clientX - startX;
+        if (change > 80) {
+            bonoPop.style.transition = 'all 0.4s ease-out';
+            bonoPop.style.transform = 'translateX(500px)';
+            bonoPop.style.opacity = '0';
+            setTimeout(() => { bonoPop.style.display = 'none'; }, 400);
+        } else {
+            bonoPop.style.transition = 'all 0.3s ease-out';
+            bonoPop.style.transform = 'translateX(0px) rotate(0deg)';
+            bonoPop.style.opacity = '1';
+        }
+    });
+}
+        
+        
     </script>
 </body>
 </html>
