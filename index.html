@@ -27,11 +27,28 @@
             border-bottom-left-radius: 14px; border-bottom-right-radius: 14px; z-index: 50;
         }
 
-        #registro-interno {
-            display: none; position: absolute; inset: 0;
-            background: white; z-index: 45; color: #333; padding: 40px 25px;
-            flex-direction: column; align-items: center; justify-content: center;
+                #registro-interno {
+            display: none; 
+            position: absolute; 
+            inset: 0;
+            background: white; 
+            z-index: 45; 
+            color: #333; 
+            padding: 40px 25px;
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            /* AQUÍ ESTÁ EL TRUCO: */
+            transform: scale(0.6); 
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
+        /* Esta clase hará que se agrande cuando la activemos con JS */
+        #registro-interno.expandido { 
+            transform: scale(1); 
+            opacity: 1; 
+        }
+
 
         #menu-lateral { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
         #menu-lateral.open { transform: translateX(0); }
