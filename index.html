@@ -141,11 +141,24 @@
     filter: brightness(1.2);
 }
        .slogan-brillante {
-    font-size: 32px; /* Aumentado */
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.2);
-    animation: brilloRespiracion 3s infinite ease-in-out;
+    font-size: 18px; /* Bajamos de 32px a 18px para que quepa bien */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.2);
+    animation: resplandor 2.5s infinite alternate ease-in-out;
+    display: inline-block;
+    width: 100%;
 }
- 
+
+@keyframes resplandor {
+    from {
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+        transform: scale(1);
+    }
+    to {
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 25px rgba(255, 255, 255, 0.3);
+        transform: scale(1.03);
+    }
+}
+        
     </style>
 </head>
 
@@ -350,24 +363,24 @@
             </div>
         <div id="seccion-confianza-vip" class="flex flex-col items-center justify-center py-16 px-6 overflow-hidden">
     
-    <div class="flex flex-row items-center justify-between w-full max-w-lg gap-6">
-        
-        <div id="mini-google-window" onclick="expandirGoogle()" class="cursor-pointer bg-zinc-900/90 backdrop-blur-md border border-zinc-700 p-6 rounded-3xl w-[60%] shadow-2xl animate-entrada-izquierda transition-transform active:scale-95">
-            <div class="flex flex-col items-start gap-3">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Logo.svg" class="w-16 opacity-90" alt="Google">
-                <div class="flex text-yellow-500 text-xs gap-1">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-                <p class="text-[10px] text-gray-300 uppercase leading-tight font-medium">Toca para ver reseñas reales de nuestros pasajeros...</p>
+    <div class="flex flex-row items-center justify-between w-full max-w-lg gap-2">
+    <div id="mini-google-window" onclick="expandirGoogle()" class="cursor-pointer bg-zinc-900/90 backdrop-blur-md border border-zinc-700 p-4 rounded-2xl w-[55%] shadow-2xl animate-entrada-izquierda transition-transform active:scale-95">
+        <div class="flex flex-col items-start gap-2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Logo.svg" class="w-12 opacity-90" alt="Google">
+            <div class="flex text-yellow-500 text-[10px] gap-0.5">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
             </div>
-        </div>
-
-        <div id="slogan-seguridad" class="w-[40%] animate-entrada-derecha">
-            <h3 class="text-white font-black italic uppercase leading-none text-right tracking-tighter slogan-brillante text-3xl">
-                Tu seguridad<br><span class="text-sm">es primero</span>
-            </h3>
+            <p class="text-[8px] text-gray-300 uppercase leading-tight font-medium">Toca para ver reseñas reales...</p>
         </div>
     </div>
+
+    <div id="slogan-seguridad" class="w-[45%] animate-entrada-derecha">
+        <h3 class="text-white font-black italic uppercase leading-[0.9] text-right tracking-tighter slogan-brillante">
+            Tu seguridad<br><span class="text-[10px] tracking-widest block mt-1">es primero</span>
+        </h3>
+    </div>
+    </div>
+            
 
     <div id="google-full-screen" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center pt-10 px-4">
         
