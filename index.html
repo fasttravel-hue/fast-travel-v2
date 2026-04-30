@@ -440,7 +440,20 @@
         ScrollReveal().reveal('#espacio-logo', { delay: 1000, scale: 0.5, duration: 2000 });
         ScrollReveal().reveal('#subtitulo', { delay: 1600, distance: '40px', origin: 'bottom', duration: 2600, opacity: 0 });
         ScrollReveal().reveal('#celular-interactivo', { delay: 600, distance: '80px', origin: 'right', duration: 2000 });
+ScrollReveal().reveal('#titulo-manual', {
+    duration: 3000,      // 3 segundos de duración
+    origin: 'top',       // Viene desde arriba
+    distance: '50px',    // Recorre 50px
+    delay: 500           // Espera medio segundo antes de empezar
+});
+        ScrollReveal().reveal('#selectores-minimalistas', {
+    duration: 3000,      // 3 segundos de duración
+    scale: 0.8,          // Empieza un poco más pequeño
+    opacity: 0,          // Empieza invisible
+    delay: 1500          // Espera 1.5 segundos (para que el título ya esté casi listo)
+});
 
+        
         function mostrarRegistroYScroll() {
     mostrarRegistro(); // Abre el formulario en el celular
     // Hace que la pantalla suba suavemente hasta el celular
@@ -453,24 +466,36 @@
 
         // ESTE ES EL ÚLTIMO CÓDIGO (DENTRO DEL SCRIPT)
                 function switchManual(metodo) {
-            // 1. Identificamos qué manual queremos mostrar
-            const web = document.getElementById('manual-webapp');
-            const wa = document.getElementById('manual-whatsapp');
+    const web = document.getElementById('manual-webapp');
+    const wa = document.getElementById('manual-whatsapp');
+    
+    // 1. Reiniciamos: Quitamos la visibilidad a todos los cuadros
+    document.querySelectorAll('#manual-webapp > div, #manual-whatsapp > div').forEach(cuadro => {
+        cuadro.classList.remove('cuadro-visible');
+    });
 
-            // 2. Limpiamos: Quitamos la visibilidad de todos los cuadros primero
-            document.querySelectorAll('#manual-webapp > div, #manual-whatsapp > div').forEach(cuadro => {
-                cuadro.classList.remove('cuadro-visible');
-            });
+    // 2. Activamos el contenedor y lanzamos la cascada
+    if(metodo === 'webapp') {
+        web.classList.remove('hidden');
+        wa.classList.add('hidden');
+        lanzarCascada('#manual-webapp > div');
+    } else {
+        wa.classList.remove('hidden');
+        web.classList.add('hidden');
+        lanzarCascada('#manual-whatsapp > div');
+    }
+}
 
-            // 3. Mostramos el contenedor principal según el botón
-            if(metodo === 'webapp') {
-                web.classList.remove('hidden');
-                wa.classList.add('hidden');
-            } else {
-                wa.classList.remove('hidden');
-                web.classList.add('hidden');
-            }
-        }
+// 3. El motor de la cascada (300ms de diferencia entre cada cuadro)
+function lanzarCascada(selector) {
+    const cuadros = document.querySelectorAll(selector);
+    cuadros.forEach((cuadro, index) => {
+        setTimeout(() => {
+            cuadro.classList.add('cuadro-visible');
+        }, index * 300);
+    });
+}
+        
 
 // Lógica para que el Bono VIP siga el dedo y se oculte
 const bonoPop = document.getElementById('notificacionPop');
