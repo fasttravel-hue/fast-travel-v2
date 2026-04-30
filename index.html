@@ -124,7 +124,23 @@
     50% { box-shadow: 0 10px 45px rgba(255,255,255,0.4); } /* Aquí es cuando brilla más */
     100% { box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
 }
+/* Efecto de latido suave para los iconos */
+.btn-icon-vip {
+    animation: latidoVip 3s infinite ease-in-out;
+}
 
+@keyframes latidoVip {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); } /* Se agranda un 10% */
+    100% { transform: scale(1); }
+}
+
+/* Cambio de color cuando están activos (opcional pero recomendado) */
+#btn-m-webapp:active, #btn-m-whatsapp:active {
+    transform: scale(0.9);
+    filter: brightness(1.2);
+}
+        
     </style>
 </head>
 
@@ -263,9 +279,16 @@
                     </h2>
                     
                     <div class="flex justify-center gap-4 mb-10">
-                        <button onclick="switchManual('webapp')" id="btn-m-webapp" class="px-6 py-3 rounded-full border border-red-600 bg-red-600 text-white font-black text-[10px] uppercase tracking-widest transition-all">Por WebApp</button>
-                        <button onclick="switchManual('whatsapp')" id="btn-m-whatsapp" class="px-6 py-3 rounded-full border border-zinc-800 bg-zinc-900 text-gray-400 font-black text-[10px] uppercase tracking-widest transition-all">Por WhatsApp</button>
-                    </div>
+                        <div class="flex justify-center gap-8 mb-10">
+    <button onclick="switchManual('webapp')" id="btn-m-webapp" class="btn-icon-vip flex items-center justify-center w-16 h-16 rounded-full border border-red-600 bg-red-600/10 text-red-600 transition-all">
+        <i class="fa-solid fa-mobile-screen-button text-2xl"></i>
+    </button>
+
+    <button onclick="switchManual('whatsapp')" id="btn-m-whatsapp" class="btn-icon-vip flex items-center justify-center w-16 h-16 rounded-full border border-zinc-800 bg-zinc-900 text-green-500 transition-all">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </button>
+                        </div>
+                        
                 </div>
 
                 <div id="manual-webapp" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
