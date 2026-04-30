@@ -270,9 +270,20 @@
         function abrirModalConductor() { toggleMenu(); document.getElementById('modalConductor').style.display = 'flex'; }
         function cerrarModalConductor() { document.getElementById('modalConductor').style.display = 'none'; }
         
-        function mostrarRegistro() { document.getElementById('registro-interno').style.display = 'flex'; }
-        function cerrarRegistro() { document.getElementById('registro-interno').style.display = 'none'; }
+        function mostrarRegistro() { 
+    const reg = document.getElementById('registro-interno');
+    reg.style.display = 'flex'; 
+    // Este pequeño retraso de 10 milisegundos es lo que activa la animación
+    setTimeout(() => reg.classList.add('expandido'), 10);
+}
 
+function cerrarRegistro() { 
+    const reg = document.getElementById('registro-interno');
+    reg.classList.remove('expandido');
+    // Esperamos 500ms (lo que dura la transición) para ocultarlo del todo
+    setTimeout(() => reg.style.display = 'none', 500);
+}
+        
         let redEscogida = "";
         function seleccionarRed(red, url) {
             redEscogida = red;
