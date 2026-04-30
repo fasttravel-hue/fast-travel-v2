@@ -343,6 +343,38 @@
                     </button>
                 </div>
             </div>
+        <div id="seccion-confianza-vip" class="flex flex-col items-center justify-center py-12 px-6 overflow-hidden">
+    
+    <div class="flex flex-row items-center justify-between w-full max-w-md gap-4">
+        <div id="mini-google-window" onclick="expandirGoogle()" class="cursor-pointer bg-zinc-900/80 backdrop-blur-md border border-zinc-700 p-4 rounded-2xl w-1/2 shadow-2xl animate-entrada-izquierda">
+            <div class="flex flex-col items-start gap-2">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Logo.svg" class="w-12 opacity-80" alt="Google">
+                <div class="flex text-yellow-500 text-[10px] gap-0.5">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="text-[8px] text-gray-400 uppercase leading-tight">Pulsa para ver opiniones reales...</p>
+            </div>
+        </div>
+
+        <div id="slogan-seguridad" class="w-1/2 animate-entrada-derecha">
+            <h3 class="text-white font-black italic uppercase leading-none text-right tracking-tighter slogan-brillante">
+                Tu seguridad<br><span class="text-xs">es primero</span>
+            </h3>
+        </div>
+    </div>
+
+    <div id="google-full-screen" class="hidden fixed inset-0 z-[100] bg-black/90 backdrop-blur-xl flex-col items-center pt-20 px-6">
+        <p class="text-[8px] font-black text-white/40 uppercase tracking-[0.5em] mb-8 animate-pulse">Desliza hacia abajo para volver</p>
+        
+        <div id="lista-reseñas" class="w-full max-w-md overflow-y-auto h-[70vh] space-y-4">
+            <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-3xl">
+                <p class="text-white text-xs italic">"Excelente servicio, el aire acondicionado perfecto para el calor de Guayaquil."</p>
+                <p class="text-red-600 font-bold text-[9px] mt-2">- Juan Pérez (Google User)</p>
+            </div>
+            </div>
+    </div>
+        </div>
+                
         </section>
     </main>
 
@@ -536,6 +568,46 @@
                 }
             });
         }
+        // ... aquí termina tu código anterior ...
+
+    // --- CÓDIGO DE LA VENTANA DE GOOGLE ---
+    function expandirGoogle() {
+        const fullScreen = document.getElementById('google-full-screen');
+        fullScreen.classList.remove('hidden');
+        fullScreen.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    let touchstartY = 0;
+    let touchendY = 0;
+    const areaReseñas = document.getElementById('google-full-screen');
+
+    areaReseñas.addEventListener('touchstart', e => {
+        touchstartY = e.changedTouches[0].screenY;
+    }, {passive: true});
+
+    areaReseñas.addEventListener('touchend', e => {
+        touchendY = e.changedTouches[0].screenY;
+        if (touchendY > touchstartY + 100) { 
+            cerrarGoogle();
+        }
+    }, {passive: true});
+
+    function cerrarGoogle() {
+        const fullScreen = document.getElementById('google-full-screen');
+        document.body.style.overflow = 'auto';
+        fullScreen.style.transition = "all 0.4s ease";
+        fullScreen.style.opacity = "0";
+        setTimeout(() => {
+            fullScreen.classList.add('hidden');
+            fullScreen.style.display = 'none';
+            fullScreen.style.opacity = "1";
+        }, 400);
+    }
+    // --- FIN DEL CÓDIGO DE GOOGLE ---
+
+</script> ```
+
     </script>
 </body>
 </html>
