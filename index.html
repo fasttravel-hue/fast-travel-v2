@@ -298,34 +298,37 @@
 
             // 1. Google Sheets
             fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
-
             // 2. Hostinger
             fetch('registro_cliente.php', { method: 'POST', body: formData })
             .finally(() => {
                 document.getElementById('registro-interno').style.display = 'none';
                 document.getElementById('slides-inicio').style.display = 'none';
-                document.getElementById('function mostrarRegistro() { 
-    const reg = document.getElementById('registro-interno');
-    const celular = document.getElementById('celular-interactivo');
+                document.getElementById('contenedor-aplicativo').classList.remove('hidden');
+            });
+        });
 
-    // 1. Estiramos el marco negro del celular
-    celular.classList.add('estirado');
-    
-    // 2. Mostramos y agrandamos el formulario blanco
-    reg.style.display = 'flex'; 
-    setTimeout(() => reg.classList.add('expandido'), 10);
-}
+        // --- LAS FUNCIONES DEBEN IR AQUÍ AFUERA ---
+        function mostrarRegistro() { 
+            const reg = document.getElementById('registro-interno');
+            const celular = document.getElementById('celular-interactivo');
+            if(reg && celular) {
+                celular.classList.add('estirado'); // Estira el marco
+                reg.style.display = 'flex'; 
+                setTimeout(() => reg.classList.add('expandido'), 10); // Agranda el formulario
+            }
+        }
 
-function cerrarRegistro() { 
-    const reg = document.getElementById('registro-interno');
-    const celular = document.getElementById('celular-interactivo');
-
-    // Quitamos ambas clases para que todo regrese a su tamaño original
-    reg.classList.remove('expandido');
-    celular.classList.remove('estirado');
-    
-    setTimeout(() => reg.style.display = 'none', 500);
-}
+        function cerrarRegistro() { 
+            const reg = document.getElementById('registro-interno');
+            const celular = document.getElementById('celular-interactivo');
+            if(reg && celular) {
+                reg.classList.remove('expandido');
+                celular.classList.remove('estirado');
+                setTimeout(() => reg.style.display = 'none', 500);
+            }
+        }
+        
+            
 contenedor-aplicativo').classList.remove('hidden');
             });
         });
