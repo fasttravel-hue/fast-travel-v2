@@ -88,6 +88,30 @@
             opacity: 1;
             transform: translateX(0);
         }
+        /* --- PREPARACIÓN PARA LA CASCADA DEL MANUAL --- */
+
+/* 1. Ponemos los cuadros en "espera" (invisibles y abajo) */
+#manual-webapp > div, 
+#manual-whatsapp > div {
+    opacity: 0;
+    transform: translateY(40px); /* Empiezan 40px más abajo */
+    /* Transición muy lenta (2 segundos) para que sea suave */
+    transition: all 2s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none; /* Evita que se pueda clickear mientras están ocultos */
+}
+
+/* 2. Esta clase la usaremos para "despertar" cada cuadro */
+.cuadro-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+}
+
+/* 3. Un pequeño toque VIP: que el cuadro brille un poco al aparecer */
+#manual-webapp > div.cuadro-visible,
+#manual-whatsapp > div.cuadro-visible {
+    box-shadow: 0 10px 30px rgba(220, 38, 38, 0.1);
+}
         
     </style>
 </head>
@@ -225,7 +249,7 @@
                     <button onclick="switchManual('whatsapp')" id="btn-m-whatsapp" class="px-6 py-3 rounded-full border border-zinc-800 bg-zinc-900 text-gray-400 font-black text-[10px] uppercase tracking-widest transition-all">Por WhatsApp</button>
                 </div>
 
-                <div id="manual-webapp" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div id="manual-webapp" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
                         <i class="fa-solid fa-id-card text-red-600 mb-4 block text-xl"></i>
                         <h4 class="font-black uppercase text-[11px] mb-2">1. Registro ID</h4>
@@ -408,28 +432,26 @@
                 // ... aquí están tus otras funciones (como mostrarRegistroYScroll) ...
 
         // ESTE ES EL ÚLTIMO CÓDIGO (DENTRO DEL SCRIPT)
-        function switchManual(metodo) {
+                function switchManual(metodo) {
+            // 1. Identificamos qué manual queremos mostrar
             const web = document.getElementById('manual-webapp');
             const wa = document.getElementById('manual-whatsapp');
-            const btnWeb = document.getElementById('btn-m-webapp');
-            const btnWa = document.getElementById('btn-m-whatsapp');
 
+            // 2. Limpiamos: Quitamos la visibilidad de todos los cuadros primero
+            document.querySelectorAll('#manual-webapp > div, #manual-whatsapp > div').forEach(cuadro => {
+                cuadro.classList.remove('cuadro-visible');
+            });
+
+            // 3. Mostramos el contenedor principal según el botón
             if(metodo === 'webapp') {
                 web.classList.remove('hidden');
                 wa.classList.add('hidden');
-                btnWeb.style.backgroundColor = '#dc2626'; // Rojo
-                btnWeb.style.color = 'white';
-                btnWa.style.backgroundColor = '#18181b'; 
-                btnWa.style.color = '#a1a1aa';
             } else {
                 wa.classList.remove('hidden');
                 web.classList.add('hidden');
-                btnWa.style.backgroundColor = '#16a34a'; // Verde
-                btnWa.style.color = 'white';
-                btnWeb.style.backgroundColor = '#18181b';
-                btnWeb.style.color = '#a1a1aa';
             }
         }
+
 // Lógica para que el Bono VIP siga el dedo y se oculte
 const bonoPop = document.getElementById('notificacionPop');
 let startX;
