@@ -75,6 +75,20 @@
         .red-item { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; transition: 0.3s; width: 60px; }
         .red-item img { width: 40px; height: 40px; transition: 0.3s; filter: grayscale(1); opacity: 0.6; }
         .red-item.active img { filter: grayscale(0); opacity: 1; transform: scale(1.1); }
+            /* Estado inicial de los botones */
+        #botones-accion-vip {
+            opacity: 0;
+            transform: translateX(-50px); /* Empiezan un poco a la izquierda */
+            transition: all 4s cubic-bezier(0.16, 1, 0.3, 1); /* 4 segundos de duración */
+            transition-delay: 2.5s; /* Espera 2.5 segundos para aparecer */
+        }
+
+        /* Estado final cuando se activan */
+        #botones-accion-vip.aparecer {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
     </style>
 </head>
 
@@ -191,7 +205,7 @@
                     <div class="swiper-pagination !bottom-10"></div>
                 </div>
             </div>
-            <div class="flex flex-col gap-4 w-full max-w-[280px]">
+            <div id="botones-accion-vip" class="flex flex-col gap-4 w-full max-w-[280px]">
                 <button onclick="mostrarRegistro()" class="bg-red-700 text-white py-5 rounded-3xl font-black uppercase italic tracking-widest text-[11px] shadow-2xl">
                     <i class="fa-solid fa-bolt mr-2"></i> Usar WebApp
                 </button>
@@ -338,7 +352,20 @@
         });
 
         // BONO Y OTROS
-        window.onload = () => { setTimeout(() => { document.getElementById('notificacionPop').classList.add('show'); }, 45000); };
+                window.onload = () => { 
+            // 1. Notificación del Bono (a los 45 seg)
+            setTimeout(() => { 
+                const pop = document.getElementById('notificacionPop');
+                if(pop) pop.classList.add('show'); 
+            }, 45000); 
+
+            // 2. ACTIVAR BOTONES LENTOS
+            const btns = document.getElementById('botones-accion-vip');
+            if(btns) {
+                btns.classList.add('aparecer');
+            }
+        };
+        
         function cerrarPop(e) { e.stopPropagation(); document.getElementById('notificacionPop').classList.remove('show'); }
         function mostrarModalJuego() { document.getElementById('modalJuego').style.display = 'flex'; }
         function cerrarModalJuego() { document.getElementById('modalJuego').style.display = 'none'; }
