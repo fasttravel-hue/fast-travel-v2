@@ -21,6 +21,12 @@
             border-radius: 45px; position: relative; box-shadow: 0 0 40px rgba(220, 38, 38, 0.15);
             overflow: hidden; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
+               /* Esta clase hace que el marco negro se estire a los lados */
+        .phone-frame.estirado {
+            width: 320px; /* Se ensancha un poco */
+            box-shadow: 0 0 60px rgba(220, 38, 38, 0.3);
+        }
+        
         .phone-notch {
             position: absolute; top: 0; left: 50%; transform: translateX(-50%);
             width: 110px; height: 24px; background: #1a1a1a;
@@ -270,19 +276,7 @@
         function abrirModalConductor() { toggleMenu(); document.getElementById('modalConductor').style.display = 'flex'; }
         function cerrarModalConductor() { document.getElementById('modalConductor').style.display = 'none'; }
         
-        function mostrarRegistro() { 
-    const reg = document.getElementById('registro-interno');
-    reg.style.display = 'flex'; 
-    // Este pequeño retraso de 10 milisegundos es lo que activa la animación
-    setTimeout(() => reg.classList.add('expandido'), 10);
-}
-
-function cerrarRegistro() { 
-    const reg = document.getElementById('registro-interno');
-    reg.classList.remove('expandido');
-    // Esperamos 500ms (lo que dura la transición) para ocultarlo del todo
-    setTimeout(() => reg.style.display = 'none', 500);
-}
+        
         
         let redEscogida = "";
         function seleccionarRed(red, url) {
@@ -310,7 +304,29 @@ function cerrarRegistro() {
             .finally(() => {
                 document.getElementById('registro-interno').style.display = 'none';
                 document.getElementById('slides-inicio').style.display = 'none';
-                document.getElementById('contenedor-aplicativo').classList.remove('hidden');
+                document.getElementById('function mostrarRegistro() { 
+    const reg = document.getElementById('registro-interno');
+    const celular = document.getElementById('celular-interactivo');
+
+    // 1. Estiramos el marco negro del celular
+    celular.classList.add('estirado');
+    
+    // 2. Mostramos y agrandamos el formulario blanco
+    reg.style.display = 'flex'; 
+    setTimeout(() => reg.classList.add('expandido'), 10);
+}
+
+function cerrarRegistro() { 
+    const reg = document.getElementById('registro-interno');
+    const celular = document.getElementById('celular-interactivo');
+
+    // Quitamos ambas clases para que todo regrese a su tamaño original
+    reg.classList.remove('expandido');
+    celular.classList.remove('estirado');
+    
+    setTimeout(() => reg.style.display = 'none', 500);
+}
+contenedor-aplicativo').classList.remove('hidden');
             });
         });
 
