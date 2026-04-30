@@ -140,7 +140,12 @@
     transform: scale(0.9);
     filter: brightness(1.2);
 }
-        
+       .slogan-brillante {
+    font-size: 32px; /* Aumentado */
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.2);
+    animation: brilloRespiracion 3s infinite ease-in-out;
+}
+ 
     </style>
 </head>
 
@@ -343,37 +348,60 @@
                     </button>
                 </div>
             </div>
-        <div id="seccion-confianza-vip" class="flex flex-col items-center justify-center py-12 px-6 overflow-hidden">
+        <div id="seccion-confianza-vip" class="flex flex-col items-center justify-center py-16 px-6 overflow-hidden">
     
-    <div class="flex flex-row items-center justify-between w-full max-w-md gap-4">
-        <div id="mini-google-window" onclick="expandirGoogle()" class="cursor-pointer bg-zinc-900/80 backdrop-blur-md border border-zinc-700 p-4 rounded-2xl w-1/2 shadow-2xl animate-entrada-izquierda">
-            <div class="flex flex-col items-start gap-2">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Logo.svg" class="w-12 opacity-80" alt="Google">
-                <div class="flex text-yellow-500 text-[10px] gap-0.5">
+    <div class="flex flex-row items-center justify-between w-full max-w-lg gap-6">
+        
+        <div id="mini-google-window" onclick="expandirGoogle()" class="cursor-pointer bg-zinc-900/90 backdrop-blur-md border border-zinc-700 p-6 rounded-3xl w-[60%] shadow-2xl animate-entrada-izquierda transition-transform active:scale-95">
+            <div class="flex flex-col items-start gap-3">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Logo.svg" class="w-16 opacity-90" alt="Google">
+                <div class="flex text-yellow-500 text-xs gap-1">
                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>
-                <p class="text-[8px] text-gray-400 uppercase leading-tight">Pulsa para ver opiniones reales...</p>
+                <p class="text-[10px] text-gray-300 uppercase leading-tight font-medium">Toca para ver reseñas reales de nuestros pasajeros...</p>
             </div>
         </div>
 
-        <div id="slogan-seguridad" class="w-1/2 animate-entrada-derecha">
-            <h3 class="text-white font-black italic uppercase leading-none text-right tracking-tighter slogan-brillante">
-                Tu seguridad<br><span class="text-xs">es primero</span>
+        <div id="slogan-seguridad" class="w-[40%] animate-entrada-derecha">
+            <h3 class="text-white font-black italic uppercase leading-none text-right tracking-tighter slogan-brillante text-3xl">
+                Tu seguridad<br><span class="text-sm">es primero</span>
             </h3>
         </div>
     </div>
 
-    <div id="google-full-screen" class="hidden fixed inset-0 z-[100] bg-black/90 backdrop-blur-xl flex-col items-center pt-20 px-6">
-        <p class="text-[8px] font-black text-white/40 uppercase tracking-[0.5em] mb-8 animate-pulse">Desliza hacia abajo para volver</p>
+    <div id="google-full-screen" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center pt-10 px-4">
         
-        <div id="lista-reseñas" class="w-full max-w-md overflow-y-auto h-[70vh] space-y-4">
-            <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-3xl">
-                <p class="text-white text-xs italic">"Excelente servicio, el aire acondicionado perfecto para el calor de Guayaquil."</p>
-                <p class="text-red-600 font-bold text-[9px] mt-2">- Juan Pérez (Google User)</p>
+        <div class="w-full max-w-md flex justify-between items-center mb-6">
+            <p class="text-[9px] font-black text-white/50 uppercase tracking-[0.4em]">Opiniones Reales</p>
+            <a href="https://maps.app.goo.gl/TU_PERFIL" target="_blank" class="text-[10px] text-red-500 font-bold uppercase tracking-widest bg-red-950/30 px-4 py-2 rounded-full border border-red-800/50">
+                Opinar en Google
+            </a>
+        </div>
+
+        <p class="text-[8px] font-black text-white/30 uppercase tracking-[0.6em] mb-8 animate-pulse text-center">Desliza hacia abajo para ver más<br>o para cerrar</p>
+        
+        <div id="lista-reseñas" class="w-full max-w-sm overflow-y-auto h-[70vh] space-y-4 pb-20 snap-y snap-mandatory">
+            
+            <div class="snap-center w-full">
+                <img src="comentario1.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña Fast Travel">
             </div>
+
+            <div class="snap-center w-full">
+                <img src="comentario2.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña Fast Travel">
             </div>
+
+            <div class="snap-center w-full">
+                <img src="comentario3.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña Fast Travel">
+            </div>
+
+        </div>
+
+        <div class="absolute bottom-8 animate-bounce opacity-20">
+            <i class="fa-solid fa-chevron-down text-white text-2xl"></i>
+        </div>
     </div>
         </div>
+                
                 
         </section>
     </main>
