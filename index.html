@@ -21,9 +21,8 @@
             border-radius: 45px; position: relative; box-shadow: 0 0 40px rgba(220, 38, 38, 0.15);
             overflow: hidden; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-               /* Esta clase hace que el marco negro se estire a los lados */
         .phone-frame.estirado {
-            width: 320px; /* Se ensancha un poco */
+            width: 320px;
             box-shadow: 0 0 60px rgba(220, 38, 38, 0.3);
         }
         
@@ -33,7 +32,7 @@
             border-bottom-left-radius: 14px; border-bottom-right-radius: 14px; z-index: 50;
         }
 
-                #registro-interno {
+        #registro-interno {
             display: none; 
             position: absolute; 
             inset: 0;
@@ -44,17 +43,14 @@
             flex-direction: column; 
             align-items: center; 
             justify-content: center;
-            /* AQUÍ ESTÁ EL TRUCO: */
             transform: scale(0.6); 
             opacity: 0;
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        /* Esta clase hará que se agrande cuando la activemos con JS */
         #registro-interno.expandido { 
             transform: scale(1); 
             opacity: 1; 
         }
-
 
         #menu-lateral { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
         #menu-lateral.open { transform: translateX(0); }
@@ -75,59 +71,54 @@
         .red-item { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; transition: 0.3s; width: 60px; }
         .red-item img { width: 40px; height: 40px; transition: 0.3s; filter: grayscale(1); opacity: 0.6; }
         .red-item.active img { filter: grayscale(0); opacity: 1; transform: scale(1.1); }
-            /* Estado inicial de los botones */
+
         #botones-accion-vip {
             opacity: 0;
-            transform: translateX(-50px); /* Empiezan un poco a la izquierda */
-            transition: all 4s cubic-bezier(0.16, 1, 0.3, 1); /* 4 segundos de duración */
-            transition-delay: 2.5s; /* Espera 2.5 segundos para aparecer */
+            transform: translateX(-50px);
+            transition: all 4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition-delay: 2.5s;
         }
 
-        /* Estado final cuando se activan */
         #botones-accion-vip.aparecer {
             opacity: 1;
             transform: translateX(0);
         }
+
         /* --- PREPARACIÓN PARA LA CASCADA DEL MANUAL --- */
+        #manual-webapp > div, 
+        #manual-whatsapp > div {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 2s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
 
-/* 1. Ponemos los cuadros en "espera" (invisibles y abajo) */
-#manual-webapp > div, 
-#manual-whatsapp > div {
-    opacity: 0;
-    transform: translateY(40px); /* Empiezan 40px más abajo */
-    /* Transición muy lenta (2 segundos) para que sea suave */
-    transition: all 2s cubic-bezier(0.16, 1, 0.3, 1);
-    pointer-events: none; /* Evita que se pueda clickear mientras están ocultos */
-}
+        .cuadro-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+        }
 
-/* 2. Esta clase la usaremos para "despertar" cada cuadro */
-.cuadro-visible {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-    pointer-events: auto !important;
-}
+        #manual-webapp > div.cuadro-visible,
+        #manual-whatsapp > div.cuadro-visible {
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.1);
+        }
 
-/* 3. Un pequeño toque VIP: que el cuadro brille un poco al aparecer */
-#manual-webapp > div.cuadro-visible,
-#manual-whatsapp > div.cuadro-visible {
-    box-shadow: 0 10px 30px rgba(220, 38, 38, 0.1);
-}
         #contenedor-titulo-manual {
-    opacity: 0;
-    transform: translateY(-30px); /* Empieza un poquito arriba */
-    transition: all 2.5s cubic-bezier(0.16, 1, 0.3, 1); /* 2.5 segundos de elegancia */
-}
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: all 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-#contenedor-titulo-manual.aparecer {
-    opacity: 1;
-    transform: translateY(0);
-}
-        
+        #contenedor-titulo-manual.aparecer {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 
 <body>
-        <div id="notificacionPop" class="fixed bottom-[30px] left-[20px] z-[100] bg-white text-black p-4 rounded-3xl flex items-center gap-3 shadow-2xl border-l-[6px] border-red-600 transition-all duration-300 ease-out touch-none select-none opacity-0 translate-y-[200%]">
+    <div id="notificacionPop" class="fixed bottom-[30px] left-[20px] z-[100] bg-white text-black p-4 rounded-3xl flex items-center gap-3 shadow-2xl border-l-[6px] border-red-600 transition-all duration-300 ease-out touch-none select-none opacity-0 translate-y-[200%]">
         <div onclick="mostrarModalJuego()" class="flex items-center gap-3 cursor-pointer">
             <div class="text-2xl">🎁</div>
             <div>
@@ -136,7 +127,6 @@
             </div>
         </div>
     </div>
-
 
     <div id="modalJuego" class="modal-full">
         <div class="bg-white rounded-[35px] p-8 text-black text-center max-w-[340px] relative">
@@ -167,7 +157,7 @@
         </div>
     </div>
 
-    <header class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center border-b border-zinc-900">
+    <header class="fixed top-0 left-0 z-50 flex items-center justify-between px-6 py-4">
         <div class="text-xl font-black italic uppercase tracking-tighter">FAST <span class="texto-rojo">TRAVEL</span></div>
         <button onclick="toggleMenu()" class="text-white text-2xl pr-2"><i class="fa-solid fa-bars-staggered"></i></button>
     </header>
@@ -248,25 +238,23 @@
                 </a>
             </div>
         </section>
-                    <section class="w-full py-16 px-6 border-t border-zinc-900 bg-zinc-950/30">
+
+        <section class="w-full py-16 px-6 border-t border-zinc-900 bg-zinc-950/30">
             <div class="max-w-4xl mx-auto text-center">
                 
                 <div id="titulo-manual" class="text-center">
-    <h3 class="text-[10px] font-black text-red-600 uppercase tracking-[0.5em] mb-2">Manual de Usuario</h3>
-</div>
+                    <h3 class="text-[10px] font-black text-red-600 uppercase tracking-[0.5em] mb-2">Manual de Usuario</h3>
+                </div>
 
-<div id="selectores-minimalistas" class="text-center">
-    <h2 class="text-3xl font-black italic uppercase tracking-tighter mb-8">
-        ¿Cómo prefieres <span class="texto-rojo">Pedir?</span>
-    </h2>
-    
-    <div class="flex justify-center gap-4 mb-12">
-        </div>
-</div>
-                
-                <div class="flex justify-center gap-4 mb-10">
-                    <button onclick="switchManual('webapp')" id="btn-m-webapp" class="px-6 py-3 rounded-full border border-red-600 bg-red-600 text-white font-black text-[10px] uppercase tracking-widest transition-all">Por WebApp</button>
-                    <button onclick="switchManual('whatsapp')" id="btn-m-whatsapp" class="px-6 py-3 rounded-full border border-zinc-800 bg-zinc-900 text-gray-400 font-black text-[10px] uppercase tracking-widest transition-all">Por WhatsApp</button>
+                <div id="selector-seccion" class="text-center">
+                    <h2 class="text-3xl font-black italic uppercase tracking-tighter mb-8">
+                        ¿Cómo prefieres <span class="texto-rojo">Pedir?</span>
+                    </h2>
+                    
+                    <div class="flex justify-center gap-4 mb-10">
+                        <button onclick="switchManual('webapp')" id="btn-m-webapp" class="px-6 py-3 rounded-full border border-red-600 bg-red-600 text-white font-black text-[10px] uppercase tracking-widest transition-all">Por WebApp</button>
+                        <button onclick="switchManual('whatsapp')" id="btn-m-whatsapp" class="px-6 py-3 rounded-full border border-zinc-800 bg-zinc-900 text-gray-400 font-black text-[10px] uppercase tracking-widest transition-all">Por WhatsApp</button>
+                    </div>
                 </div>
 
                 <div id="manual-webapp" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -321,20 +309,16 @@
                     </button>
                 </div>
             </div>
-                    </section>
-        
+        </section>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // CONFIGURACIÓN DE CONEXIONES (Sustituir URL de AppScript)
         const scriptURL = 'TU_URL_DE_APPSCRIPT_AQUI';
 
         function toggleMenu() { document.getElementById('menu-lateral').classList.toggle('open'); }
         function abrirModalConductor() { toggleMenu(); document.getElementById('modalConductor').style.display = 'flex'; }
         function cerrarModalConductor() { document.getElementById('modalConductor').style.display = 'none'; }
-        
-        
         
         let redEscogida = "";
         function seleccionarRed(red, url) {
@@ -344,7 +328,6 @@
             window.open(url, '_blank');
         }
 
-        // ENVÍO CLIENTE (SHEETS + HOSTINGER)
         document.getElementById('miFormulario').addEventListener('submit', function(e) {
             e.preventDefault();
             if(!redEscogida) return alert("Selecciona una red social primero");
@@ -354,9 +337,7 @@
             formData.append('RedSocial', redEscogida);
             formData.append('Cupon', document.getElementById('inputCuponReal').value || "Ninguno");
 
-            // 1. Google Sheets
             fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
-            // 2. Hostinger
             fetch('registro_cliente.php', { method: 'POST', body: formData })
             .finally(() => {
                 document.getElementById('registro-interno').style.display = 'none';
@@ -365,14 +346,13 @@
             });
         });
 
-        // --- LAS FUNCIONES DEBEN IR AQUÍ AFUERA ---
         function mostrarRegistro() { 
             const reg = document.getElementById('registro-interno');
             const celular = document.getElementById('celular-interactivo');
             if(reg && celular) {
-                celular.classList.add('estirado'); // Estira el marco
+                celular.classList.add('estirado');
                 reg.style.display = 'flex'; 
-                setTimeout(() => reg.classList.add('expandido'), 10); // Agranda el formulario
+                setTimeout(() => reg.classList.add('expandido'), 10);
             }
         }
 
@@ -386,7 +366,6 @@
             }
         }
         
-        // ENVÍO CONDUCTOR (HOSTINGER)
         document.getElementById('formConductor').addEventListener('submit', function(e) {
             e.preventDefault();
             document.getElementById('btn-envio-cond').innerText = "PROCESANDO...";
@@ -395,15 +374,12 @@
             .catch(() => alert("Error al enviar solicitud"));
         });
 
-        // BONO Y OTROS
-                window.onload = () => { 
-            // 1. Notificación del Bono (a los 45 seg)
+        window.onload = () => { 
             setTimeout(() => { 
                 const pop = document.getElementById('notificacionPop');
                 if(pop) pop.classList.add('show'); 
             }, 45000); 
 
-            // 2. ACTIVAR BOTONES LENTOS
             const btns = document.getElementById('botones-accion-vip');
             if(btns) {
                 btns.classList.add('aparecer');
@@ -440,98 +416,77 @@
         ScrollReveal().reveal('#espacio-logo', { delay: 1000, scale: 0.5, duration: 2000 });
         ScrollReveal().reveal('#subtitulo', { delay: 1600, distance: '40px', origin: 'bottom', duration: 2600, opacity: 0 });
         ScrollReveal().reveal('#celular-interactivo', { delay: 600, distance: '80px', origin: 'right', duration: 2000 });
-ScrollReveal().reveal('#titulo-manual', {
-    duration: 3000,      // 3 segundos de duración
-    origin: 'top',       // Viene desde arriba
-    distance: '50px',    // Recorre 50px
-    delay: 500           // Espera medio segundo antes de empezar
-});
-        ScrollReveal().reveal('#selectores-minimalistas', {
-    duration: 3000,      // 3 segundos de duración
-    scale: 0.8,          // Empieza un poco más pequeño
-    opacity: 0,          // Empieza invisible
-    delay: 1500          // Espera 1.5 segundos (para que el título ya esté casi listo)
-});
-
         
+        // ANIMACIÓN DEL MANUAL
+        ScrollReveal().reveal('#titulo-manual', { duration: 3000, origin: 'top', distance: '50px', delay: 500 });
+        ScrollReveal().reveal('#btn-m-webapp', { duration: 2500, origin: 'left', distance: '150px', delay: 1200, opacity: 0 });
+        ScrollReveal().reveal('#btn-m-whatsapp', { duration: 2500, origin: 'right', distance: '150px', delay: 1200, opacity: 0 });
+
         function mostrarRegistroYScroll() {
-    mostrarRegistro(); // Abre el formulario en el celular
-    // Hace que la pantalla suba suavemente hasta el celular
-    document.getElementById('celular-interactivo').scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'center' 
-    });
+            mostrarRegistro(); 
+            document.getElementById('celular-interactivo').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
         }
-                // ... aquí están tus otras funciones (como mostrarRegistroYScroll) ...
 
-        // ESTE ES EL ÚLTIMO CÓDIGO (DENTRO DEL SCRIPT)
-                function switchManual(metodo) {
-    const web = document.getElementById('manual-webapp');
-    const wa = document.getElementById('manual-whatsapp');
-    
-    // 1. Reiniciamos: Quitamos la visibilidad a todos los cuadros
-    document.querySelectorAll('#manual-webapp > div, #manual-whatsapp > div').forEach(cuadro => {
-        cuadro.classList.remove('cuadro-visible');
-    });
+        function switchManual(metodo) {
+            const web = document.getElementById('manual-webapp');
+            const wa = document.getElementById('manual-whatsapp');
+            
+            document.querySelectorAll('#manual-webapp > div, #manual-whatsapp > div').forEach(cuadro => {
+                cuadro.classList.remove('cuadro-visible');
+            });
 
-    // 2. Activamos el contenedor y lanzamos la cascada
-    if(metodo === 'webapp') {
-        web.classList.remove('hidden');
-        wa.classList.add('hidden');
-        lanzarCascada('#manual-webapp > div');
-    } else {
-        wa.classList.remove('hidden');
-        web.classList.add('hidden');
-        lanzarCascada('#manual-whatsapp > div');
-    }
-}
-
-// 3. El motor de la cascada (300ms de diferencia entre cada cuadro)
-function lanzarCascada(selector) {
-    const cuadros = document.querySelectorAll(selector);
-    cuadros.forEach((cuadro, index) => {
-        setTimeout(() => {
-            cuadro.classList.add('cuadro-visible');
-        }, index * 300);
-    });
-}
-        
-
-// Lógica para que el Bono VIP siga el dedo y se oculte
-const bonoPop = document.getElementById('notificacionPop');
-let startX;
-
-if (bonoPop) {
-    bonoPop.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-        bonoPop.style.transition = 'none'; 
-    });
-
-    bonoPop.addEventListener('touchmove', e => {
-        let touch = e.touches[0].clientX;
-        let change = touch - startX;
-        if (change > 0) {
-            bonoPop.style.transform = `translateX(${change}px) rotate(${change / 25}deg)`;
-            bonoPop.style.opacity = 1 - (change / 200);
+            if(metodo === 'webapp') {
+                web.classList.remove('hidden');
+                wa.classList.add('hidden');
+                lanzarCascada('#manual-webapp > div');
+            } else {
+                wa.classList.remove('hidden');
+                web.classList.add('hidden');
+                lanzarCascada('#manual-whatsapp > div');
+            }
         }
-    });
 
-    bonoPop.addEventListener('touchend', e => {
-        let change = e.changedTouches[0].clientX - startX;
-        if (change > 80) {
-            bonoPop.style.transition = 'all 0.4s ease-out';
-            bonoPop.style.transform = 'translateX(500px)';
-            bonoPop.style.opacity = '0';
-            setTimeout(() => { bonoPop.style.display = 'none'; }, 400);
-        } else {
-            bonoPop.style.transition = 'all 0.3s ease-out';
-            bonoPop.style.transform = 'translateX(0px) rotate(0deg)';
-            bonoPop.style.opacity = '1';
+        function lanzarCascada(selector) {
+            const cuadros = document.querySelectorAll(selector);
+            cuadros.forEach((cuadro, index) => {
+                setTimeout(() => {
+                    cuadro.classList.add('cuadro-visible');
+                }, index * 300);
+            });
         }
-    });
-}
-        
-        
+
+        const bonoPop = document.getElementById('notificacionPop');
+        let startX;
+        if (bonoPop) {
+            bonoPop.addEventListener('touchstart', e => {
+                startX = e.touches[0].clientX;
+                bonoPop.style.transition = 'none'; 
+            });
+            bonoPop.addEventListener('touchmove', e => {
+                let touch = e.touches[0].clientX;
+                let change = touch - startX;
+                if (change > 0) {
+                    bonoPop.style.transform = `translateX(${change}px) rotate(${change / 25}deg)`;
+                    bonoPop.style.opacity = 1 - (change / 200);
+                }
+            });
+            bonoPop.addEventListener('touchend', e => {
+                let change = e.changedTouches[0].clientX - startX;
+                if (change > 80) {
+                    bonoPop.style.transition = 'all 0.4s ease-out';
+                    bonoPop.style.transform = 'translateX(500px)';
+                    bonoPop.style.opacity = '0';
+                    setTimeout(() => { bonoPop.style.display = 'none'; }, 400);
+                } else {
+                    bonoPop.style.transition = 'all 0.3s ease-out';
+                    bonoPop.style.transform = 'translateX(0px) rotate(0deg)';
+                    bonoPop.style.opacity = '1';
+                }
+            });
+        }
     </script>
 </body>
 </html>
