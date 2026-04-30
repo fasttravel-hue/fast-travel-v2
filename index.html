@@ -336,7 +336,32 @@
         block: 'center' 
     });
         }
-        
+                // ... aquí están tus otras funciones (como mostrarRegistroYScroll) ...
+
+        // ESTE ES EL ÚLTIMO CÓDIGO (DENTRO DEL SCRIPT)
+        function switchManual(metodo) {
+            const web = document.getElementById('manual-webapp');
+            const wa = document.getElementById('manual-whatsapp');
+            const btnWeb = document.getElementById('btn-m-webapp');
+            const btnWa = document.getElementById('btn-m-whatsapp');
+
+            if(metodo === 'webapp') {
+                web.classList.remove('hidden');
+                wa.classList.add('hidden');
+                btnWeb.style.backgroundColor = '#dc2626'; // Rojo
+                btnWeb.style.color = 'white';
+                btnWa.style.backgroundColor = '#18181b'; 
+                btnWa.style.color = '#a1a1aa';
+            } else {
+                wa.classList.remove('hidden');
+                web.classList.add('hidden');
+                btnWa.style.backgroundColor = '#16a34a'; // Verde
+                btnWa.style.color = 'white';
+                btnWeb.style.backgroundColor = '#18181b';
+                btnWeb.style.color = '#a1a1aa';
+            }
+        }
+
     </script>
 </body>
 </html>
