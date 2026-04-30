@@ -114,6 +114,17 @@
             opacity: 1;
             transform: translateY(0);
         }
+   /* Este es el efecto de brillo respiratorio para el botón de Fast Travel */
+.btn-vip-brillo {
+    animation: pulsoBrillo 4s infinite ease-in-out;
+}
+
+@keyframes pulsoBrillo {
+    0% { box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
+    50% { box-shadow: 0 10px 45px rgba(255,255,255,0.4); } /* Aquí es cuando brilla más */
+    100% { box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
+}
+
     </style>
 </head>
 
@@ -304,7 +315,7 @@
                 </div>
 
                 <div class="mt-12">
-                    <button onclick="mostrarRegistroYScroll()" class="bg-white text-black px-10 py-5 rounded-full font-black uppercase text-[10px] tracking-[0.2em] shadow-xl">
+                    <button onclick="mostrarRegistroYScroll()" class="btn-vip-brillo bg-white text-black px-10 py-5 rounded-full font-black uppercase text-[10px] tracking-[0.2em] shadow-xl">
                         ¡Registrarme y Pedir!
                     </button>
                 </div>
@@ -419,6 +430,21 @@
         
         // ANIMACIÓN DEL MANUAL
         ScrollReveal().reveal('#titulo-manual', { duration: 3000, origin: 'top', distance: '50px', delay: 500 });
+       ScrollReveal().reveal('#selector-seccion h2', { 
+    duration: 2500, 
+    scale: 0.8, 
+    opacity: 0, 
+    delay: 900, 
+    distance: '0px' 
+});
+        ScrollReveal().reveal('.mt-12 button', { 
+    duration: 3000, 
+    distance: '30px', 
+    origin: 'bottom', 
+    opacity: 0, 
+    delay: 2000 
+});
+
         ScrollReveal().reveal('#btn-m-webapp', { duration: 2500, origin: 'left', distance: '150px', delay: 1200, opacity: 0 });
         ScrollReveal().reveal('#btn-m-whatsapp', { duration: 2500, origin: 'right', distance: '150px', delay: 1200, opacity: 0 });
 
