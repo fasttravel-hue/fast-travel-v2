@@ -112,6 +112,16 @@
 #manual-whatsapp > div.cuadro-visible {
     box-shadow: 0 10px 30px rgba(220, 38, 38, 0.1);
 }
+        #contenedor-titulo-manual {
+    opacity: 0;
+    transform: translateY(-30px); /* Empieza un poquito arriba */
+    transition: all 2.5s cubic-bezier(0.16, 1, 0.3, 1); /* 2.5 segundos de elegancia */
+}
+
+#contenedor-titulo-manual.aparecer {
+    opacity: 1;
+    transform: translateY(0);
+}
         
     </style>
 </head>
@@ -241,8 +251,18 @@
                     <section class="w-full py-16 px-6 border-t border-zinc-900 bg-zinc-950/30">
             <div class="max-w-4xl mx-auto text-center">
                 
-                <h3 class="text-[10px] font-black text-red-600 uppercase tracking-[0.5em] mb-2">Manual de Usuario</h3>
-                <h2 class="text-3xl font-black italic uppercase tracking-tighter mb-8">¿Cómo prefieres <span class="texto-rojo">Pedir?</span></h2>
+                <div id="titulo-manual" class="text-center">
+    <h3 class="text-[10px] font-black text-red-600 uppercase tracking-[0.5em] mb-2">Manual de Usuario</h3>
+</div>
+
+<div id="selectores-minimalistas" class="text-center">
+    <h2 class="text-3xl font-black italic uppercase tracking-tighter mb-8">
+        ¿Cómo prefieres <span class="texto-rojo">Pedir?</span>
+    </h2>
+    
+    <div class="flex justify-center gap-4 mb-12">
+        </div>
+</div>
                 
                 <div class="flex justify-center gap-4 mb-10">
                     <button onclick="switchManual('webapp')" id="btn-m-webapp" class="px-6 py-3 rounded-full border border-red-600 bg-red-600 text-white font-black text-[10px] uppercase tracking-widest transition-all">Por WebApp</button>
