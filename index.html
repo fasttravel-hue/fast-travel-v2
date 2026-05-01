@@ -445,6 +445,68 @@
 #menu-lateral .menu-vip-section-container {
     margin-top: 10px;
 }
+   /* =========================================
+   ANIMACIONES ELITE - CLUB VIP
+   ========================================= */
+
+/* 1. Definición de los Efectos (Keyframes) */
+
+/* Entrada suave desde abajo */
+@keyframes fadeInUpElite {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pulso de escala y brillo para la corona */
+@keyframes coronaPulsoNeon {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.7));
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 30px rgba(220, 38, 38, 1));
+    }
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.7));
+    }
+}
+
+/* 2. Aplicación de las Clases de Animación */
+
+/* Contenedor principal para la entrada inicial */
+.animate-entrada-modal {
+    animation: fadeInUpElite 0.6s ease-out forwards;
+}
+
+/* La Corona: Movimiento y Luz Neón Continua */
+.animation-floatingIcon {
+    animation: coronaPulsoNeon 3s infinite ease-in-out;
+}
+
+/* Retrasos secuenciales para los textos (Staggered) */
+#modalVIP h3 {
+    opacity: 0; /* Empieza invisible */
+    animation: fadeInUpElite 0.5s ease-out 0.3s forwards; /* Retraso de 0.3s */
+}
+
+#modalVIP p {
+    opacity: 0;
+    animation: fadeInUpElite 0.5s ease-out 0.5s forwards; /* Retraso de 0.5s */
+}
+
+/* Aparición final del formulario */
+#modalVIP .flex-col {
+    opacity: 0;
+    animation: fadeInUpElite 0.5s ease-out 0.8s forwards; /* Retraso de 0.8s */
+}
         
         
     </style>
@@ -502,7 +564,11 @@
         
         <i class="fa-solid fa-crown text-5xl text-red-600 filter drop-shadow-[0_0_15px_rgba(220,38,38,1)] animation-floatingIcon mb-6 block"></i>
         
-        <h3 class="text-white font-black italic uppercase text-lg mb-2">Mi Estatus <span class="text-red-600">VIP</span></h3>
+        <h3 class="text-white font-black italic uppercase text-lg mb-2 flex flex-col items-center">
+    <span>Mi Estatus</span>
+    <span class="text-red-600 text-3xl mt-1">VIP</span>
+        </h3>
+        
         <p class="text-[9px] text-zinc-500 font-bold uppercase mb-6 tracking-widest">Ingresa tu número para ver tu progreso</p>
         
         <div class="flex flex-col gap-3">
