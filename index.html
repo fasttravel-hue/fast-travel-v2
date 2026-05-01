@@ -545,6 +545,46 @@
     75% { transform: translateX(5px); }
 }
 .animate-shake { animation: shake 0.2s ease-in-out 0s 2; } 
+
+/* --- DISEÑO DE PANTALLA COMPLETA PARA ESCRITORIO --- */
+@media (min-width: 1024px) {
+    /* Forzamos a que el cuerpo use todo el ancho y alto disponible */
+    body {
+        overflow-x: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+    }
+
+    .home-wrapper {
+        display: flex;
+        flex-direction: row; /* Aquí ocurre la magia: izquierda y derecha */
+        width: 100vw;
+        height: 100vh;
+        max-width: 100%;
+        gap: 0; /* Sin espacios vacíos */
+    }
+
+    .section-left {
+        flex: 0 0 50%; /* Ocupa la mitad izquierda */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-right: 1px solid rgba(255,0,0,0.1);
+        padding: 40px;
+    }
+
+    .section-right {
+        flex: 0 0 50%; /* Ocupa la mitad derecha */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 60px;
+        background: rgba(5,5,5,0.5);
+        overflow-y: auto; /* Por si hay mucha info a la derecha */
+    }
+}
         
     </style>
 </head>
