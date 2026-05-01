@@ -1237,18 +1237,18 @@ function cerrarModalVIP() {
 
 // 2. Función para acceder (actualizada para el nuevo Input)
 function accederClubVIPModal() {
-    // IMPORTANTE: El ID del input cambió a 'vip-number-modal'
     const numeroInput = document.getElementById('vip-number-modal').value;
     const numeroLimpio = numeroInput.trim();
 
     if (numeroLimpio.length >= 10) {
-        // Cierra el modal antes de irse
-        cerrarModalVIP();
+        // En lugar de ir a ciegas, avisamos que es para clientes activos
+        alert("Accediendo al portal exclusivo. Si no tienes viajes registrados, el sistema te redirigirá a WhatsApp.");
         window.location.href = `https://fasttravelec.com/plandescuentos?id=${numeroLimpio}`;
     } else {
         alert("Por favor, ingresa tu número completo registrado.");
     }
 }
+        
         
         
         
