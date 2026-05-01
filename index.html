@@ -242,103 +242,6 @@
             animation: pulsoIcono 4s infinite ease-in-out;
         }
 
-       /* --- ESTILOS CARRUSEL SERVICIOS EXPANDIBLES --- */
-.swiperServicios { padding-top: 20px; padding-bottom: 50px; }
-
-.card-servicio {
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    transform: scale(0.85); /* Tamaño medio en reposo */
-    opacity: 0.4;
-    filter: blur(2px);
-}
-
-/* Cuando la tarjeta está en el centro (activa) */
-.swiper-slide-active.card-servicio {
-    transform: scale(1.05); /* Se expande */
-    opacity: 1;
-    filter: blur(0);
-}
-
-.content-card {
-    background: linear-gradient(145deg, #0a0a0a, #151515);
-    border: 1px solid #222;
-    padding: 40px 30px;
-    border-radius: 40px;
-    text-align: center;
-    height: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.swiper-slide-active .content-card {
-    border-color: #dc2626;
-    box-shadow: 0 0 40px rgba(220, 38, 38, 0.15);
-}
-
-/* Iconos con luz */
-.icon-service {
-    font-size: 3rem;
-    color: #fff;
-    margin-bottom: 25px;
-    transition: all 0.5s ease;
-}
-
-.swiper-slide-active .icon-service {
-    color: #dc2626;
-    filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.8));
-    animation: floatingIcon 3s infinite ease-in-out;
-}
-
-/* Movimiento de palabras */
-.title-service {
-    font-family: sans-serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-style: italic;
-    line-height: 1;
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-}
-
-.word-move {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.8s ease 0.3s;
-}
-
-.swiper-slide-active .word-move {
-    opacity: 1;
-    transform: translateY(0);
-    animation: shineWord 2s infinite alternate;
-}
-
-.desc-service {
-    font-size: 10px;
-    color: #666;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-    margin-top: 10px;
-    opacity: 0;
-    transition: 0.5s ease 0.5s;
-}
-
-.swiper-slide-active .desc-service { opacity: 1; }
-
-/* Animaciones */
-@keyframes floatingIcon {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-@keyframes shineWord {
-    from { text-shadow: 0 0 5px rgba(220, 38, 38, 0.2); }
-    to { text-shadow: 0 0 15px rgba(220, 38, 38, 0.8); }
-}
 /* --- ESTILOS MEJORADOS: CARDS CON VALOR --- */
 .card-servicio {
     transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -681,49 +584,6 @@
                 
                 </section>
 
-<section id="servicios-vip" class="py-20 px-6 overflow-hidden">
-    <div class="max-w-4xl mx-auto text-center mb-12">
-        <h3 class="text-[10px] font-black text-red-600 uppercase tracking-[0.5em] mb-4">Nuestra Experiencia</h3>
-        <h2 class="text-3xl font-black italic uppercase tracking-tighter">Servicios <span class="texto-rojo">Elite</span></h2>
-    </div>
-
-    <div class="swiper swiperServicios max-w-sm mx-auto overflow-visible">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide card-servicio">
-                <div class="content-card">
-                    <i class="fa-solid fa-plane-up icon-service"></i>
-                    <h4 class="title-service">puntualidad <br><span class="word-move texto-rojo">extrema</span></h4>
-                    <p class="desc-service">Monitoreo VIP de vuelos para traslados al Aeropuerto JJO.</p>
-                </div>
-            </div>
-
-            <div class="swiper-slide card-servicio">
-                <div class="content-card">
-                    <i class="fa-solid fa-briefcase icon-service"></i>
-                    <h4 class="title-service">soluciones <br><span class="word-move texto-rojo">corporativas</span></h4>
-                    <p class="desc-service">Movilidad inteligente y facturación centralizada para tu empresa.</p>
-                </div>
-            </div>
-
-            <div class="swiper-slide card-servicio">
-                <div class="content-card">
-                    <i class="fa-solid fa-box-check icon-service"></i>
-                    <h4 class="title-service">entregas <br><span class="word-move texto-rojo">blindadas</span></h4>
-                    <p class="desc-service">Gestión de paquetes y documentos con seguridad puerta a puerta.</p>
-                </div>
-            </div>
-
-            <div class="swiper-slide card-servicio">
-                <div class="content-card">
-                    <i class="fa-solid fa-map-location-dot icon-service"></i>
-                    <h4 class="title-service">confort <br><span class="word-move texto-rojo">sin fronteras</span></h4>
-                    <p class="desc-service">Viajes interprovinciales privados con confort de primera clase.</p>
-                </div>
-            </div>
-        </div>
-        <div class="swiper-pagination-servicios mt-10 flex justify-center gap-2"></div>
-    </div>
-</section>
         
 <section id="servicios-vip" class="py-24 px-6 overflow-hidden bg-black">
     <div class="max-w-4xl mx-auto text-center mb-16">
@@ -1085,24 +945,7 @@
             }
         }, {passive: true});
     }
-var swiperServicios = new Swiper(".swiperServicios", {
-    effect: "coverflow",
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: "auto",
-    loop: true,
-    coverflowEffect: {
-        rotate: 0,
-        stretch: 0,
-        depth: 100,
-        modifier: 2,
-        slideShadows: false,
-    },
-    pagination: {
-        el: ".swiper-pagination-servicios",
-        clickable: true,
-    },
-});
+
         var swiperServicios = new Swiper(".swiperServicios", {
     effect: "coverflow",
     grabCursor: true,
