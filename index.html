@@ -507,7 +507,38 @@
     opacity: 0;
     animation: fadeInUpElite 0.5s ease-out 0.8s forwards; /* Retraso de 0.8s */
 }
-        
+     /* Ajuste de contenedor para aprovechar el alto del cel */
+#modalVIP .content-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 450px; /* Le damos más altura */
+    padding: 3rem 2rem;
+}
+
+/* Espaciado del formulario */
+#modalVIP .flex-col.gap-3 {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Más espacio entre el input y el botón */
+}
+
+/* Estilo del Input para que destaque más */
+#vip-number-modal {
+    letter-spacing: 0.2em;
+    font-size: 14px;
+    height: 60px; /* Más alto para que sea fácil tocarlo */
+    border-radius: 20px;
+}
+        /* Animación escalonada para elementos verticales */
+#modalVIP h3 { animation: fadeInUpElite 0.6s ease-out 0.2s forwards; }
+#modalVIP span { animation: fadeInUpElite 0.6s ease-out 0.4s forwards; opacity: 0; }
+#modalVIP p { animation: fadeInUpElite 0.6s ease-out 0.6s forwards; opacity: 0; }
+#modalVIP .flex-col.gap-3 { animation: fadeInUpElite 0.6s ease-out 0.8s forwards; opacity: 0; }
+
         
     </style>
 </head>
@@ -564,12 +595,6 @@
         
         <i class="fa-solid fa-crown text-5xl text-red-600 filter drop-shadow-[0_0_15px_rgba(220,38,38,1)] animation-floatingIcon mb-6 block"></i>
         
-        <h3 class="text-white font-black italic uppercase text-lg mb-2 flex flex-col items-center">
-    <span>Mi Estatus</span>
-    <span class="text-red-600 text-3xl mt-1">VIP</span>
-        </h3>
-        
-        <p class="text-[9px] text-zinc-500 font-bold uppercase mb-6 tracking-widest">Ingresa tu número para ver tu progreso</p>
         
         <div class="flex flex-col gap-3">
             <input type="number" id="vip-number-modal" placeholder="TU WHATSAPP (ej: 5939...)" class="w-full bg-black border border-zinc-700 p-4 rounded-xl text-[11px] text-white text-center font-bold outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 placeholder:text-zinc-700 transition-all">
@@ -579,6 +604,18 @@
             </button>
         </div>
     </div>
+</div>
+
+    <div class="flex flex-col items-center gap-2 mb-8">
+    <h3 class="text-white font-black italic uppercase text-2xl tracking-tighter leading-none">
+        Mi Estatus
+    </h3>
+    <span class="text-red-600 font-black italic uppercase text-5xl filter drop-shadow-[0_0_10px_rgba(220,38,38,0.5)]">
+        VIP
+    </span>
+    <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.3em] mt-4 max-w-[200px] leading-relaxed">
+        Ingresa tu número para consultar tu progreso
+    </p>
 </div>
 
     
