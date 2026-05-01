@@ -339,6 +339,87 @@
     from { text-shadow: 0 0 5px rgba(220, 38, 38, 0.2); }
     to { text-shadow: 0 0 15px rgba(220, 38, 38, 0.8); }
 }
+/* --- ESTILOS MEJORADOS: CARDS CON VALOR --- */
+.card-servicio {
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: scale(0.85);
+    opacity: 0.3;
+}
+
+.swiper-slide-active.card-servicio {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.content-card {
+    background: linear-gradient(160deg, #0f0f0f 0%, #050505 100%);
+    border: 1px solid #1a1a1a;
+    border-radius: 35px;
+    height: 420px; /* Un poco más alta para los bullets */
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+/* El brillo que recorre el borde cuando está activa */
+.swiper-slide-active .content-card {
+    border-color: #dc2626;
+    box-shadow: 0 0 50px rgba(220, 38, 38, 0.15);
+}
+
+.icon-service {
+    font-size: 3.5rem;
+    color: #333;
+    transition: all 0.5s ease;
+    margin-bottom: 20px;
+}
+
+.swiper-slide-active .icon-service {
+    color: #fff;
+    filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.8));
+    animation: floatingIcon 3s infinite ease-in-out;
+}
+
+.bullets-container {
+    margin-top: 25px;
+    text-align: left;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease 0.4s;
+}
+
+.swiper-slide-active .bullets-container {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.bullet-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-[8px] font-bold text-zinc-500 uppercase tracking-tighter mb-3;
+    font-size: 9px;
+}
+
+.bullet-item i {
+    color: #dc2626;
+    font-size: 11px;
+    filter: drop-shadow(0 0 5px rgba(220, 38, 38, 0.5));
+}
+
+.swiper-slide-active .word-move {
+    animation: pulseRed 2s infinite alternate;
+}
+
+@keyframes pulseRed {
+    from { text-shadow: 0 0 5px #dc2626; }
+    to { text-shadow: 0 0 20px #dc2626, 0 0 30px #dc2626; }
+}
+        
         
     </style>
 </head>
@@ -644,6 +725,76 @@
     </div>
 </section>
         
+<section id="servicios-vip" class="py-24 px-6 overflow-hidden bg-black">
+    <div class="max-w-4xl mx-auto text-center mb-16">
+        <h3 class="text-[10px] font-black text-red-600 uppercase tracking-[0.5em] mb-4">Tecnología en Movimiento</h3>
+        <h2 class="text-3xl font-black italic uppercase tracking-tighter text-white">Servicios <span class="texto-rojo">Elite</span></h2>
+    </div>
+
+    <div class="swiper swiperServicios max-w-sm mx-auto overflow-visible">
+        <div class="swiper-wrapper">
+            
+            <div class="swiper-slide card-servicio">
+                <div class="content-card">
+                    <div class="card-inner">
+                        <i class="fa-solid fa-mobile-screen-button icon-service"></i>
+                        <h4 class="title-service">ecosistema <br><span class="word-move texto-rojo">digital</span></h4>
+                        <div class="bullets-container">
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Aplicativo Web sin descargas</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Bot inteligente vía WhatsApp</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Interfaz de alta velocidad</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide card-servicio">
+                <div class="content-card">
+                    <div class="card-inner">
+                        <i class="fa-solid fa-shield-halved icon-service"></i>
+                        <h4 class="title-service">seguridad <br><span class="word-move texto-rojo">proactiva</span></h4>
+                        <div class="bullets-container">
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Ruta compartida con familiares</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Filtros rigurosos de confianza</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Monitoreo 24/7 por central</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide card-servicio">
+                <div class="content-card">
+                    <div class="card-inner">
+                        <i class="fa-solid fa-box-open icon-service"></i>
+                        <h4 class="title-service">encomiendas <br><span class="word-move texto-rojo">inteligentes</span></h4>
+                        <div class="bullets-container">
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Rastreo en vivo del envío</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Respaldo digital de entrega</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Logística ágil por el Bot</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide card-servicio">
+                <div class="content-card">
+                    <div class="card-inner">
+                        <i class="fa-solid fa-handshake-angle icon-service"></i>
+                        <h4 class="title-service">gestión <br><span class="word-move texto-rojo">corporativa</span></h4>
+                        <div class="bullets-container">
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Convenios mensuales/trimestrales</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Reportes detallados de ruta</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Prioridad de despacho VIP</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="swiper-pagination-servicios mt-12 flex justify-center gap-2"></div>
+    </div>
+</section>
+
         
         <footer class="w-full bg-black py-16 px-6 border-t border-zinc-900">
     <div class="max-w-4xl mx-auto flex flex-col items-center">
@@ -945,6 +1096,24 @@ var swiperServicios = new Swiper(".swiperServicios", {
         stretch: 0,
         depth: 100,
         modifier: 2,
+        slideShadows: false,
+    },
+    pagination: {
+        el: ".swiper-pagination-servicios",
+        clickable: true,
+    },
+});
+        var swiperServicios = new Swiper(".swiperServicios", {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    loop: true,
+    coverflowEffect: {
+        rotate: 0,
+        stretch: 50, // Ajusta el espaciado lateral
+        depth: 100,
+        modifier: 1,
         slideShadows: false,
     },
     pagination: {
