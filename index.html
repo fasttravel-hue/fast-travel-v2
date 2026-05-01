@@ -560,6 +560,16 @@
         </div>
     </div>
 
+<div id="modalCargaVip" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[500] hidden flex-col items-center justify-center p-6 text-center transition-all duration-500 opacity-0">
+    <div class="max-w-xs w-full bg-zinc-950 p-10 rounded-[40px] border border-red-600/30 shadow-[0_0_50px_rgba(220,38,38,0.2)]">
+        <i class="fa-solid fa-circle-notch fa-spin text-4xl text-red-600 mb-6 block"></i>
+        <h3 class="text-white font-black italic uppercase text-xl mb-4 tracking-tighter">Validando Acceso</h3>
+        <p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest leading-relaxed">
+            Accediendo al portal exclusivo. Si no posees viajes registrados, serás redirigido a nuestra central.
+        </p>
+    </div>
+</div>
+    
     <div id="modalJuego" class="modal-full">
         <div class="bg-white rounded-[35px] p-8 text-black text-center max-w-[340px] relative">
             <button onclick="cerrarModalJuego()" class="absolute top-4 right-6 text-xl">✕</button>
@@ -1266,17 +1276,7 @@ function accederClubVIPModal() {
     }
 }
         
-        
-  <div id="modalCargaVip" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[300] hidden flex-col items-center justify-center p-6 text-center transition-all duration-500 opacity-0">
-    <div class="max-w-xs w-full glass-card p-10 rounded-[40px] border border-red-600/30 shadow-[0_0_50px_rgba(220,38,38,0.2)]">
-        <i class="fa-solid fa-circle-notch fa-spin text-4xl text-red-600 mb-6 block"></i>
-        <h3 class="text-white font-black italic uppercase text-xl mb-4 tracking-tighter">Validando Acceso</h3>
-        <p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest leading-relaxed">
-            Accediendo al portal exclusivo. Si no posees viajes registrados, serás redirigido a nuestra central.
-        </p>
-    </div>
-</div>      
-        
+          
 </script> 
 </body>
 </html>
