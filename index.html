@@ -185,6 +185,62 @@
     from { opacity: 0.8; text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); }
     to { opacity: 1; text-shadow: 0 0 18px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.2); }
 }
+                /* --- ESTILOS VIP PARA REDES SOCIALES --- */
+        
+        /* Estilo base para los iconos */
+        .red-social-vip {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: inline-block;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 2px rgba(255,255,255,0.1));
+        }
+
+        /* Efecto al tocar/pasar el mouse: Crece y se ilumina completamente */
+        .red-social-vip:hover {
+            transform: scale(1.2) translateY(-5px);
+            opacity: 1;
+        }
+
+        /* Colores y Brillos Específicos */
+
+        /* TikTok: Combinación Cyan/Magenta */
+        .rs-tiktok i {
+            color: #fff; /* El icono base es blanco */
+            filter: drop-shadow(2px 0 0 #EE1D52) drop-shadow(-2px 0 0 #69C9D0);
+        }
+        .rs-tiktok:hover {
+            filter: drop-shadow(0 0 15px #EE1D52) drop-shadow(0 0 5px #69C9D0);
+        }
+
+        /* Instagram: Degradado Rosa/Naranja */
+        .rs-instagram i {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 2px rgba(225, 48, 108, 0.3));
+        }
+        .rs-instagram:hover {
+            filter: drop-shadow(0 0 15px #E1306C) drop-shadow(0 0 5px #fd5949);
+        }
+
+        /* Facebook: Azul Oficial */
+        .rs-facebook i {
+            color: #1877F2;
+            filter: drop-shadow(0 0 2px rgba(24, 119, 242, 0.3));
+        }
+        .rs-facebook:hover {
+            filter: drop-shadow(0 0 15px #1877F2);
+        }
+
+        /* Animación de pulso leve (para que no estén estáticos) */
+        @keyframes pulsoIcono {
+            0%, 100% { filter: drop-shadow(0 0 2px rgba(255,255,255,0.1)); }
+            50% { filter: drop-shadow(0 0 8px rgba(255,255,255,0.3)); }
+        }
+        .red-social-vip:not(:hover) {
+            animation: pulsoIcono 4s infinite ease-in-out;
+        }
         
     </style>
 </head>
