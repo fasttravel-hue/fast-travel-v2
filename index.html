@@ -545,55 +545,11 @@
     75% { transform: translateX(5px); }
 }
 .animate-shake { animation: shake 0.2s ease-in-out 0s 2; } 
-
-/* --- DISEÑO DE PANTALLA COMPLETA PARA ESCRITORIO --- */
-@media (min-width: 1024px) {
-    /* Forzamos a que el cuerpo use todo el ancho y alto disponible */
-    body {
-        overflow-x: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
-    }
-
-    .home-wrapper {
-        display: flex;
-        flex-direction: row; /* Aquí ocurre la magia: izquierda y derecha */
-        width: 100vw;
-        height: 100vh;
-        max-width: 100%;
-        gap: 0; /* Sin espacios vacíos */
-    }
-
-    .section-left {
-        flex: 0 0 50%; /* Ocupa la mitad izquierda */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-right: 1px solid rgba(255,0,0,0.1);
-        padding: 40px;
-    }
-
-    .section-right {
-        flex: 0 0 50%; /* Ocupa la mitad derecha */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 60px;
-        background: rgba(5,5,5,0.5);
-        overflow-y: auto; /* Por si hay mucha info a la derecha */
-    }
-}
         
     </style>
 </head>
 
 <body>
-
-    <div class="home-wrapper">
-    <div class="section-left">
-    
     <div id="notificacionPop" class="fixed bottom-[30px] left-[20px] z-[100] bg-white text-black p-4 rounded-3xl flex items-center gap-3 shadow-2xl border-l-[6px] border-red-600 transition-all duration-300 ease-out touch-none select-none opacity-0 translate-y-[200%]">
         <div onclick="mostrarModalJuego()" class="flex items-center gap-3 cursor-pointer">
             <div class="text-2xl">🎁</div>
@@ -841,11 +797,7 @@
                     </button>
                 </div>
             </div>
-       
-
-             </div>
-    <div class="section-right">   
-                <div id="seccion-confianza-vip" class="flex flex-col items-center justify-center py-16 px-6 overflow-hidden">
+        <div id="seccion-confianza-vip" class="flex flex-col items-center justify-center py-16 px-6 overflow-hidden">
     
     <div class="flex flex-row items-center justify-between w-full max-w-lg gap-4">
         <div id="mini-google-window" onclick="expandirGoogle()" class="cursor-pointer bg-zinc-900/90 backdrop-blur-md border border-zinc-700 p-5 rounded-3xl w-[55%] shadow-2xl animate-entrada-izquierda transition-transform active:scale-95">
@@ -1031,9 +983,6 @@
 
     </main> 
 
-    </div>
-</div>
-   
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycby2f4XJve04_ywubXeifM9b7zKExEPo4uWHUqAXfhBKhA8675Bkgr6h7ylvvTbnPELgDw/exec';
@@ -1326,8 +1275,8 @@ function accederClubVIPModal() {
         setTimeout(() => input.classList.remove('animate-shake'), 500);
     }
 }
-    
         
+          
 </script> 
 </body>
 </html>
