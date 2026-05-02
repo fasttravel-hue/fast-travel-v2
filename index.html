@@ -830,19 +830,30 @@
 
         <div id="lista-reseñas" class="w-full max-w-sm overflow-y-auto h-[80vh] space-y-4 pb-32 snap-y snap-mandatory">
             
-            <div class="snap-center w-full">
+               <div class="snap-center w-full relative">
+    <button onclick="cerrarReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 shadow-lg hover:bg-black transition-all lg:flex hidden">
+        ✕
+    </button>
                 <img src="IMG_20260430_093005.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 1">
-            </div>
-            <div class="snap-center w-full">
+            <div class="snap-center w-full relative">
+    <button onclick="cerrarReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 shadow-lg hover:bg-black transition-all lg:flex hidden">
+        ✕
+    </button>
                 <img src="IMG_20260430_093025.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 2">
-            </div>
-            <div class="snap-center w-full">
+           <div class="snap-center w-full relative">
+    <button onclick="cerrarReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 shadow-lg hover:bg-black transition-all lg:flex hidden">
+        ✕
+    </button>
                 <img src="IMG_20260430_093037.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 3">
-            </div>
-            <div class="snap-center w-full">
+           <div class="snap-center w-full relative">
+    <button onclick="cerrarReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 shadow-lg hover:bg-black transition-all lg:flex hidden">
+        ✕
+    </button>
                 <img src="IMG_20260430_093050.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 4">
-            </div>
-            <div class="snap-center w-full">
+           <div class="snap-center w-full relative">
+    <button onclick="cerrarReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 shadow-lg hover:bg-black transition-all lg:flex hidden">
+        ✕
+    </button>
                 <img src="IMG_20260430_093100.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 5">
             </div>
 
@@ -1287,6 +1298,20 @@ function accederClubVIPModal() {
         setTimeout(() => { bono.style.display = 'none'; }, 500);
     }
 }        
-</script> 
+
+        function cerrarReseña(btn) {
+    // Busca el contenedor 'snap-center' más cercano y lo oculta
+    const contenedorReseña = btn.closest('.snap-center');
+    if (contenedorReseña) {
+        contenedorReseña.style.transition = "all 0.4s ease";
+        contenedorReseña.style.opacity = "0";
+        contenedorReseña.style.transform = "scale(0.9)";
+        setTimeout(() => {
+            contenedorReseña.style.display = "none";
+        }, 400);
+    }
+}
+    
+    </script> 
 </body>
 </html>
