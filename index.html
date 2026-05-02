@@ -21,14 +21,50 @@
             border-radius: 45px; position: relative; box-shadow: 0 0 40px rgba(220, 38, 38, 0.15);
             overflow: hidden; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .phone-frame.estirado { width: 320px; box-shadow: 0 0 60px rgba(220, 38, 38, 0.3); }
-        .phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 110px; height: 24px; background: #1a1a1a; border-bottom-left-radius: 14px; border-bottom-right-radius: 14px; z-index: 50; }
+        .phone-frame.estirado {
+            width: 320px;
+            box-shadow: 0 0 60px rgba(220, 38, 38, 0.3);
+        }
+        
+        .phone-notch {
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 110px; height: 24px; background: #1a1a1a;
+            border-bottom-left-radius: 14px; border-bottom-right-radius: 14px; z-index: 50;
+        }
 
-        #registro-interno { display: none; position: absolute; inset: 0; background: white; z-index: 45; color: #333; padding: 40px 25px; flex-direction: column; align-items: center; justify-content: center; transform: scale(0.6); opacity: 0; transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        #registro-interno.expandido { transform: scale(1); opacity: 1; }
+        #registro-interno {
+            display: none; 
+            position: absolute; 
+            inset: 0;
+            background: white; 
+            z-index: 45; 
+            color: #333; 
+            padding: 40px 25px;
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            transform: scale(0.6); 
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        #registro-interno.expandido { 
+            transform: scale(1); 
+            opacity: 1; 
+        }
 
         #menu-lateral { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
         #menu-lateral.open { transform: translateX(0); }
+
+        #notificacionPop { 
+            position: fixed; bottom: 30px; left: 20px; z-index: 100;
+            background: white; color: black; padding: 15px 20px;
+            border-radius: 20px; display: flex; align-items: center; gap: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            transform: translateY(200%); opacity: 0;
+            transition: all 1.8s cubic-bezier(0.19, 1, 0.22, 1);
+            border-left: 6px solid #dc2626;
+        }
+        #notificacionPop.show { transform: translateY(0); opacity: 1; }
 
         .modal-full { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:1000; align-items:center; justify-content:center; padding:20px; backdrop-filter: blur(12px); }
         
@@ -36,32 +72,485 @@
         .red-item img { width: 40px; height: 40px; transition: 0.3s; filter: grayscale(1); opacity: 0.6; }
         .red-item.active img { filter: grayscale(0); opacity: 1; transform: scale(1.1); }
 
-        .btn-vip-brillo { animation: pulsoBrillo 4s infinite ease-in-out; }
-        @keyframes pulsoBrillo { 0%, 100% { box-shadow: 0 10px 20px rgba(255,255,255,0.1); } 50% { box-shadow: 0 10px 45px rgba(255,255,255,0.4); } }
+        #botones-accion-vip {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition-delay: 5s;
+        }
 
-        .slogan-brillante { font-size: 18px; text-shadow: 0 0 10px rgba(255, 255, 255, 0.6); animation: resplandor 2.5s infinite alternate ease-in-out; }
-        @keyframes resplandor { from { opacity: 0.8; transform: scale(1); } to { opacity: 1; transform: scale(1.03); } }
+        #botones-accion-vip.aparecer {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
-        .card-servicio { transition: all 0.6s ease; transform: scale(0.85); opacity: 0.3; }
-        .swiper-slide-active.card-servicio { transform: scale(1.05); opacity: 1; z-index: 10; }
-        .content-card { background: linear-gradient(160deg, #0f0f0f 0%, #050505 100%); border: 1px solid #1a1a1a; border-radius: 35px; height: 420px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 30px; }
-        .swiper-slide-active .content-card { border: 2px solid #dc2626 !important; box-shadow: 0 0 30px rgba(220, 38, 38, 0.4); }
-        .icon-service { font-size: 3.5rem; color: #333; margin-bottom: 20px; display: block; }
-        .swiper-slide-active .icon-service { color: #fff !important; filter: drop-shadow(0 0 15px #dc2626); animation: floatingIcon 3s infinite ease-in-out; }
-        @keyframes floatingIcon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        /* --- PREPARACIÓN PARA LA CASCADA DEL MANUAL --- */
+        #manual-webapp > div, 
+        #manual-whatsapp > div {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 2s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .cuadro-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+        }
+
+        #manual-webapp > div.cuadro-visible,
+        #manual-whatsapp > div.cuadro-visible {
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.1);
+        }
+
+        #contenedor-titulo-manual {
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: all 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #contenedor-titulo-manual.aparecer {
+            opacity: 1;
+            transform: translateY(0);
+        }
+   /* Este es el efecto de brillo respiratorio para el botón de Fast Travel */
+.btn-vip-brillo {
+    animation: pulsoBrillo 4s infinite ease-in-out;
+}
+
+@keyframes pulsoBrillo {
+    0% { box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
+    50% { box-shadow: 0 10px 45px rgba(255,255,255,0.4); } /* Aquí es cuando brilla más */
+    100% { box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
+}
+/* Efecto de latido suave para los iconos */
+.btn-icon-vip {
+    animation: latidoVip 3s infinite ease-in-out;
+}
+
+@keyframes latidoVip {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); } /* Se agranda un 10% */
+    100% { transform: scale(1); }
+}
+
+/* Cambio de color cuando están activos (opcional pero recomendado) */
+#btn-m-webapp:active, #btn-m-whatsapp:active {
+    transform: scale(0.9);
+    filter: brightness(1.2);
+}
+       .slogan-brillante {
+    font-size: 18px; /* Bajamos de 32px a 18px para que quepa bien */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.2);
+    animation: resplandor 2.5s infinite alternate ease-in-out;
+    display: inline-block;
+    width: 100%;
+}
+
+@keyframes resplandor {
+    from {
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+        transform: scale(1);
+    }
+    to {
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 25px rgba(255, 255, 255, 0.3);
+        transform: scale(1.03);
+    }
+}
+     /* Carrusel Vertical Estilo App */
+#lista-reseñas {
+    scroll-snap-type: y mandatory; /* Hace que las imágenes se peguen al centro */
+    scrollbar-width: none; /* Oculta la barra en Firefox */
+}
+
+#lista-reseñas::-webkit-scrollbar {
+    display: none; /* Oculta la barra en Chrome y Safari */
+}
+
+.snap-center {
+    scroll-snap-align: center; /* Alinea cada imagen al centro al deslizar */
+    min-height: 60vh; /* Da espacio para que cada comentario respire */
+    display: flex;
+    align-items: center;
+}
+
+/* Slogan con Brillo Blanco */
+.slogan-brillante {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.3);
+    animation: resplandor 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes resplandor {
+    from { opacity: 0.8; text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); }
+    to { opacity: 1; text-shadow: 0 0 18px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.2); }
+}
+                /* --- ESTILOS VIP PARA REDES SOCIALES --- */
         
-        .bullet-item { display: flex; align-items: center; gap: 10px; font-weight: bold; text-transform: uppercase; margin-bottom: 12px; color: #a1a1aa; font-size: 10px; }
-        .bullet-item i { color: #dc2626; }
+        /* Estilo base para los iconos */
+        .red-social-vip {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: inline-block;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 2px rgba(255,255,255,0.1));
+        }
 
-        @keyframes fadeInUpElite { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-entrada-modal { animation: fadeInUpElite 0.6s ease-out forwards; }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25%, 75% { transform: translateX(-5px); } 50% { transform: translateX(5px); } }
-        .animate-shake { animation: shake 0.2s ease-in-out 2; }
+        /* Efecto al tocar/pasar el mouse: Crece y se ilumina completamente */
+        .red-social-vip:hover {
+            transform: scale(1.2) translateY(-5px);
+            opacity: 1;
+        }
+
+        /* Colores y Brillos Específicos */
+
+        /* TikTok: Combinación Cyan/Magenta */
+        .rs-tiktok i {
+            color: #fff; /* El icono base es blanco */
+            filter: drop-shadow(2px 0 0 #EE1D52) drop-shadow(-2px 0 0 #69C9D0);
+        }
+        .rs-tiktok:hover {
+            filter: drop-shadow(0 0 15px #EE1D52) drop-shadow(0 0 5px #69C9D0);
+        }
+
+        /* Instagram: Degradado Rosa/Naranja */
+        .rs-instagram i {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 2px rgba(225, 48, 108, 0.3));
+        }
+        .rs-instagram:hover {
+            filter: drop-shadow(0 0 15px #E1306C) drop-shadow(0 0 5px #fd5949);
+        }
+
+        /* Facebook: Azul Oficial */
+        .rs-facebook i {
+            color: #1877F2;
+            filter: drop-shadow(0 0 2px rgba(24, 119, 242, 0.3));
+        }
+        .rs-facebook:hover {
+            filter: drop-shadow(0 0 15px #1877F2);
+        }
+
+        /* Animación de pulso leve (para que no estén estáticos) */
+        @keyframes pulsoIcono {
+            0%, 100% { filter: drop-shadow(0 0 2px rgba(255,255,255,0.1)); }
+            50% { filter: drop-shadow(0 0 8px rgba(255,255,255,0.3)); }
+        }
+        .red-social-vip:not(:hover) {
+            animation: pulsoIcono 4s infinite ease-in-out;
+        }
+
+        /* --- ESTILOS MEJORADOS: CARDS CON VALOR --- */
+.card-servicio {
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: scale(0.85);
+    opacity: 0.3;
+}
+
+/* La tarjeta activa ahora se expande y brilla */
+.swiper-slide-active.card-servicio {
+    transform: scale(1.05); /* Un poco menos exagerado para que no tape los lados */
+    opacity: 1;
+    z-index: 10;
+}
+
+.content-card {
+    background: linear-gradient(160deg, #0f0f0f 0%, #050505 100%);
+    border: 1px solid #1a1a1a;
+    border-radius: 35px;
+    height: 420px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    transition: all 0.5s ease;
+}
+
+/* El brillo de borde neón cuando la tarjeta está activa */
+.swiper-slide-active .content-card {
+    border: 2px solid #dc2626 !important; /* Borde rojo neón fuerte */
+    box-shadow: 0 0 30px rgba(220, 38, 38, 0.4), inset 0 0 15px rgba(220, 38, 38, 0.1);
+}
+
+.icon-service {
+    font-size: 3.5rem;
+    color: #333;
+    transition: all 0.5s ease;
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* Icono iluminado y flotando */
+.swiper-slide-active .icon-service {
+    color: #fff !important;
+    filter: drop-shadow(0 0 15px rgba(220, 38, 38, 1));
+    animation: floatingIcon 3s infinite ease-in-out; /* ACTIVADA */
+}
+
+/* --- DEFINICIÓN DE ANIMACIONES (IMPORTANTE) --- */
+@keyframes floatingIcon {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); } /* Sube */
+    100% { transform: translateY(0px); } /* Baja */
+}
+
+.bullets-container {
+    margin-top: 25px;
+    text-align: left;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease 0.4s;
+}
+
+.swiper-slide-active .bullets-container {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.bullet-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    margin-bottom: 12px;
+    color: #a1a1aa; /* Zinc-400 para mejor lectura */
+    font-size: 10px;
+}
+
+.bullet-item i {
+    color: #dc2626;
+    font-size: 12px;
+    filter: drop-shadow(0 0 5px rgba(220, 38, 38, 0.8));
+}
+
+/* Efecto de pulso en el texto rojo */
+.swiper-slide-active .word-move {
+    animation: pulseRed 2s infinite alternate;
+    font-weight: 900;
+}
+
+@keyframes pulseRed {
+    from { text-shadow: 0 0 5px #dc2626; color: #dc2626; }
+    to { text-shadow: 0 0 20px #dc2626, 0 0 30px #dc2626; color: #ff3333; }
+}
+        
+     /* --- ESTILO ELITE CLUB VIP --- */
+.menu-vip-section-container {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(24, 24, 27, 0.5); /* Zinc-900 con transparencia */
+    border: 1px solid #27272a;
+    border-radius: 1.8rem;
+    text-align: center;
+    transition: all 0.4s ease;
+}
+
+.menu-vip-section-container:focus-within {
+    border-color: #dc2626;
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.2);
+}
+
+.vip-title-menu {
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.025em;
+}
+
+.vip-subtitle-menu {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #71717a;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+}
+
+.vip-input-field {
+    width: 100%;
+    background: #000;
+    border: 1px solid #3f3f46;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    color: #fff;
+    font-size: 0.75rem;
+    text-align: center;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.vip-input-field:focus {
+    border-color: #dc2626;
+    background: rgba(220, 38, 38, 0.05);
+}
+
+.vip-btn-ingresar {
+    width: 100%;
+    margin-top: 0.5rem;
+    background: #dc2626;
+    color: #fff;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 15px -3px rgba(220, 38, 38, 0.4);
+}
+
+.vip-btn-ingresar:active {
+    transform: scale(0.95);
+}
+        
+/* --- CÓDIGO CUATRO: DETALLES ELITE Y ANIMACIÓN --- */
+
+/* Brillo neón para la corona */
+.fa-crown {
+    filter: drop-shadow(0 0 8px rgba(220, 38, 38, 0.8));
+    animation: crownPulse 2s infinite alternate;
+}
+
+@keyframes crownPulse {
+    from { transform: scale(1); opacity: 0.8; }
+    to { transform: scale(1.1); opacity: 1; }
+}
+
+/* Ajuste del placeholder para que se vea elegante */
+.vip-input-field::placeholder {
+    color: #3f3f46;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+/* Efecto de cristal para el contenedor del Club VIP */
+.menu-vip-section-container {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Espaciado para que no choque con el botón de cerrar del menú */
+#menu-lateral .menu-vip-section-container {
+    margin-top: 10px;
+}
+   /* =========================================
+   ANIMACIONES ELITE - CLUB VIP
+   ========================================= */
+
+/* 1. Definición de los Efectos (Keyframes) */
+
+/* Entrada suave desde abajo */
+@keyframes fadeInUpElite {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pulso de escala y brillo para la corona */
+@keyframes coronaPulsoNeon {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.7));
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 30px rgba(220, 38, 38, 1));
+    }
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.7));
+    }
+}
+
+/* 2. Aplicación de las Clases de Animación */
+
+/* Contenedor principal para la entrada inicial */
+.animate-entrada-modal {
+    animation: fadeInUpElite 0.6s ease-out forwards;
+}
+
+/* La Corona: Movimiento y Luz Neón Continua */
+.animation-floatingIcon {
+    animation: coronaPulsoNeon 3s infinite ease-in-out;
+}
+
+/* Retrasos secuenciales para los textos (Staggered) */
+#modalVIP h3 {
+    opacity: 0; /* Empieza invisible */
+    animation: fadeInUpElite 0.5s ease-out 0.3s forwards; /* Retraso de 0.3s */
+}
+
+#modalVIP p {
+    opacity: 0;
+    animation: fadeInUpElite 0.5s ease-out 0.5s forwards; /* Retraso de 0.5s */
+}
+
+/* Aparición final del formulario */
+#modalVIP .flex-col {
+    opacity: 0;
+    animation: fadeInUpElite 0.5s ease-out 0.8s forwards; /* Retraso de 0.8s */
+}
+     /* Ajuste de contenedor para aprovechar el alto del cel */
+#modalVIP .content-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 450px; /* Le damos más altura */
+    padding: 3rem 2rem;
+}
+
+/* Espaciado del formulario */
+#modalVIP .flex-col.gap-3 {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Más espacio entre el input y el botón */
+}
+
+/* Estilo del Input para que destaque más */
+#vip-number-modal {
+    letter-spacing: 0.2em;
+    font-size: 14px;
+    height: 60px; /* Más alto para que sea fácil tocarlo */
+    border-radius: 20px;
+}
+        /* Animación escalonada para elementos verticales */
+#modalVIP h3 { animation: fadeInUpElite 0.6s ease-out 0.2s forwards; }
+#modalVIP span { animation: fadeInUpElite 0.6s ease-out 0.4s forwards; opacity: 0; }
+#modalVIP p { animation: fadeInUpElite 0.6s ease-out 0.6s forwards; opacity: 0; }
+#modalVIP .flex-col.gap-3 { animation: fadeInUpElite 0.6s ease-out 0.8s forwards; opacity: 0; }
+
+       @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+.animate-shake { animation: shake 0.2s ease-in-out 0s 2; } 
+        
     </style>
 </head>
 
 <body>
-    <div id="notificacionPop" class="fixed bottom-[30px] left-[20px] z-[100] bg-white text-black p-4 rounded-3xl flex items-center gap-3 shadow-2xl border-l-[6px] border-red-600 transition-all duration-300 translate-y-[200%] opacity-0">
+    <div id="notificacionPop" class="fixed bottom-[30px] left-[20px] z-[100] bg-white text-black p-4 rounded-3xl flex items-center gap-3 shadow-2xl border-l-[6px] border-red-600 transition-all duration-300 ease-out touch-none select-none opacity-0 translate-y-[200%]">
         <div onclick="mostrarModalJuego()" class="flex items-center gap-3 cursor-pointer">
             <div class="text-2xl">🎁</div>
             <div>
@@ -71,48 +560,82 @@
         </div>
     </div>
 
-    <div id="modalCargaVip" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[500] hidden flex-col items-center justify-center p-6 text-center transition-all duration-500 opacity-0">
-        <div class="max-w-xs w-full bg-zinc-950 p-10 rounded-[40px] border border-red-600/30 shadow-[0_0_50px_rgba(220,38,38,0.2)]">
-            <i class="fa-solid fa-circle-notch fa-spin text-4xl text-red-600 mb-6 block"></i>
-            <h3 class="text-white font-black italic uppercase text-xl mb-4 tracking-tighter">Validando Acceso</h3>
-            <p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest leading-relaxed">Accediendo al portal exclusivo.</p>
-        </div>
+<div id="modalCargaVip" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[500] hidden flex-col items-center justify-center p-6 text-center transition-all duration-500 opacity-0">
+    <div class="max-w-xs w-full bg-zinc-950 p-10 rounded-[40px] border border-red-600/30 shadow-[0_0_50px_rgba(220,38,38,0.2)]">
+        <i class="fa-solid fa-circle-notch fa-spin text-4xl text-red-600 mb-6 block"></i>
+        <h3 class="text-white font-black italic uppercase text-xl mb-4 tracking-tighter">Validando Acceso</h3>
+        <p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest leading-relaxed">
+            Accediendo al portal exclusivo. Si no posees viajes registrados, serás redirigido a nuestra central.
+        </p>
     </div>
-
+</div>
+    
     <div id="modalJuego" class="modal-full">
         <div class="bg-white rounded-[35px] p-8 text-black text-center max-w-[340px] relative">
             <button onclick="cerrarModalJuego()" class="absolute top-4 right-6 text-xl">✕</button>
             <h2 class="font-black italic uppercase text-lg">Reto <span class="text-red-600">Descuento</span></h2>
             <div class="my-4">
                 <div class="text-4xl font-black text-red-600 leading-none"><span id="numDesc">0</span>%</div>
+                <p class="text-[9px] font-bold text-gray-400 uppercase tracking-tighter mt-1">15% de descuento por cada red que nos sigas</p>
             </div>
             <div class="grid grid-cols-2 gap-4 mb-4">
-                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer" id="box-tt" onclick="clickRed('tt', 'https://tiktok.com/@fasttravelec')"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" class="w-8 mx-auto"></div>
-                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer" id="box-ig" onclick="clickRed('ig', 'https://instagram.com/fasttravelec')"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" class="w-8 mx-auto"></div>
+                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent" id="box-tt" onclick="clickRed('tt', 'https://tiktok.com/@fasttravelec')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" class="w-8 mx-auto">
+                </div>
+                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent" id="box-ig" onclick="clickRed('ig', 'https://instagram.com/fasttravelec')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" class="w-8 mx-auto">
+                </div>
+                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent" id="box-fb" onclick="clickRed('fb', 'https://facebook.com/fasttravelec')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" class="w-8 mx-auto">
+                </div>
+                <div class="p-3 bg-gray-50 rounded-2xl cursor-pointer border-2 border-transparent" id="box-wa" onclick="clickRed('wa', 'https://whatsapp.com/channel/0029VbBTr2dK5cDGtfZGFq0q')">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="w-8 mx-auto">
+                </div>
             </div>
-            <div id="codigoGenerado" onclick="copiarCodigo()" class="hidden mt-4 p-4 bg-red-50 border-2 border-dashed border-red-200 rounded-2xl">
+            <div id="codigoGenerado" onclick="copiarCodigo()" class="hidden mt-4 p-4 bg-red-50 border-2 border-dashed border-red-200 rounded-2xl cursor-pointer">
                 <span id="txtCodigo" class="font-black text-red-600 uppercase">CODIGO</span>
+                <p class="text-[8px] text-red-400 mt-1 uppercase">¡Toca para copiar!</p>
             </div>
         </div>
     </div>
 
     <header class="fixed top-0 left-0 z-50 flex items-center justify-between px-6 py-4">
-        <div class="text-xl font-black italic uppercase tracking-tighter text-white">FAST <span class="texto-rojo">TRAVEL</span></div>
+        <div class="text-xl font-black italic uppercase tracking-tighter">FAST <span class="texto-rojo">TRAVEL</span></div>
         <button onclick="toggleMenu()" class="text-white text-2xl pr-2"><i class="fa-solid fa-bars-staggered"></i></button>
     </header>
 
-    <div id="modalVIP" class="modal-full hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-[200] flex items-center justify-center p-6">
-        <div class="content-card relative bg-gradient-to-br from-[#0f0f0f] to-[#050505] border-2 border-red-600 rounded-[35px] p-10 text-center shadow-[0_0_50px_rgba(220,38,38,0.3)] max-w-sm w-full animate-entrada-modal">
-            <button onclick="cerrarModalVIP()" class="absolute top-6 right-8 text-zinc-500 text-xl">✕</button>
-            <i class="fa-solid fa-crown text-5xl text-red-600 mb-6 block"></i>
-            <h3 class="text-white font-black italic uppercase text-2xl tracking-tighter">Mi Estatus <span class="text-red-600">VIP</span></h3>
-            <div class="flex flex-col gap-3 mt-8 w-full">
-                <input type="number" id="vip-number-modal" placeholder="TU WHATSAPP" class="w-full bg-black border border-zinc-700 p-4 rounded-xl text-white text-center font-bold outline-none">
-                <button onclick="accederClubVIPModal()" class="w-full bg-red-600 text-white py-4 rounded-xl font-black uppercase text-[10px] tracking-widest">Consultar Premios</button>
-            </div>
+<div id="modalVIP" class="modal-full hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-[200] flex items-center justify-center p-6">
+    <div class="content-card relative bg-gradient-to-br from-[#0f0f0f] to-[#050505] border-2 border-red-600 rounded-[35px] p-10 text-center shadow-[0_0_50px_rgba(220,38,38,0.3)] max-w-sm w-full animate-entrada-modal">
+        
+        <button onclick="cerrarModalVIP()" class="absolute top-6 right-8 text-zinc-500 text-xl active:text-red-600">✕</button>
+        
+        <i class="fa-solid fa-crown text-5xl text-red-600 filter drop-shadow-[0_0_15px_rgba(220,38,38,1)] animation-floatingIcon mb-6 block"></i>
+        <div class="flex flex-col items-center gap-2 mb-8">
+    <h3 class="text-white font-black italic uppercase text-2xl tracking-tighter leading-none">
+        Mi Estatus
+    </h3>
+    <span class="text-red-600 font-black italic uppercase text-5xl filter drop-shadow-[0_0_10px_rgba(220,38,38,0.5)]">
+        VIP
+    </span>
+    <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.3em] mt-4 max-w-[200px] leading-relaxed">
+        Ingresa tu número para consultar tu progreso
+    </p>
+        </div>
+        
+        
+        <div class="flex flex-col gap-3">
+            <input type="number" id="vip-number-modal" placeholder="TU WHATSAPP (ej: 5939...)" class="w-full bg-black border border-zinc-700 p-4 rounded-xl text-[11px] text-white text-center font-bold outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 placeholder:text-zinc-700 transition-all">
+            
+            <button onclick="accederClubVIPModal()" class="w-full bg-red-600 text-white py-4 rounded-xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-red-600/30 active:scale-95 transition-transform">
+                Consultar Mis Premios
+            </button>
         </div>
     </div>
+</div>
 
+    
+
+    
     <div id="menu-lateral" class="fixed top-0 right-0 h-full w-[85%] bg-zinc-950 z-[100] p-10 flex flex-col border-l border-zinc-800 shadow-2xl">
         <button onclick="toggleMenu()" class="text-white text-3xl self-end mb-10"><i class="fa-solid fa-xmark"></i></button>
         <nav class="flex flex-col gap-6 text-xl font-black italic uppercase tracking-tighter text-white">
@@ -120,19 +643,26 @@
             <button onclick="abrirModalConductor()" class="text-left flex items-center gap-3 bg-zinc-900 p-5 rounded-2xl border border-zinc-800 text-sm">
                 <i class="fa-solid fa-car-side text-red-600"></i> TRABAJA CON NOSOTROS
             </button>
-            <button onclick="abrirModalVIP()" class="text-left flex items-center gap-3 bg-zinc-900 p-5 rounded-2xl border border-zinc-800 text-sm">
-                <i class="fa-solid fa-crown text-red-600"></i> CLUB VIP
-            </button>
+
+<button onclick="abrirModalVIP()" class="text-left flex items-center gap-3 bg-zinc-900 p-5 rounded-2xl border border-zinc-800 text-sm w-full mb-4 active:scale-95 transition-transform">
+    <i class="fa-solid fa-crown text-red-600"></i> CLUB VIP
+</button>
+
+
+            
         </nav>
     </div>
 
     <div id="modalConductor" class="modal-full">
-        <div class="bg-white rounded-[40px] p-8 text-black w-full max-w-sm">
+        <div class="bg-white rounded-[40px] p-8 text-black w-full max-w-sm overflow-y-auto max-h-[90vh]">
             <button onclick="cerrarModalConductor()" class="float-right text-2xl">&times;</button>
             <h2 class="font-black italic uppercase text-red-600 text-xl mb-6 text-center">Únete al Equipo</h2>
             <form id="formConductor" class="space-y-3">
                 <input type="text" name="nombre" placeholder="Nombre Completo" class="w-full p-4 bg-gray-100 rounded-xl text-xs outline-none" required>
+                <input type="text" name="cedula" placeholder="Cédula" class="w-full p-4 bg-gray-100 rounded-xl text-xs outline-none" required>
                 <input type="tel" name="telefono" placeholder="WhatsApp" class="w-full p-4 bg-gray-100 rounded-xl text-xs outline-none" required>
+                <input type="text" name="vehiculo" placeholder="Modelo y Año del Vehículo" class="w-full p-4 bg-gray-100 rounded-xl text-xs outline-none" required>
+                <input type="text" name="placa" placeholder="Número de Placa" class="w-full p-4 bg-gray-100 rounded-xl text-xs outline-none" required>
                 <button type="submit" id="btn-envio-cond" class="w-full bg-red-600 text-white py-5 rounded-xl font-bold uppercase text-[10px] tracking-widest">Enviar Solicitud</button>
             </form>
         </div>
@@ -144,20 +674,31 @@
             <div id="espacio-logo" class="w-full max-w-[280px] aspect-square mb-10 flex items-center justify-center">
                 <img src="1000917167-removebg-preview.png" alt="Logo VIP" class="max-w-full h-auto glow-logo">
             </div>
-            <h2 id="subtitulo" class="w-full text-[11px] font-bold text-gray-400 uppercase tracking-[0.6em] text-center">Transporte Ejecutivo Privado</h2>
+            <h2 id="subtitulo" class="w-full text-[11px] md:text-sm font-bold text-gray-400 uppercase tracking-[0.6em] leading-relaxed text-center">Transporte Ejecutivo Privado</h2>
         </section>
 
         <section class="w-full py-20 flex flex-col items-center border-t border-zinc-900 px-6">
-            <p class="text-[10px] font-bold texto-rojo uppercase tracking-[0.4em] mb-12">Solicita tu unidad</p>
+            <p id="label-solicita" class="text-[10px] font-bold texto-rojo uppercase tracking-[0.4em] mb-12">Solicita tu unidad</p>
             <div id="celular-interactivo" class="phone-frame mb-12">
                 <div class="phone-notch"></div>
                 <div id="registro-interno">
                     <button onclick="cerrarRegistro()" class="absolute top-6 left-6 text-2xl text-black">✕</button>
-                    <h3 class="text-sm font-black uppercase text-center mt-10">Fast Travel <span class="text-red-600">ID</span></h3>
-                    <form id="miFormulario" class="w-full space-y-2 mt-6">
+                    <div class="text-center mb-6">
+                        <h3 class="text-sm font-black uppercase tracking-tighter">Fast Travel <span class="text-red-600">ID</span></h3>
+                        <p class="text-[8px] text-gray-400 font-bold uppercase tracking-widest mt-1">Validación de Usuario</p>
+                    </div>
+                    <div class="flex justify-center gap-4 mb-6">
+                        <div onclick="seleccionarRed('ig', 'https://instagram.com/fasttravelec')" class="red-item icon-ig"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png"><span class="text-[8px] font-black uppercase text-gray-400">IG</span></div>
+                        <div onclick="seleccionarRed('tt', 'https://tiktok.com/@fasttravelec')" class="red-item icon-tt"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png"><span class="text-[8px] font-black uppercase text-gray-400">TikTok</span></div>
+                        <div onclick="seleccionarRed('fb', 'https://facebook.com/fasttravelec')" class="red-item icon-fb"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"><span class="text-[8px] font-black uppercase text-gray-400">FB</span></div>
+                    </div>
+                    <form id="miFormulario" class="w-full space-y-2">
                         <input type="text" name="Nombre" placeholder="Nombre Completo" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none" required>
+                        <input type="text" name="Cedula" placeholder="Cédula" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none" required>
                         <input type="number" name="WhatsApp" placeholder="WhatsApp" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none" required>
-                        <button type="submit" id="btn-verificar" class="w-full bg-black text-white font-bold py-4 rounded-2xl uppercase text-[9px] tracking-widest">Activar Servicio VIP</button>
+                        <input type="email" name="Correo" placeholder="Correo" class="w-full bg-gray-50 p-3 rounded-2xl text-[10px] outline-none" required>
+                        <input type="text" id="inputCuponReal" placeholder="CÓDIGO PROMOCIONAL" class="w-full bg-red-50 p-3 rounded-2xl text-[9px] text-red-600 font-black border border-dashed border-red-200 uppercase outline-none">
+                        <button type="submit" id="btn-verificar" class="w-full bg-black text-white font-bold py-4 rounded-2xl mt-2 uppercase text-[9px] tracking-widest">Activar Servicio VIP</button>
                     </form>
                 </div>
                 <div id="contenedor-aplicativo" class="hidden w-full h-full"><iframe src="https://fasttravelec.ondelight.app/" class="w-full h-full border-0" allow="geolocation"></iframe></div>
@@ -166,116 +707,294 @@
                         <div class="swiper-slide cursor-pointer" onclick="mostrarRegistro()"><img src="Screenshot_2026-04-29-07-41-13-165_com.android.chrome.jpg" class="w-full h-full object-cover"></div>
                         <div class="swiper-slide cursor-pointer" onclick="window.location.href='https://wa.me/593979986138'"><img src="IMG_20260429_071123.jpg" class="w-full h-full object-cover"></div>
                     </div>
+                    <div class="swiper-pagination !bottom-10"></div>
                 </div>
             </div>
-            <div class="flex flex-col gap-4 w-full max-w-[280px]">
-                <button onclick="mostrarRegistro()" class="bg-red-700 text-white py-5 rounded-3xl font-black uppercase italic tracking-widest text-[11px]">
+            <div id="botones-accion-vip" class="flex flex-col gap-4 w-full max-w-[280px]">
+                <button onclick="mostrarRegistro()" class="bg-red-700 text-white py-5 rounded-3xl font-black uppercase italic tracking-widest text-[11px] shadow-2xl">
                     <i class="fa-solid fa-bolt mr-2"></i> Usar WebApp
                 </button>
                 <a href="https://wa.me/593979986138" class="bg-zinc-900 border border-zinc-800 text-green-500 py-5 rounded-3xl font-black uppercase italic tracking-widest text-[11px] text-center">
-                    <i class="fa-brands fa-whatsapp mr-2"></i> Chatear con T-Go
+                    <i class="fa-brands fa-whatsapp mr-2 text-lg"></i> Chatear con T-Go
                 </a>
             </div>
         </section>
 
-        <section class="flex flex-col items-center justify-center py-16 px-6 overflow-hidden">
-            <div class="flex flex-row items-center justify-between w-full max-w-lg gap-4">
-                <div onclick="expandirGoogle()" class="cursor-pointer bg-zinc-900/90 border border-zinc-700 p-5 rounded-3xl w-[55%] shadow-2xl transition-transform active:scale-95">
-                    <img src="IMG_20260430_110122.jpg" class="w-14 opacity-90 mb-2">
-                    <div class="flex text-yellow-500 text-[10px] gap-1 mb-1">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="text-[9px] text-gray-300 uppercase leading-tight font-medium">Toca para ver reseñas reales...</p>
+        <section class="w-full py-16 px-6 border-t border-zinc-900 bg-zinc-950/30">
+            <div class="max-w-4xl mx-auto text-center">
+                
+                <div id="titulo-manual" class="text-center">
+                    <h3 class="text-[10px] font-black text-red-600 uppercase tracking-[0.5em] mb-2">Manual de Usuario</h3>
                 </div>
-                <div class="w-[45%]">
-                    <h3 class="text-white font-black italic uppercase leading-[0.85] text-right tracking-tighter slogan-brillante">
-                        <span class="text-[20px]">Tu seguridad</span><br>
-                        <span class="text-[11px] tracking-[0.2em] opacity-80">es primero</span>
-                    </h3>
+
+                <div id="selector-seccion" class="text-center">
+                    <h2 class="text-3xl font-black italic uppercase tracking-tighter mb-8">
+                        ¿Cómo prefieres <span class="texto-rojo">Pedir?</span>
+                    </h2>
+                    
+                    <div class="flex justify-center gap-4 mb-10">
+                        <div class="flex justify-center gap-8 mb-10">
+    <button onclick="switchManual('webapp')" id="btn-m-webapp" class="btn-icon-vip flex items-center justify-center w-16 h-16 rounded-full border border-red-600 bg-red-600/10 text-red-600 transition-all">
+        <i class="fa-solid fa-mobile-screen-button text-2xl"></i>
+    </button>
+
+    <button onclick="switchManual('whatsapp')" id="btn-m-whatsapp" class="btn-icon-vip flex items-center justify-center w-16 h-16 rounded-full border border-zinc-800 bg-zinc-900 text-green-500 transition-all">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </button>
+                        </div>
+                        
+                </div>
+
+                <div id="manual-webapp" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-solid fa-id-card text-red-600 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">1. Registro ID</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Recibirás un código por <b>WhatsApp o SMS</b> para activar tu cuenta.</p>
+                    </div>
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-solid fa-location-dot text-red-600 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">2. Punto A</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Arrastra el <b>puntero morado (A)</b> hasta donde te encuentras.</p>
+                    </div>
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-solid fa-flag-checkered text-red-600 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">3. Punto B</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Selecciona tu destino <b>(Punto B)</b> para calcular tu ruta.</p>
+                    </div>
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-solid fa-money-bill-transfer text-red-600 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">4. Tarifa Real</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Mira el precio final. Si estás de acuerdo, presiona <b>"Pedir"</b>.</p>
+                    </div>
+                </div>
+
+                <div id="manual-whatsapp" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-brands fa-whatsapp text-green-500 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">1. Chatea</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Escríbenos directamente a nuestra central de despacho 24/7.</p>
+                    </div>
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-solid fa-map-location-dot text-green-500 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">2. Ubicación</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Envíanos tu ubicación actual y dinos hacia dónde vas.</p>
+                    </div>
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-solid fa-comment-dollar text-green-500 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">3. Cotización</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Un operador te dará el precio VIP de inmediato por el chat.</p>
+                    </div>
+                    <div class="p-6 bg-zinc-900/50 rounded-[30px] border border-zinc-800">
+                        <i class="fa-solid fa-car-side text-green-500 mb-4 block text-xl"></i>
+                        <h4 class="font-black uppercase text-[11px] mb-2">4. Despacho</h4>
+                        <p class="text-[10px] text-gray-400 uppercase leading-relaxed">Confirmamos la unidad y te enviamos los datos del conductor.</p>
+                    </div>
+                </div>
+
+                <div class="mt-12">
+                    <button onclick="mostrarRegistroYScroll()" class="btn-vip-brillo bg-white text-black px-10 py-5 rounded-full font-black uppercase text-[10px] tracking-[0.2em] shadow-xl">
+                        ¡Registrarme y Pedir!
+                    </button>
+                </div>
+            </div>
+        <div id="seccion-confianza-vip" class="flex flex-col items-center justify-center py-16 px-6 overflow-hidden">
+    
+    <div class="flex flex-row items-center justify-between w-full max-w-lg gap-4">
+        <div id="mini-google-window" onclick="expandirGoogle()" class="cursor-pointer bg-zinc-900/90 backdrop-blur-md border border-zinc-700 p-5 rounded-3xl w-[55%] shadow-2xl animate-entrada-izquierda transition-transform active:scale-95">
+            <div class="flex flex-col items-start gap-2">
+                <img src="IMG_20260430_110122.jpg" class="w-14 opacity-90" alt="Google">
+                <div class="flex text-yellow-500 text-[10px] gap-1">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="text-[9px] text-gray-300 uppercase leading-tight font-medium">Toca para ver reseñas reales de nuestros pasajeros...</p>
+            </div>
+        </div>
+
+        <div id="slogan-seguridad" class="w-[45%] animate-entrada-derecha">
+            <h3 class="text-white font-black italic uppercase leading-[0.85] text-right tracking-tighter slogan-brillante">
+                <span class="text-[20px]">Tu seguridad</span><br>
+                <span class="text-[11px] tracking-[0.2em] opacity-80">es primero</span>
+            </h3>
+        </div>
+    </div>
+
+   <div id="google-full-screen" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center pt-10 px-4">
+    
+    <button onclick="cerrarGoogle()" class="absolute top-6 right-6 text-white/40 hover:text-white text-3xl z-[200] p-2">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+        
+    <div class="w-full max-w-md flex justify-between items-center mb-6">
+        <p class="text-[9px] font-black text-white/50 uppercase tracking-[0.4em]">Opiniones Reales</p>
+        <a href="https://g.page/r/CeRbvtTvvaCSEAE/review" target="_blank" class="text-[10px] text-red-500 font-bold uppercase tracking-widest bg-red-950/30 px-4 py-2 rounded-full border border-red-800/50">
+            Opinar en Google
+        </a>
+    </div>
+
+    <div id="lista-reseñas" class="w-full max-w-sm overflow-y-auto h-[80vh] space-y-4 pb-32 snap-y snap-mandatory no-scrollbar">
+        
+        <div class="snap-center w-full relative">
+            <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600/80 text-white w-8 h-8 rounded-full flex items-center justify-center z-50">✕</button>
+            <img src="IMG_20260430_093005.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 1">
+        </div>
+
+        <div class="snap-center w-full relative">
+            <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600/80 text-white w-8 h-8 rounded-full flex items-center justify-center z-50">✕</button>
+            <img src="IMG_20260430_093025.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 2">
+        </div>
+
+        <div class="snap-center w-full relative">
+            <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600/80 text-white w-8 h-8 rounded-full flex items-center justify-center z-50">✕</button>
+            <img src="IMG_20260430_093037.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 3">
+        </div>
+
+        <div class="snap-center w-full relative">
+            <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600/80 text-white w-8 h-8 rounded-full flex items-center justify-center z-50">✕</button>
+            <img src="IMG_20260430_093050.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 4">
+        </div>
+
+        <div class="snap-center w-full relative">
+            <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600/80 text-white w-8 h-8 rounded-full flex items-center justify-center z-50">✕</button>
+            <img src="IMG_20260430_093100.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 5">
+        </div>
+
+    </div>
+
+    <div class="absolute bottom-10 animate-bounce opacity-30">
+        <i class="fa-solid fa-chevron-down text-white text-2xl"></i>
+    </div>
+</div> ```
+
+                
+                </section>
+
+        
+<section id="servicios-vip" class="py-24 px-6 overflow-hidden bg-black">
+    <div class="max-w-4xl mx-auto text-center mb-16">
+        <h3 class="text-[10px] font-black text-red-600 uppercase tracking-[0.5em] mb-4">Tecnología en Movimiento</h3>
+        <h2 class="text-3xl font-black italic uppercase tracking-tighter text-white">Servicios <span class="texto-rojo">Elite</span></h2>
+    </div>
+
+    <div class="swiper swiperServicios max-w-sm mx-auto overflow-visible">
+        <div class="swiper-wrapper">
+            
+            <div class="swiper-slide card-servicio">
+                <div class="content-card">
+                    <div class="card-inner">
+                        <i class="fa-solid fa-mobile-screen-button icon-service"></i>
+                        <h4 class="title-service">ecosistema <br><span class="word-move texto-rojo">digital</span></h4>
+                        <div class="bullets-container">
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Aplicativo Web sin descargas</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Bot inteligente vía WhatsApp</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Interfaz de alta velocidad</span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div id="google-full-screen" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center pt-10 px-4">
-                <button onclick="cerrarGoogle()" class="absolute top-6 right-6 text-white/40 hover:text-white text-3xl z-[200] p-2">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-
-                <div class="w-full max-w-md flex justify-between items-center mb-6">
-                    <p class="text-[9px] font-black text-white/50 uppercase tracking-[0.4em]">Opiniones Reales</p>
-                    <a href="https://g.page/r/CeRbvtTvvaCSEAE/review" target="_blank" class="text-[10px] text-red-500 font-bold uppercase tracking-widest bg-red-950/30 px-4 py-2 rounded-full border border-red-800/50">Opinar en Google</a>
-                </div>
-
-                <div class="relative w-full max-w-sm flex items-center">
-                    <button onclick="moverReseña(-1)" class="absolute -left-16 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-3xl lg:block hidden"><i class="fa-solid fa-chevron-left"></i></button>
-
-                    <div id="lista-reseñas-scroll" class="w-full overflow-x-auto flex snap-x snap-mandatory h-[80vh] gap-4 no-scrollbar scroll-smooth">
-                        <div class="snap-center min-w-full relative">
-                            <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600/80 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 lg:flex hidden">✕</button>
-                            <img src="IMG_20260430_093005.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl">
-                        </div>
-                        <div class="snap-center min-w-full relative">
-                            <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600/80 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 lg:flex hidden">✕</button>
-                            <img src="IMG_20260430_093025.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl">
-                        </div>
-                        <div class="snap-center min-w-full relative">
-                            <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600/80 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 lg:flex hidden">✕</button>
-                            <img src="IMG_20260430_093037.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl">
-                        </div>
-                        <div class="snap-center min-w-full relative">
-                            <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600/80 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 lg:flex hidden">✕</button>
-                            <img src="IMG_20260430_093050.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl">
-                        </div>
-                        <div class="snap-center min-w-full relative">
-                            <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600/80 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 lg:flex hidden">✕</button>
-                            <img src="IMG_20260430_093100.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl">
-                        </div>
-                    </div>
-
-                    <button onclick="moverReseña(1)" class="absolute -right-16 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-3xl lg:block hidden"><i class="fa-solid fa-chevron-right"></i></button>
-                </div> </div> </section>
-
-        <section id="servicios-vip" class="py-24 px-6 overflow-hidden bg-black">
-            <div class="max-w-4xl mx-auto text-center mb-16">
-                <h3 class="text-[10px] font-black text-red-600 uppercase tracking-[0.5em] mb-4">Tecnología en Movimiento</h3>
-                <h2 class="text-3xl font-black italic uppercase tracking-tighter text-white">Servicios <span class="texto-rojo">Elite</span></h2>
-            </div>
-
-            <div class="swiper swiperServicios max-w-sm mx-auto overflow-visible">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide card-servicio">
-                        <div class="content-card">
-                            <div class="card-inner text-center">
-                                <i class="fa-solid fa-mobile-screen-button icon-service mx-auto"></i>
-                                <h4 class="font-black italic uppercase text-lg text-white">ECOSISTEMA <br><span class="texto-rojo">DIGITAL</span></h4>
-                                <div class="bullets-container mt-6">
-                                    <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Aplicativo Web sin descargas</span></div>
-                                    <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Bot inteligente vía WhatsApp</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide card-servicio">
-                        <div class="content-card">
-                            <div class="card-inner text-center">
-                                <i class="fa-solid fa-shield-halved icon-service mx-auto"></i>
-                                <h4 class="font-black italic uppercase text-lg text-white">SEGURIDAD <br><span class="texto-rojo">PROACTIVA</span></h4>
-                                <div class="bullets-container mt-6">
-                                    <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Ruta compartida con familiares</span></div>
-                                    <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Monitoreo 24/7 por central</span></div>
-                                </div>
-                            </div>
+            <div class="swiper-slide card-servicio">
+                <div class="content-card">
+                    <div class="card-inner">
+                        <i class="fa-solid fa-shield-halved icon-service"></i>
+                        <h4 class="title-service">seguridad <br><span class="word-move texto-rojo">proactiva</span></h4>
+                        <div class="bullets-container">
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Ruta compartida con familiares</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Filtros rigurosos de confianza</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Monitoreo 24/7 por central</span></div>
                         </div>
                     </div>
                 </div>
-                <div class="swiper-pagination-servicios mt-12 flex justify-center gap-2"></div>
             </div>
-        </section>
 
-        <footer class="w-full bg-black py-16 px-6 border-t border-zinc-900 text-center">
-            <div class="text-2xl font-black italic uppercase tracking-tighter mb-4 text-white">FAST <span class="texto-rojo">TRAVEL</span></div>
-            <p class="text-[9px] text-zinc-600 uppercase font-black tracking-[0.2em]">© 2026 Fast Travel EC. Todos los derechos reservados.</p>
+            <div class="swiper-slide card-servicio">
+                <div class="content-card">
+                    <div class="card-inner">
+                        <i class="fa-solid fa-box-open icon-service"></i>
+                        <h4 class="title-service">encomiendas <br><span class="word-move texto-rojo">inteligentes</span></h4>
+                        <div class="bullets-container">
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Rastreo en vivo del envío</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Respaldo digital de entrega</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Logística ágil por el Bot</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide card-servicio">
+                <div class="content-card">
+                    <div class="card-inner">
+                        <i class="fa-solid fa-handshake-angle icon-service"></i>
+                        <h4 class="title-service">gestión <br><span class="word-move texto-rojo">corporativa</span></h4>
+                        <div class="bullets-container">
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Convenios mensuales/trimestrales</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Reportes detallados de ruta</span></div>
+                            <div class="bullet-item"><i class="fa-solid fa-check-double"></i> <span>Prioridad de despacho VIP</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="swiper-pagination-servicios mt-12 flex justify-center gap-2"></div>
+    </div>
+</section>
+
+        
+        <footer class="w-full bg-black py-16 px-6 border-t border-zinc-900">
+    <div class="max-w-4xl mx-auto flex flex-col items-center">
+        
+        <div class="text-2xl font-black italic uppercase tracking-tighter mb-4 text-center text-white">
+            FAST <span class="texto-rojo">TRAVEL</span>
+        </div>
+        <p class="text-[10px] text-zinc-500 uppercase tracking-[0.4em] mb-12 text-center">
+            Guayaquil • Ecuador
+        </p>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-10 w-full text-center mb-12 text-zinc-400">
+            <div>
+                <h5 class="text-[10px] font-black text-white uppercase mb-5 tracking-widest">Legal</h5>
+                <ul class="text-[10px] space-y-3 uppercase font-bold">
+                    <li><a href="#" class="hover:text-red-600 transition">Privacidad</a></li>
+                    <li><a href="#" class="hover:text-red-600 transition">Términos</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-[10px] font-black text-white uppercase mb-5 tracking-widest">Soporte</h5>
+                <ul class="text-[10px] space-y-3 uppercase font-bold">
+                    <li><a href="https://wa.me/593979986138" target="_blank" class="hover:text-red-600 transition">Ayuda T-Go</a></li>
+                </ul>
+            </div>
+                        <div class="col-span-2 md:col-span-1 border-t md:border-t-0 border-zinc-900 pt-10 md:pt-0">
+                <h5 class="text-[10px] font-black text-white uppercase mb-6 tracking-widest text-center">Nuestras Redes VIP</h5>
+                <div class="flex justify-center gap-8 text-3xl">
+                    
+                    <a href="https://tiktok.com/@fasttravelec" target="_blank" class="red-social-vip rs-tiktok">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+
+                    <a href="https://instagram.com/fasttravelec" target="_blank" class="red-social-vip rs-instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="https://facebook.com/fasttravelec" target="_blank" class="red-social-vip rs-facebook">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                </div>
+                        </div>
+            
+
+        <div class="pt-10 border-t border-zinc-900 w-full text-center">
+            <p class="text-[9px] text-zinc-600 uppercase font-black tracking-[0.2em]">
+                © 2026 Fast Travel EC. Todos los derechos reservados.
+            </p>
+        </div>
+
+    </div>
         </footer>
-    </main>
+        
+
+
+    </main> 
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
@@ -284,92 +1003,312 @@
         function toggleMenu() { document.getElementById('menu-lateral').classList.toggle('open'); }
         function abrirModalConductor() { toggleMenu(); document.getElementById('modalConductor').style.display = 'flex'; }
         function cerrarModalConductor() { document.getElementById('modalConductor').style.display = 'none'; }
-        function abrirModalVIP() { toggleMenu(); document.getElementById('modalVIP').classList.replace('hidden', 'flex'); }
-        function cerrarModalVIP() { document.getElementById('modalVIP').classList.replace('flex', 'hidden'); }
-
-        function expandirGoogle() {
-            const fullScreen = document.getElementById('google-full-screen');
-            if (fullScreen) {
-                // RESET: Volver a mostrar imágenes que se hayan ocultado con la X
-                document.querySelectorAll('.snap-center').forEach(res => {
-                    res.style.display = 'block';
-                    res.style.opacity = '1';
-                });
-                fullScreen.classList.remove('hidden');
-                fullScreen.style.display = 'flex';
-                fullScreen.style.opacity = '1';
-                document.body.style.overflow = 'hidden';
-            }
+        
+        let redEscogida = "";
+        function seleccionarRed(red, url) {
+            redEscogida = red;
+            document.querySelectorAll('.red-item').forEach(i => i.classList.remove('active'));
+            document.querySelector('.icon-' + red).classList.add('active');
+            window.open(url, '_blank');
         }
 
-        function cerrarGoogle() {
-            const fullScreen = document.getElementById('google-full-screen');
-            if (fullScreen) {
-                document.body.style.overflow = 'auto';
-                fullScreen.style.opacity = '0';
-                setTimeout(() => {
-                    fullScreen.classList.add('hidden');
-                    fullScreen.style.display = 'none';
-                }, 300);
-            }
-        }
+        document.getElementById('miFormulario').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if(!redEscogida) return alert("Selecciona una red social primero");
+            document.getElementById('btn-verificar').innerText = "ENVIANDO...";
 
-        function cerrarImagenReseña(btn) {
-            const item = btn.closest('.snap-center');
-            item.style.opacity = "0";
-            setTimeout(() => {
-                item.style.display = 'none';
-                const visibles = Array.from(document.querySelectorAll('.snap-center')).filter(i => i.style.display !== 'none');
-                if(visibles.length === 0) cerrarGoogle();
-            }, 300);
-        }
+            const formData = new FormData(this);
+            formData.append('RedSocial', redEscogida);
+            formData.append('Cupon', document.getElementById('inputCuponReal').value || "Ninguno");
 
-        function moverReseña(dir) {
-            const lista = document.getElementById('lista-reseñas-scroll');
-            const ancho = lista.offsetWidth;
-            lista.scrollBy({ left: dir * ancho, behavior: 'smooth' });
-        }
-
-        function mostrarRegistro() {
-            const reg = document.getElementById('registro-interno');
-            const cel = document.getElementById('celular-interactivo');
-            cel.classList.add('estirado');
-            reg.style.display = 'flex';
-            setTimeout(() => reg.classList.add('expandido'), 10);
-        }
-
-        function cerrarRegistro() {
-            const reg = document.getElementById('registro-interno');
-            const cel = document.getElementById('celular-interactivo');
-            reg.classList.remove('expandido');
-            cel.classList.remove('estirado');
-            setTimeout(() => reg.style.display = 'none', 500);
-        }
-
-        function accederClubVIPModal() {
-            const num = document.getElementById('vip-number-modal').value;
-            const modalCarga = document.getElementById('modalCargaVip');
-            if (num.length >= 10) {
-                modalCarga.classList.remove('hidden');
-                modalCarga.classList.add('flex');
-                setTimeout(() => modalCarga.classList.add('opacity-100'), 10);
-                setTimeout(() => window.location.href = `https://fasttravelec.com/plandescuentos?id=${num}`, 1500);
-            } else {
-                const input = document.getElementById('vip-number-modal');
-                input.classList.add('animate-shake');
-                setTimeout(() => input.classList.remove('animate-shake'), 500);
-            }
-        }
-
-        new Swiper(".mySwiper", { loop: true });
-        new Swiper(".swiperServicios", {
-            centeredSlides: true,
-            slidesPerView: "auto",
-            pagination: { el: ".swiper-pagination-servicios", clickable: true }
+            fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
+            fetch('registro_cliente.php', { method: 'POST', body: formData })
+            .finally(() => {
+                document.getElementById('registro-interno').style.display = 'none';
+                document.getElementById('slides-inicio').style.display = 'none';
+                document.getElementById('contenedor-aplicativo').classList.remove('hidden');
+            });
         });
 
-        ScrollReveal().reveal('#titulo-principal', { delay: 400, distance: '50px', origin: 'bottom' });
-        ScrollReveal().reveal('#espacio-logo', { delay: 800, scale: 0.8 });
-    </script>
+        function mostrarRegistro() { 
+            const reg = document.getElementById('registro-interno');
+            const celular = document.getElementById('celular-interactivo');
+            if(reg && celular) {
+                celular.classList.add('estirado');
+                reg.style.display = 'flex'; 
+                setTimeout(() => reg.classList.add('expandido'), 10);
+            }
+        }
+
+        function cerrarRegistro() { 
+            const reg = document.getElementById('registro-interno');
+            const celular = document.getElementById('celular-interactivo');
+            if(reg && celular) {
+                reg.classList.remove('expandido');
+                celular.classList.remove('estirado');
+                setTimeout(() => reg.style.display = 'none', 500);
+            }
+        }
+        
+        document.getElementById('formConductor').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('btn-envio-cond').innerText = "PROCESANDO...";
+            fetch('registro_conductor.php', { method: 'POST', body: new FormData(this) })
+            .then(() => { alert("Solicitud enviada con éxito"); cerrarModalConductor(); })
+            .catch(() => alert("Error al enviar solicitud"));
+        });
+
+        window.onload = () => { 
+            setTimeout(() => { 
+                const pop = document.getElementById('notificacionPop');
+                if(pop) pop.classList.add('show'); 
+            }, 45000); 
+
+            const btns = document.getElementById('botones-accion-vip');
+            if(btns) {
+                btns.classList.add('aparecer');
+            }
+        };
+        
+        function cerrarPop(e) { e.stopPropagation(); document.getElementById('notificacionPop').classList.remove('show'); }
+        function mostrarModalJuego() { document.getElementById('modalJuego').style.display = 'flex'; }
+        function cerrarModalJuego() { document.getElementById('modalJuego').style.display = 'none'; }
+
+        let acum = 0; let visitadas = new Set();
+        function clickRed(id, link) {
+            if(!visitadas.has(id)) {
+                visitadas.add(id); acum += 15;
+                document.getElementById('numDesc').innerText = acum;
+                document.getElementById('box-' + id).classList.add('border-green-500');
+                document.getElementById('txtCodigo').innerText = "FAST" + acum + "VIP";
+                document.getElementById('codigoGenerado').classList.remove('hidden');
+            }
+            window.open(link, '_blank');
+        }
+
+        function copiarCodigo() {
+            navigator.clipboard.writeText(document.getElementById('txtCodigo').innerText).then(() => {
+                alert("¡Código Copiado!");
+                document.getElementById('inputCuponReal').value = document.getElementById('txtCodigo').innerText;
+                cerrarModalJuego(); mostrarRegistro();
+            });
+        }
+
+        var swiper = new Swiper(".mySwiper", { loop: true, pagination: { el: ".swiper-pagination", clickable: true } });
+
+        ScrollReveal().reveal('#titulo-principal', { delay: 400, distance: '100px', origin: 'bottom', duration: 1800 });
+        ScrollReveal().reveal('#espacio-logo', { delay: 1000, scale: 0.5, duration: 2000 });
+        ScrollReveal().reveal('#subtitulo', { delay: 1600, distance: '40px', origin: 'bottom', duration: 2600, opacity: 0 });
+        ScrollReveal().reveal('#celular-interactivo', { delay: 600, distance: '80px', origin: 'right', duration: 2000 });
+        
+        // ANIMACIÓN DEL MANUAL
+        ScrollReveal().reveal('#titulo-manual', { duration: 3000, origin: 'top', distance: '50px', delay: 500 });
+       ScrollReveal().reveal('#selector-seccion h2', { 
+    duration: 2500, 
+    scale: 0.8, 
+    opacity: 0, 
+    delay: 900, 
+    distance: '0px' 
+});
+        ScrollReveal().reveal('.mt-12 button', { 
+    duration: 3000, 
+    distance: '30px', 
+    origin: 'bottom', 
+    opacity: 0, 
+    delay: 2000 
+});
+
+        ScrollReveal().reveal('#btn-m-webapp', { duration: 2500, origin: 'left', distance: '150px', delay: 1200, opacity: 0 });
+        ScrollReveal().reveal('#btn-m-whatsapp', { duration: 2500, origin: 'right', distance: '150px', delay: 1200, opacity: 0 });
+
+        function mostrarRegistroYScroll() {
+            mostrarRegistro(); 
+            document.getElementById('celular-interactivo').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        }
+
+        function switchManual(metodo) {
+            const web = document.getElementById('manual-webapp');
+            const wa = document.getElementById('manual-whatsapp');
+            
+            document.querySelectorAll('#manual-webapp > div, #manual-whatsapp > div').forEach(cuadro => {
+                cuadro.classList.remove('cuadro-visible');
+            });
+
+            if(metodo === 'webapp') {
+                web.classList.remove('hidden');
+                wa.classList.add('hidden');
+                lanzarCascada('#manual-webapp > div');
+            } else {
+                wa.classList.remove('hidden');
+                web.classList.add('hidden');
+                lanzarCascada('#manual-whatsapp > div');
+            }
+        }
+
+        function lanzarCascada(selector) {
+            const cuadros = document.querySelectorAll(selector);
+            cuadros.forEach((cuadro, index) => {
+                setTimeout(() => {
+                    cuadro.classList.add('cuadro-visible');
+                }, index * 900);
+            });
+        }
+
+        const bonoPop = document.getElementById('notificacionPop');
+        let startX;
+        if (bonoPop) {
+            bonoPop.addEventListener('touchstart', e => {
+                startX = e.touches[0].clientX;
+                bonoPop.style.transition = 'none'; 
+            });
+            bonoPop.addEventListener('touchmove', e => {
+                let touch = e.touches[0].clientX;
+                let change = touch - startX;
+                if (change > 0) {
+                    bonoPop.style.transform = `translateX(${change}px) rotate(${change / 25}deg)`;
+                    bonoPop.style.opacity = 1 - (change / 200);
+                }
+            });
+            bonoPop.addEventListener('touchend', e => {
+                let change = e.changedTouches[0].clientX - startX;
+                if (change > 80) {
+                    bonoPop.style.transition = 'all 0.4s ease-out';
+                    bonoPop.style.transform = 'translateX(500px)';
+                    bonoPop.style.opacity = '0';
+                    setTimeout(() => { bonoPop.style.display = 'none'; }, 400);
+                } else {
+                    bonoPop.style.transition = 'all 0.3s ease-out';
+                    bonoPop.style.transform = 'translateX(0px) rotate(0deg)';
+                    bonoPop.style.opacity = '1';
+                }
+            });
+        }
+        // ... aquí termina tu código anterior ...
+
+    // --- CÓDIGO DE LA VENTANA DE GOOGLE ---
+    function expandirGoogle() {
+        const fullScreen = document.getElementById('google-full-screen');
+        if (fullScreen) {
+            // RESET: Vuelve a mostrar todas las reseñas que se ocultaron con la X individual
+            document.querySelectorAll('#lista-reseñas .snap-center').forEach(res => {
+                res.style.display = 'block';
+                res.style.opacity = '1';
+            });
+            
+            fullScreen.classList.remove('hidden');
+            fullScreen.style.display = 'flex';
+            fullScreen.style.opacity = "1";
+            document.body.style.overflow = 'hidden'; // Bloquea el scroll del fondo
+        }
+    }
+
+    function cerrarGoogle() {
+        const fullScreen = document.getElementById('google-full-screen');
+        if (fullScreen) {
+            document.body.style.overflow = 'auto'; // Devuelve el scroll
+            fullScreen.style.transition = "all 0.4s ease";
+            fullScreen.style.opacity = "0";
+            setTimeout(() => {
+                fullScreen.classList.add('hidden');
+                fullScreen.style.display = 'none';
+                fullScreen.style.opacity = "1";
+            }, 400);
+        }
+    }
+
+    // NUEVA FUNCIÓN: Para que las X de cada reseña funcionen
+    function cerrarImagenReseña(btn) {
+        const item = btn.closest('.snap-center');
+        item.style.transition = "all 0.3s ease";
+        item.style.opacity = "0";
+        setTimeout(() => {
+            item.style.display = 'none';
+            // Si el usuario cierra todas las fotos una por una, cerramos el modal negro automáticamente
+            const visibles = Array.from(document.querySelectorAll('#lista-reseñas .snap-center')).filter(i => i.style.display !== 'none');
+            if(visibles.length === 0) cerrarGoogle();
+        }, 300);
+    }
+
+    // Detector de deslizamiento para cerrar (Mantenemos tu lógica)
+    let touchstartY = 0;
+    const areaReseñas = document.getElementById('google-full-screen');
+
+    if (areaReseñas) {
+        areaReseñas.addEventListener('touchstart', e => {
+            touchstartY = e.changedTouches[0].screenY;
+        }, {passive: true});
+
+        areaReseñas.addEventListener('touchend', e => {
+            let touchendY = e.changedTouches[0].screenY;
+            if (touchendY > touchstartY + 100) { 
+                cerrarGoogle();
+            }
+        }, {passive: true});
+    }
+
+    // Swiper de Servicios (Corregido para que no falle)
+    var swiperServicios = new Swiper(".swiperServicios", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        loop: true,
+        coverflowEffect: {
+            rotate: 0,
+            stretch: 50,
+            depth: 100,
+            modifier: 1,
+            slideShadows: false,
+        },
+        pagination: {
+            el: ".swiper-pagination-servicios",
+            clickable: true,
+        },
+    });
+        // --- LÓGICA ELITE CLUB VIP (CON MODAL) ---
+
+// 1. Funciones para Abrir y Cerrar la ventana
+function abrirModalVIP() {
+    const modal = document.getElementById('modalVIP');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+function cerrarModalVIP() {
+    const modal = document.getElementById('modalVIP');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+// 2. Función para acceder (actualizada para el nuevo Input)
+function accederClubVIPModal() {
+    const numeroInput = document.getElementById('vip-number-modal').value;
+    const numeroLimpio = numeroInput.trim();
+    const modalCarga = document.getElementById('modalCargaVip');
+
+    if (numeroLimpio.length >= 10) {
+        // 1. Mostramos el modal elegante
+        modalCarga.classList.remove('hidden');
+        modalCarga.classList.add('flex');
+        setTimeout(() => modalCarga.classList.add('opacity-100'), 10);
+
+        // 2. Esperamos un segundo para que el usuario vea la elegancia y redirigimos
+        setTimeout(() => {
+            window.location.href = `https://fasttravelec.com/plandescuentos?id=${numeroLimpio}`;
+        }, 1500);
+
+    } else {
+        // Si el número está incompleto, puedes usar un efecto de vibración en el input
+        const input = document.getElementById('vip-number-modal');
+        input.classList.add('border-red-600', 'animate-shake');
+        setTimeout(() => input.classList.remove('animate-shake'), 500);
+    }
+}
+        
+          
+</script> 
 </body>
 </html>
