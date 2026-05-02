@@ -1311,7 +1311,18 @@ function accederClubVIPModal() {
         }, 400);
     }
 }
+// Cambia tu función actual por esta para que cierre TODO el modal
+function cerrarReseña(btn) {
+    // 1. Primero ocultamos la pantalla completa (el modal negro)
+    cerrarGoogle(); 
     
+    // 2. Opcional: Si quieres que esa reseña específica no vuelva a aparecer
+    const contenedorReseña = btn.closest('.snap-center');
+    if (contenedorReseña) {
+        contenedorReseña.style.display = "none";
+    }
+}
+        
     </script> 
 </body>
 </html>
