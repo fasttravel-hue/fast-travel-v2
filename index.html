@@ -551,6 +551,7 @@
 
 <body>
     <div id="notificacionPop" class="fixed bottom-[30px] left-[20px] z-[100] bg-white text-black p-4 rounded-3xl flex items-center gap-3 shadow-2xl border-l-[6px] border-red-600 transition-all duration-300 ease-out touch-none select-none opacity-0 translate-y-[200%]">
+     <button onclick="cerrarBonoEscritorio(event)" style="position: absolute; top: -10px; right: -10px; background: #dc2626; color: white; border: none; width: 22px; height: 22px; border-radius: 50%; cursor: pointer; font-weight: bold; font-size: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.3); z-index: 110;">✕</button>
         <div onclick="mostrarModalJuego()" class="flex items-center gap-3 cursor-pointer">
             <div class="text-2xl">🎁</div>
             <div>
@@ -1276,7 +1277,16 @@ function accederClubVIPModal() {
     }
 }
         
-          
+  function cerrarBonoEscritorio(e) {
+    if(e) e.stopPropagation(); // Evita que se abra el juego al hacer clic en la X
+    const bono = document.getElementById('notificacionPop');
+    if(bono) {
+        bono.style.transition = 'all 0.5s ease-out';
+        bono.style.transform = 'translateX(500px)';
+        bono.style.opacity = '0';
+        setTimeout(() => { bono.style.display = 'none'; }, 500);
+    }
+}        
 </script> 
 </body>
 </html>
