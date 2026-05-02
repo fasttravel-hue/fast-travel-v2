@@ -819,51 +819,41 @@
         </div>
     </div>
 
-    <div id="google-full-screen" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center pt-10 px-4">
-        
-        <div class="w-full max-w-md flex justify-between items-center mb-6">
-            <p class="text-[9px] font-black text-white/50 uppercase tracking-[0.4em]">Opiniones Reales</p>
-            <a href="https://g.page/r/CeRbvtTvvaCSEAE/review" target="_blank" class="text-[10px] text-red-500 font-bold uppercase tracking-widest bg-red-950/30 px-4 py-2 rounded-full border border-red-800/50">
-                Opinar en Google
-            </a>
-        </div>
-
-        <div id="lista-reseñas" class="w-full max-w-sm overflow-y-auto h-[80vh] space-y-4 pb-32 snap-y snap-mandatory">
-            
-               <div class="snap-center w-full relative">
-    <button onclick="cerrarReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 shadow-lg hover:bg-black transition-all lg:flex hidden">
-        ✕
-    </button>
-                <img src="IMG_20260430_093005.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 1">
-            <div class="snap-center w-full relative">
-    <button onclick="cerrarReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 shadow-lg hover:bg-black transition-all lg:flex hidden">
-        ✕
-    </button>
-                <img src="IMG_20260430_093025.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 2">
-           <div class="snap-center w-full relative">
-    <button onclick="cerrarReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 shadow-lg hover:bg-black transition-all lg:flex hidden">
-        ✕
-    </button>
-                <img src="IMG_20260430_093037.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 3">
-           <div class="snap-center w-full relative">
-    <button onclick="cerrarReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 shadow-lg hover:bg-black transition-all lg:flex hidden">
-        ✕
-    </button>
-                <img src="IMG_20260430_093050.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 4">
-           <div class="snap-center w-full relative">
-    <button onclick="cerrarReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 shadow-lg hover:bg-black transition-all lg:flex hidden">
-        ✕
-    </button>
-                <img src="IMG_20260430_093100.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl" alt="Reseña 5">
-            </div>
-
-        </div>
-
-        <div class="absolute bottom-10 animate-bounce opacity-30">
-            <i class="fa-solid fa-chevron-down text-white text-2xl"></i>
-        </div>
+<div id="google-full-screen" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex flex-col items-center pt-10 px-4">
+    <div class="w-full max-w-md flex justify-between items-center mb-6">
+        <p class="text-[9px] font-black text-white/50 uppercase tracking-[0.4em]">Opiniones Reales</p>
+        <a href="https://g.page/r/CeRbvtTvvaCSEAE/review" target="_blank" class="text-[10px] text-red-500 font-bold uppercase tracking-widest bg-red-950/30 px-4 py-2 rounded-full border border-red-800/50">Opinar en Google</a>
     </div>
+
+    <div class="relative w-full max-w-sm flex items-center">
+        <button onclick="moverReseña(-1)" class="absolute -left-16 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-3xl lg:block hidden"><i class="fa-solid fa-chevron-left"></i></button>
+
+        <div id="lista-reseñas-scroll" class="w-full overflow-x-auto flex snap-x snap-mandatory h-[80vh] gap-4 no-scrollbar scroll-smooth">
+            <div class="snap-center min-w-full relative">
+                <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 lg:flex hidden">✕</button>
+                <img src="IMG_20260430_093005.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl">
+            </div>
+            <div class="snap-center min-w-full relative">
+                <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 lg:flex hidden">✕</button>
+                <img src="IMG_20260430_093025.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl">
+            </div>
+            <div class="snap-center min-w-full relative">
+                <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 lg:flex hidden">✕</button>
+                <img src="IMG_20260430_093037.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl">
+            </div>
+            <div class="snap-center min-w-full relative">
+                <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 lg:flex hidden">✕</button>
+                <img src="IMG_20260430_093050.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl">
+            </div>
+            <div class="snap-center min-w-full relative">
+                <button onclick="cerrarImagenReseña(this)" class="absolute top-4 right-4 bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center z-50 lg:flex hidden">✕</button>
+                <img src="IMG_20260430_093100.jpg" class="w-full rounded-2xl border border-zinc-800 shadow-2xl">
+            </div>
         </div>
+
+        <button onclick="moverReseña(1)" class="absolute -right-16 top-1/2 -translate-y-1/2 text-white/50 hover:text-white text-3xl lg:block hidden"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+</div>
                 
                 </section>
 
@@ -1197,129 +1187,64 @@
         }
     }
 
-    function cerrarGoogle() {
-        const fullScreen = document.getElementById('google-full-screen');
-        if (fullScreen) {
-            document.body.style.overflow = 'auto'; // Devuelve el scroll
-            fullScreen.style.transition = "all 0.4s ease";
-            fullScreen.style.opacity = "0";
-            setTimeout(() => {
-                fullScreen.classList.add('hidden');
-                fullScreen.style.display = 'none';
-                fullScreen.style.opacity = "1";
-            }, 400);
-        }
+    // --- LÓGICA DE RESEÑAS Y BONO (CORREGIDA) ---
+
+function expandirGoogle() {
+    const fullScreen = document.getElementById('google-full-screen');
+    if (fullScreen) {
+        // RESET: Volvemos a mostrar todas las reseñas por si se cerraron con la X
+        document.querySelectorAll('.snap-center').forEach(res => {
+            res.style.display = 'block';
+            res.style.opacity = '1';
+            res.style.transform = 'scale(1)';
+        });
+        fullScreen.classList.remove('hidden');
+        fullScreen.style.display = 'flex';
+        fullScreen.style.opacity = '1';
+        document.body.style.overflow = 'hidden';
     }
-
-    // Detector de deslizamiento para cerrar
-    let touchstartY = 0;
-    const areaReseñas = document.getElementById('google-full-screen');
-
-    if (areaReseñas) {
-        areaReseñas.addEventListener('touchstart', e => {
-            touchstartY = e.changedTouches[0].screenY;
-        }, {passive: true});
-
-        areaReseñas.addEventListener('touchend', e => {
-            let touchendY = e.changedTouches[0].screenY;
-            // Si deslizas hacia abajo (más de 100px), se cierra
-            if (touchendY > touchstartY + 100) { 
-                cerrarGoogle();
-            }
-        }, {passive: true});
-    }
-
-        var swiperServicios = new Swiper(".swiperServicios", {
-    effect: "coverflow",
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: "auto",
-    loop: true,
-    coverflowEffect: {
-        rotate: 0,
-        stretch: 50, // Ajusta el espaciado lateral
-        depth: 100,
-        modifier: 1,
-        slideShadows: false,
-    },
-    pagination: {
-        el: ".swiper-pagination-servicios",
-        clickable: true,
-    },
-});
-
-        // --- LÓGICA ELITE CLUB VIP (CON MODAL) ---
-
-// 1. Funciones para Abrir y Cerrar la ventana
-function abrirModalVIP() {
-    const modal = document.getElementById('modalVIP');
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
 }
 
-function cerrarModalVIP() {
-    const modal = document.getElementById('modalVIP');
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
+function cerrarImagenReseña(btn) {
+    const item = btn.closest('.snap-center');
+    item.style.transition = "all 0.3s ease";
+    item.style.opacity = "0";
+    item.style.transform = "scale(0.9)";
+    setTimeout(() => {
+        item.style.display = 'none';
+        // Si no quedan reseñas visibles, cerramos el fondo negro
+        const visibles = Array.from(document.querySelectorAll('.snap-center')).filter(i => i.style.display !== 'none');
+        if(visibles.length === 0) cerrarGoogle();
+    }, 300);
 }
 
-// 2. Función para acceder (actualizada para el nuevo Input)
-function accederClubVIPModal() {
-    const numeroInput = document.getElementById('vip-number-modal').value;
-    const numeroLimpio = numeroInput.trim();
-    const modalCarga = document.getElementById('modalCargaVip');
+function moverReseña(dir) {
+    const lista = document.getElementById('lista-reseñas-scroll');
+    const ancho = lista.offsetWidth;
+    lista.scrollBy({ left: dir * ancho, behavior: 'smooth' });
+}
 
-    if (numeroLimpio.length >= 10) {
-        // 1. Mostramos el modal elegante
-        modalCarga.classList.remove('hidden');
-        modalCarga.classList.add('flex');
-        setTimeout(() => modalCarga.classList.add('opacity-100'), 10);
-
-        // 2. Esperamos un segundo para que el usuario vea la elegancia y redirigimos
+function cerrarGoogle() {
+    const fullScreen = document.getElementById('google-full-screen');
+    if (fullScreen) {
+        document.body.style.overflow = 'auto';
+        fullScreen.style.transition = "all 0.4s ease";
+        fullScreen.style.opacity = "0";
         setTimeout(() => {
-            window.location.href = `https://fasttravelec.com/plandescuentos?id=${numeroLimpio}`;
-        }, 1500);
-
-    } else {
-        // Si el número está incompleto, puedes usar un efecto de vibración en el input
-        const input = document.getElementById('vip-number-modal');
-        input.classList.add('border-red-600', 'animate-shake');
-        setTimeout(() => input.classList.remove('animate-shake'), 500);
+            fullScreen.classList.add('hidden');
+            fullScreen.style.display = 'none';
+        }, 400);
     }
 }
-        
-  function cerrarBonoEscritorio(e) {
-    if(e) e.stopPropagation(); // Evita que se abra el juego al hacer clic en la X
+
+function cerrarBonoEscritorio(e) {
+    if(e) e.stopPropagation();
     const bono = document.getElementById('notificacionPop');
     if(bono) {
         bono.style.transition = 'all 0.5s ease-out';
         bono.style.transform = 'translateX(500px)';
         bono.style.opacity = '0';
         setTimeout(() => { bono.style.display = 'none'; }, 500);
-    }
-}        
-
-        function cerrarReseña(btn) {
-    // Busca el contenedor 'snap-center' más cercano y lo oculta
-    const contenedorReseña = btn.closest('.snap-center');
-    if (contenedorReseña) {
-        contenedorReseña.style.transition = "all 0.4s ease";
-        contenedorReseña.style.opacity = "0";
-        contenedorReseña.style.transform = "scale(0.9)";
-        setTimeout(() => {
-            contenedorReseña.style.display = "none";
-        }, 400);
-    }
-}
-// Cambia tu función actual por esta para que cierre TODO el modal
-function cerrarReseña(btn) {
-    // 1. Primero ocultamos la pantalla completa (el modal negro)
-    cerrarGoogle(); 
-    
-    // 2. Opcional: Si quieres que esa reseña específica no vuelva a aparecer
-    const contenedorReseña = btn.closest('.snap-center');
-    if (contenedorReseña) {
-        contenedorReseña.style.display = "none";
     }
 }
         
